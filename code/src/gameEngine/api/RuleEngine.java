@@ -73,14 +73,14 @@ public class RuleEngine {
                                 break;
                         }
                         if(canStillWin)
-                            return new GameInfo(gameState, true, player.playerFlip());
+                            return new GameInfo(gameState.isOver(),gameState.getWinner(), true, player.playerFlip());
                     }
 
                 }
             }
 
 
-            return new GameInfo(gameState, false, null);
+            return new GameInfo(gameState.isOver(),gameState.getWinner(), false);
 
 
         }else{

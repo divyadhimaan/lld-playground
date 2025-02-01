@@ -3,12 +3,14 @@ package game;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GameResult {
+
+// CUrrent state of the game.
+public class GameState {
 
     boolean isOver;
     String Winner;
 
-    public GameResult(boolean isOver, String Winner){
+    public GameState(boolean isOver, String Winner){
         this.isOver = isOver;
         this.Winner = Winner;
     }

@@ -11,7 +11,7 @@ Requirements -
 
 ### [Java Implementation](./../code/src/weatherPublisher)
 
-This Model is based on Observer Design Pattern
+This Model is implemented using Observer Design Pattern
 ## Use case Diagram
 ![img.png](../images/weather-publisher.png)
 

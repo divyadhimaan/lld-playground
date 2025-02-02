@@ -12,7 +12,7 @@ This is the repos
 
 ## Concepts
 
-- [OOPs Concepts](./concepts/oops/oops.md)
+- [OOPs Concepts](./concepts/oops/four-pillars)
 - [SOLID Principles](./concepts/intro/solid-principles/solid-principles.md)
 
 

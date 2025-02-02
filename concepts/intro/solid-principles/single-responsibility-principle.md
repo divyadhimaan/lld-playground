@@ -12,7 +12,7 @@
 
 # Code Sample with Explanation
 
-Refer [this](./../../code/SOLID/singleResponsibility) code for better Understanding.
+Refer [this](./../../../code/solidPrinciples/SingleResponsibility/SRPDemo.java) code for better Understanding.
 - Before (SRPDemo):
 
     - Single class handles everything

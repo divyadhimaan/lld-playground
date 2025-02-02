@@ -12,7 +12,9 @@
 
 # Code Sample with Explanation
 
-Refer [this](./../../code/SOLID/OpenClosed) code for better Understanding.
+Code Samples:
+- [Violation](./../../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java) code
+- [OCP following](./../../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java) code
 
 
 1. **Interface-Based Design** (TaxCalculator)

@@ -10,3 +10,4 @@ In Low-Level Design (LLD), design patterns provide guidelines for implementing c
 1. Creational Design Patterns - (Object Creation & Instantiation)
 2. Structural Design Patterns - (Object Composition & Relationships)
 3. Behavioral Design Patterns - (Object Interaction & Communication)
+

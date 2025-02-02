@@ -9,5 +9,7 @@
 - The cache should be efficient in terms of time complexity for both put and get operations, ideally O(1).
 
 
+### [Java Implementation](./../code/src/lruCache)
+
 ## Use case Diagram
 ![LRU-Cache.png](./../images/lru-cache-use-case.png)

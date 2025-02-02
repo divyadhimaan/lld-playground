@@ -16,9 +16,31 @@ This is the repos
 - [SOLID Principles](./concepts/intro/solid-principles/solid-principles.md)
 
 
+## Design Patterns
+
+| Creational Patterns | Structural Patterns | Behavioral Patterns |
+|---|---|---|
+| Singleton | Adapter | Chain of Responsibility |
+| Factory Method | Bridge | Command |
+| Abstract Factory | Composite | Iterator |
+| Builder | Decorator | Mediator |
+| Prototype | Facade | Memento |
+|  | Flyweight | Observer |
+|  | Proxy | State |
+|  |  | Strategy |
+|  |  | Template Method |
+|  |  | Visitor |
 
 
 
+## Design Examples
+
+- [Cache](./problems/LRU-based-cache.md)
+
+
+## Notations
+- Is-A (Inheritance)
+- Has-A (Composition/Aggregation)
 
 ## Resources
 

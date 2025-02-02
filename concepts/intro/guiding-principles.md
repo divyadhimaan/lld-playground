@@ -9,20 +9,7 @@ This includes
 - inheritance, 
 - composition, etc...
 
-## SOLID principles
 
-```S``` - **Single Responsibility Principle**
-
-- A ```class``` should have ```single responsibility```.
-- Should not have extra/irrelevant functionalities
-
-    **Goal** - This principle aims to separate behaviours so that if bugs arise as a result of your change, it won’t affect other unrelated behaviours.
-![single-responsibility.png](../images/single-responsibility.png)
-
-```O``` - **Open Closed Principle**
-
-- Software entities should be open for extension, but closed for modifications
-- Make minimal changes to existing code when introducing new functionality
 
 
 

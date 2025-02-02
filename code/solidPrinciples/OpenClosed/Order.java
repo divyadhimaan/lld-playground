@@ -14,6 +14,8 @@ public class Order {
     public void addItem(OrderItem item) {
         items.add(item);
     }
+    public List<OrderItem> getItems() { return new ArrayList<>(items); }
+
 
     public double processOrder(TaxCalculator taxCalculator) {
         double total = items.stream().mapToDouble((item) -> item.getPrice() * item.getQuantity()).sum();

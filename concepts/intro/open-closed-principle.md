@@ -1,30 +1,45 @@
-```S``` - **Single Responsibility Principle**
+```O``` - **Open Closed Principle**
 
-- A ```class``` should have ```single responsibility```.
-- Should not have extra/irrelevant functionalities
+> Class should be Open for Extension but closed for Extension
 
 
-  **Goal** - This principle aims to separate behaviours so that if bugs arise as a result of your change, it won’t affect other unrelated behaviours.
+- Software entities should be open for extension, but closed for modifications
+- Make minimal changes to existing code when introducing new functionality, should not modify already tested code.
 
-  ![single-responsibility.png](../images/single-responsibility.png)
+![open-close.png](../../images/open-closed.png)
   
 
 
 # Code Sample
 
-Refer [this](./../../code/SOLID/singleResponsibility) code for better Understanding.
+Refer [this](./../../code/SOLID/OpenClosed) code for better Understanding.
 Explanation:
-- Before (SRPDemo):
 
-    - Single class handles everything
-    - All operations are methods of the `OrderBeforeSRP` class
-    - Tightly coupled code 
-    - Hard to modify one aspect without affecting others
+1. **Interface-Based Design** (TaxCalculator)
+    - The TaxCalculator interface defines a contract for tax calculation.
+    - The StandardTaxCalculator implements this interface with a 15% tax rate. 
+      - If we need a different tax calculation (e.g., GST, VAT, regional tax rates), we do not modify existing code but create new implementations of TaxCalculator.
+2. Extending Functionality Without Modification
+   - The Order class depends on the TaxCalculator abstraction rather than a concrete implementation.
+   - If we want to apply a different tax strategy (e.g., ReducedTaxCalculator or NoTaxCalculator), we simply create new classes implementing TaxCalculator instead of modifying Order.
+   
 
 
-- After (SRPDemo):
-
-    - Separate classes for each responsibility (`OrderAfterSRP`, `OrderCalculator`, `OrderItem`, `EmailService`, `InvoiceGenerator`)
-    - Each operation is handled by a dedicated service 
-    - Loose coupling between components
-    - Easy to modify or replace individual components
+   - **Example of Extension**: 
+   Suppose a new tax rule requires a reduced tax rate for certain products. We can create a new class:
+      ```java
+      class ReducedTaxCalculator implements TaxCalculator {
+          private static final double REDUCED_TAX_RATE = 0.05;
+          
+          public double calculateTax(double amount) {
+          return amount * REDUCED_TAX_RATE;
+          }
+      }
+                
+      ```
+        
+   - Now, in Main, we can use:
+      ```java
+      TaxCalculator taxCalculator = new ReducedTaxCalculator();
+     ```
+      No changes are made to the Order class, making the system open for extension but closed for modification.

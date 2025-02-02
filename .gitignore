@@ -4,6 +4,9 @@ out/
 !**/src/test/**/out/
 
 .idea
+.idea/low-level-design.iml
+
+
 *.iml
 ### Eclipse ###
 .apt_generated

@@ -35,6 +35,7 @@ This is the repos
 ## Design Examples
 
 - [Cache](./problems/LRU-based-cache.md)
+- [Weather Publisher](./problems/weather-publisher.md)
 
 
 ## Notations

@@ -13,22 +13,26 @@ public class Game {
         move.getPlayer().setTimeTaken(timeTakenSinceLastLastMove);
 
         if(gameConfig.timed){
-            if(gameConfig.timePerMove != null) {
-                if(moveMadeInTime(timeTakenSinceLastLastMove)){
-                    board.move(move);
-                }else{
-                    winner = move.getPlayer().playerFlip();;
-                }
-            }else{
-                if(moveMadeInTime(move.getPlayer())){
-                    board.move(move);
-                }else{
-                    winner = move.getPlayer().playerFlip();;
-                }
-            }
+            moveForTimedGame(move, timeTakenSinceLastLastMove);
         }
         else{
             board.move(move);
+        }
+    }
+
+    private void moveForTimedGame(Move move, int timeTakenSinceLastLastMove) {
+        if(gameConfig.timePerMove != null) {
+            if(moveMadeInTime(timeTakenSinceLastLastMove)){
+                board.move(move);
+            }else{
+                winner = move.getPlayer().playerFlip();;
+            }
+        }else{
+            if(moveMadeInTime(move.getPlayer())){
+                board.move(move);
+            }else{
+                winner = move.getPlayer().playerFlip();;
+            }
         }
     }
 

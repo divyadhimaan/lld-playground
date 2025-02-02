@@ -2,7 +2,8 @@ package game;
 
 public interface Board {
 
-    public abstract void move(Move move);
+    public void move(Move move);
 
-    public abstract Board copy();
+    public Board copy();
+
 }

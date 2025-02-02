@@ -1,4 +1,4 @@
-```O``` - **Open Closed Principle**
+# ```O``` - Open Closed Principle (OCP)
 
 > Class should be Open for Extension but closed for Extension
 
@@ -6,14 +6,14 @@
 - Software entities should be open for extension, but closed for modifications
 - Make minimal changes to existing code when introducing new functionality, should not modify already tested code.
 
-![open-close.png](../../images/open-closed.png)
+![open-close.png](../../../images/open-closed.png)
   
 
 
-# Code Sample
+# Code Sample with Explanation
 
 Refer [this](./../../code/SOLID/OpenClosed) code for better Understanding.
-Explanation:
+
 
 1. **Interface-Based Design** (TaxCalculator)
     - The TaxCalculator interface defines a contract for tax calculation.

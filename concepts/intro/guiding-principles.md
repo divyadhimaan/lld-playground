@@ -12,13 +12,6 @@ This includes
 
 
 
-## SOLID
-`S` - [Single Responsibility Principle](solid-principles/single-responsibility-principle.md)
-
-`O` - [Open Closed Principle](solid-principles/open-closed-principle.md)
-
-`L` - [Liskov Substitution Principle](solid-principles/liskov-substitution-principle.md)
-
 
 ## DRY - Dont Repeat Yourself
 > Every piece of knowledge must have a single, unambiguous, authoritative representation within a system.

@@ -1,0 +1,28 @@
+# Low-Level Design: Concepts, Code Examples, and Design Examples
+
+This repository serves as a comprehensive guide to Low-Level Design (LLD), aimed at helping developers understand and implement essential design concepts in software development. It contains a collection of:
+
+- Core Concepts: Key principles and techniques in LLD such as SOLID principles, object-oriented design, and common design patterns.
+- Code Examples: Practical Java code implementations showcasing various design techniques, including dependency injection, design pattern usage, and object modeling.
+- Design Examples: Step-by-step breakdowns of real-world design problems, with detailed explanations of how to design and architect scalable, maintainable software systems.
+
+- Whether you're preparing for interviews, aiming to improve your design skills, or looking to see best practices in action, this repository provides a solid foundation for mastering Low-Level Design.
+This is the repos
+
+
+## Concepts
+
+- [OOPs Concepts](./concepts/oops/oops.md)
+- [SOLID Principles](./concepts/intro/solid-principles/solid-principles.md)
+
+
+
+
+
+
+## Resources
+
+- Design Patterns with [Refactoring Guru](https://refactoring.guru)
+- 
+
+> NOTE: This repository was created during my learning journey in Low-Level Design. If you notice any improvements or corrections, feel free to reach out.

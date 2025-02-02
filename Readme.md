@@ -18,19 +18,18 @@ This is the repos
 
 ## Design Patterns
 
-| Creational Patterns | Structural Patterns | Behavioral Patterns |
-|---|---|---|
+| Creational Patterns | Structural Patterns | Behavioral Patterns   |
+|---|---|-----------------------|
 | Singleton | Adapter | Chain of Responsibility |
-| Factory Method | Bridge | Command |
-| Abstract Factory | Composite | Iterator |
-| Builder | Decorator | Mediator |
-| Prototype | Facade | Memento |
-|  | Flyweight | Observer |
-|  | Proxy | State |
-|  |  | Strategy |
-|  |  | Template Method |
-|  |  | Visitor |
-
+| Factory Method | Bridge | Command               |
+| Abstract Factory | Composite | Iterator              |
+| Builder | Decorator | Mediator              |
+| Prototype | Facade | Memento               |
+|  | Flyweight | Observer              |
+|  | Proxy | State                 |
+|  |  | [Strategy](./concepts/intro/design-patterns/strategy.md)     |
+|  |  | Template Method       |
+|  |  | Visitor               |
 
 
 ## Design Examples

@@ -72,15 +72,22 @@ public class RuleEngine {
                             if(!canStillWin)
                                 break;
                         }
-                        if(canStillWin)
-                            return new GameInfo(gameState.isOver(),gameState.getWinner(), true, player.playerFlip());
+                        if(canStillWin) {
+                            return new GameInfoBuilder().isOver(gameState.isOver())
+                                    .winner(gameState.getWinner())
+                                    .hasFork(true)
+                                    .player(player.playerFlip())
+                                    .build();
+
+                        }
                     }
 
                 }
             }
 
-
-            return new GameInfo(gameState.isOver(),gameState.getWinner(), false);
+            return new GameInfoBuilder().isOver(gameState.isOver())
+                    .winner(gameState.getWinner())
+                    .build();
 
 
         }else{

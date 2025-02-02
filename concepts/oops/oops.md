@@ -31,7 +31,7 @@ public class Person{
         return Arrays.asList(this.firstName,this.LastName);
     }
 
-    public static void src.main.java.Main(String[] args)
+    public static void src.main.java.CacheDemo(String[] args)
     {
         Person p = new Person("Divya", "Dhiman");
         List<String> name= p.getName();
@@ -62,7 +62,7 @@ public class Person{
         return Arrays.asList(this.firstName,this.LastName);
     }
 
-    public static void src.main.java.Main(String[] args)
+    public static void src.main.java.CacheDemo(String[] args)
     {
         Person p = new Person("Divya", "Dhiman");
         List<String> name= p.getName();

@@ -9,13 +9,7 @@ public class GameInfo {
     private Player player;
     private int numberOfMoves;
 
-    public GameInfo(boolean isOver, String winner, boolean hasFork, Player player)
-    {
-        this.isOver = isOver;
-        this.winner = winner;
-        this.hasFork = hasFork;
-        this.player = player;
-    }
+
 
     public GameInfo(boolean isOver, String winner, boolean hasFork, Player player, int numberOfMoves)
     {
@@ -26,10 +20,5 @@ public class GameInfo {
         this.numberOfMoves = numberOfMoves;
     }
 
-    public GameInfo(boolean isOver, String winner, boolean hasFork)
-    {
-        this.isOver = isOver;
-        this.winner = winner;
-        this.hasFork = hasFork;
-    }
 }
+

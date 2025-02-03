@@ -6,13 +6,13 @@
 
   **Goal** - This principle aims to separate behaviours so that if bugs arise as a result of your change, it won’t affect other unrelated behaviours.
 
-  ![single-responsibility.png](../../../images/single-responsibility.png)
+  ![single-responsibility.png](../../images/single-responsibility.png)
   
 
 
 # Code Sample with Explanation
 
-Refer [this](./../../../code/solidPrinciples/SingleResponsibility/SRPDemo.java) code for better Understanding.
+Refer [this](../../code/solidPrinciples/SingleResponsibility/SRPDemo.java) code for better Understanding.
 - Before (SRPDemo):
 
     - Single class handles everything

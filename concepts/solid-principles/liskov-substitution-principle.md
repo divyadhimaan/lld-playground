@@ -6,12 +6,12 @@
 
 - Subclass should extend the properties of parent class, not narrow it down.
 
-![Liskov Substitution Principle.png](../../../images/liskov-substitution.png)
+![Liskov Substitution Principle.png](../../images/liskov-substitution.png)
   
 
 
 # Code Sample with Explanation
-- Violation of LSP [Refer](../../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionViolation.java)
+- Violation of LSP [Refer](../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionViolation.java)
     - The Penguin class extends Bird but does not support fly(), violating LSP.
     - A better approach would be segregating the hierarchy.
-- Fixed version: [Refer](../../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionFixed.java)
+- Fixed version: [Refer](../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionFixed.java)

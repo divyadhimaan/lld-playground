@@ -6,15 +6,15 @@
 - Software entities should be open for extension, but closed for modifications
 - Make minimal changes to existing code when introducing new functionality, should not modify already tested code.
 
-![open-close.png](../../../images/open-closed.png)
+![open-close.png](../../images/open-closed.png)
   
 
 
 # Code Sample with Explanation
 
 Code Samples:
-- [Violation](./../../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java) code
-- [OCP following](./../../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java) code
+- [Violation](../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java) code
+- [OCP following](../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java) code
 
 
 1. **Interface-Based Design** (TaxCalculator)

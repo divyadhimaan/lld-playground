@@ -2,7 +2,7 @@
 
 >A behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
 
-![strategy-design.png](../../../images/strategy-design.png)
+![strategy-design.png](../../images/strategy-design.png)
 
 ## Summary
 
@@ -14,5 +14,5 @@
 
 
 ### Article Reference - [here](https://refactoring.guru/design-patterns/strategy)
-### Java Example - [here](./../../../code/designPatterns/StrategyExample.java)
+### Java Example - [here](../../code/designPatterns/StrategyExample.java)
 

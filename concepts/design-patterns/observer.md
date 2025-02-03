@@ -4,7 +4,7 @@
 
 
 
-![img.png](../../../images/observer-design.png)
+![img.png](../../images/observer-design.png)
 
 ## Summary
 
@@ -18,9 +18,9 @@
 
 
 ### Article Reference - [here](https://refactoring.guru/design-patterns/strategy)
-### Java Example - [here](./../../../code/designPatterns/ObserverExample.java)
+### Java Example - [here](../../code/designPatterns/ObserverExample.java)
 
 
-![img.png](../../../images/observer-design-2.png)
+![img.png](../../images/observer-design-2.png)
 
 

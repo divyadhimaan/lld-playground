@@ -10,13 +10,13 @@
 
 **Goal** - This principle aims at reducing the dependency of a high-level Class on the low-level Class by introducing an interface. 
 
-![Dependency-inversion.png](../../../images/dependency-inversion.png)
+![Dependency-inversion.png](../../images/dependency-inversion.png)
   
 
 
 # Code Sample with Explanation
 
-- Violation of DIP [Refer](./../../../code/solidPrinciples/DependencyInversion/DependencyInversionViolation.java):
+- Violation of DIP [Refer](../../code/solidPrinciples/DependencyInversion/DependencyInversionViolation.java):
   - Direct Dependency on Concrete Classes:
     The `Macbook` class is tightly coupled to `WiredMouse2` and `WiredKeyboard2`. It directly creates instances of these concrete classes inside its constructor.
     If you wanted to use a `WirelessMouse2` or a `WirelessKeyboard2`, you would need to modify the `Macbook` class, breaking the **Open/Closed Principle** (part of SOLID principles).
@@ -26,7 +26,7 @@
 
 
 
-- Solution [Refer](./../../../code/solidPrinciples/DependencyInversion/DependencyInversionViolation.java):
+- Solution [Refer](../../code/solidPrinciples/DependencyInversion/DependencyInversionViolation.java):
   - **Abstraction Interfaces**:
   
     `Mouse` and `Keyboard` are interfaces that define the expected behavior (click and type methods).

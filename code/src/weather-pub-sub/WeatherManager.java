@@ -29,10 +29,23 @@ public class WeatherManager {
 
     public void unSubscribe(String city, WeatherListener weatherListener)
     {
-        if(listeners.containsKey(city) && !listeners.get(city).isEmpty() && listeners.get(city).contains(weatherListener))
-            listeners.get(city).remove(weatherListener);
-        else{
-            System.out.println("Cannot unsubscribe");
+        if (!listeners.containsKey(city)) {
+            System.out.println("Error: No listeners exist for " + city);
+            return;
+        }
+        Set<WeatherListener> cityListeners = listeners.get(city);
+
+        if (!cityListeners.contains(weatherListener)) {
+            System.out.println("Error: The provided listener is not subscribed to " + city);
+            return;
+        }
+
+        cityListeners.remove(weatherListener);
+        System.out.println("Unsubscribed successfully from " + city);
+
+        if (cityListeners.isEmpty()) {
+            listeners.remove(city);
+            System.out.println("No more listeners for " + city + ". Removing from subscription list.");
         }
     }
 
@@ -40,6 +53,7 @@ public class WeatherManager {
     {
         Set<WeatherListener> targetListeners = listeners.get(city);
         if(targetListeners != null) {
+            System.out.println("Weather in " + city + " changed to " + getTemp(city) + " Notifying all the users...");
             for (WeatherListener currListener : targetListeners) {
                 currListener.Update();
             }
@@ -58,6 +72,10 @@ public class WeatherManager {
 
     public int getTemp(String city)
     {
+        if (!temperatures.containsKey(city)) {
+            System.out.println("Error: Temperature data for " + city + " is not available.");
+            return -1;
+        }
         return temperatures.get(city);
     }
 

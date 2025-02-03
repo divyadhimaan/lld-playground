@@ -10,11 +10,9 @@ Requirements -
 6. Temperature is the changing parameter. (city->temp)
 
 
-### [Java Implementation](./../code/src/weatherPublisher)
+### [Java Implementation](./../code/src/weather-pub-sub)
 
-This Model is implemented using Observer Design Pattern
-## Use case Diagram
-![img.png](../images/weather-publisher.png)
+### [Design Explanation](./../code/src/weather-pub-sub/Weather-pub-sub.md)
 
 
 

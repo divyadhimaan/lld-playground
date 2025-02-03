@@ -11,5 +11,4 @@
 
 ### [Java Implementation](./../code/src/lruCache)
 
-## Use case Diagram
-![LRU-Cache.png](./../images/lru-cache-use-case.png)
+### [Design Explanation](./../code/src/lruCache/lruCache.md)

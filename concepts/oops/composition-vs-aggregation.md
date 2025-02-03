@@ -10,7 +10,7 @@ Part-Whole Relationship: The owned object is a part of the owning object, and it
 Implementation Detail: Composition is often used to implement the functionality of the owning class. The owned class is an internal component, and its existence is usually hidden from the outside world.
 Example:
 
-Think of a Car and its Engine.  A car has-a engine.  In this case, it's a composition relationship because:
+Think of a Vehicle.Car and its Engine.  A car has-a engine.  In this case, it's a composition relationship because:
 
 The car owns the engine (in most cases, the engine isn't shared with other cars).
 If the car is scrapped or destroyed, the engine is likely also destroyed or at least becomes unusable as a car engine without significant rework.
@@ -19,10 +19,10 @@ UML Notation:
 
 In UML (Unified Modeling Language) diagrams, composition is represented by a solid line connecting the two classes, with a filled diamond at the owning class end.
 
-      Car
+      Vehicle.Car
       /|\
        |
-    Engine  (Filled diamond at the Car end)
+    Engine  (Filled diamond at the Vehicle.Car end)
 Contrast with Aggregation:
 
 Composition is often confused with aggregation.  The key difference lies in the dependency of the owned object's lifecycle.  In aggregation (a weaker "has-a" relationship), the owned object can exist independently of the owning object.

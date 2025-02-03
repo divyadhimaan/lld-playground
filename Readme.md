@@ -18,23 +18,25 @@ This is the repos
 
 ## Design Patterns
 
-| Creational Patterns | Structural Patterns | Behavioral Patterns                                     |
-|---|---|---------------------------------------------------------|
-| Singleton | Adapter | Chain of Responsibility                                 |
-| Factory Method | Bridge | Command                                                 |
-| Abstract Factory | Composite | Iterator                                                |
-| Builder | Decorator | Mediator                                                |
-| Prototype | Facade | Memento                                                 |
-|  | Flyweight | [Observer](concepts/design-patterns/observer.md)                                        |
-|  | Proxy | State                                                   |
-|  |  | [Strategy](concepts/design-patterns/strategy.md) |
-|  |  | Template Method                                         |
-|  |  | Visitor                                                 |
+| Creational Patterns                                                | Structural Patterns | Behavioral Patterns                                     |
+|--------------------------------------------------------------------|---|---------------------------------------------------------|
+| Singleton                                                          | Adapter | Chain of Responsibility                                 |
+| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge | Command                                                 |
+| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | Composite                                                          | Iterator                                                |
+| Builder                                                            | Decorator | Mediator                                                |
+| Prototype                                                          | Facade | Memento                                                 |
+|                                                                    | Flyweight | [Observer](concepts/design-patterns/observer.md)                                        |
+|                                                                    | Proxy | State                                                   |
+|                                                                    |  | [Strategy](concepts/design-patterns/strategy.md) |
+|                                                                    |  | Template Method                                         |
+|                                                                    |  | Visitor                                                 |
+
 
 ## Design Examples
 
 - [Cache](./problems/LRU-based-cache.md)
 - [Weather Pub Sub](./problems/weather-pub-sub)
+- [Parking Lot](./problems/parking-lot.md)
 
 
 ## Notations

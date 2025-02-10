@@ -37,6 +37,7 @@ This is the repos
 - [Cache](./problems/LRU-based-cache.md)
 - [Weather Pub Sub](./problems/weather-pub-sub)
 - [Parking Lot](./problems/parking-lot.md)
+- [PubSub Model](./problems/pub-sub-model.md)
 
 
 ## Notations

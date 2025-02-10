@@ -9,3 +9,7 @@
 - Messages should be delivered to all subscribers of a topic in real-time.
 - The system should handle concurrent access and ensure thread safety.
 - The Pub-Sub system should be scalable and efficient in terms of message delivery.
+
+### [Java Implementation](./../code/src/pubSubModel)
+
+### [Design Explanation](./../code/src/pubSubModel/pub-sub.md)

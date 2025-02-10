@@ -18,18 +18,18 @@ This is the repos
 
 ## Design Patterns
 
-| Creational Patterns                                                | Structural Patterns | Behavioral Patterns                            |
-|--------------------------------------------------------------------|---|------------------------------------------------|
-| Singleton                                                          | Adapter | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
-| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge | Command                                        |
-| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | Composite                                                          | Iterator                                       |
-| Builder                                                            | Decorator | Mediator                                       |
-| Prototype                                                          | Facade | Memento                                        |
-|                                                                    | Flyweight | [Observer](concepts/design-patterns/observer.md) |
-|                                                                    | Proxy | State                                          |
-|                                                                    |  | [Strategy](concepts/design-patterns/strategy.md) |
-|                                                                    |  | Template Method                                |
-|                                                                    |  | Visitor                                        |
+| Creational Patterns                                                | Structural Patterns                        | Behavioral Patterns                            |
+|--------------------------------------------------------------------|--------------------------------------------|------------------------------------------------|
+| Singleton                                                          | Adapter                                    | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
+| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                     | Command                                        |
+| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | Composite                                  | Iterator                                       |
+| Builder                                                            | Decorator                                  | Mediator                                       |
+| Prototype                                                          | Facade                                     | Memento                                        |
+|                                                                    | Flyweight                                  | [Observer](concepts/design-patterns/observer.md) |
+|                                                                    | [Proxy](concepts/design-patterns/proxy.md) | State                                          |
+|                                                                    |                                            | [Strategy](concepts/design-patterns/strategy.md) |
+|                                                                    |                                            | Template Method                                |
+|                                                                    |                                            | Visitor                                        |
 
 ## Design Examples
 

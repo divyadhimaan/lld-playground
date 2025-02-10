@@ -5,6 +5,9 @@
 
 ### Article Reference - [here](https://refactoring.guru/design-patterns/proxy)
 
+### Java Example - [here](../../code/designPatterns/ProxyExample.java)
+
+Usually used for access restrictions
 
 
 

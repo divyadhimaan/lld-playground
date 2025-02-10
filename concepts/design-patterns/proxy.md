@@ -7,7 +7,10 @@
 
 ### Java Example - [here](../../code/designPatterns/ProxyExample.java)
 
-Usually used for access restrictions
+## Sample Uses
+- Access restrictions
+- Caching
+- Pre- / Post-processing
 
 
 

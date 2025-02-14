@@ -11,8 +11,10 @@ This is the repos
 
 
 ## Concepts
-
-- [OOPs Concepts](./concepts/oops/four-pillars)
+- [Basic OOP](./concepts/oops/java.md#basic-oop)
+- [Collections](./concepts/oops/java.md#collections)
+- [Generics](./concepts/oops/java.md#generics)
+- [Springboot](./)
 - [SOLID Principles](concepts/solid-principles/solid-principles.md)
 
 

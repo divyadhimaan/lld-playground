@@ -1,5 +1,6 @@
 package main.java.org.example.service;
 
+import org.example.factory.VerdictFactory;
 import org.example.model.Verdict;
 
 import java.util.HashMap;
@@ -8,9 +9,14 @@ import java.util.Map;
 
 public class VerdictService {
     private final Map<String, Verdict> verdicts = new HashMap<>();
+    private final VerdictFactory verdictFactory;
+
+    public VerdictService(VerdictFactory verdictFactory) {
+        this.verdictFactory = verdictFactory;
+    }
 
     public Verdict addVerdict(String authorId, String targetId, String targetType, String text, int rating, boolean isPublic){
-        Verdict verdict =  new Verdict(authorId, targetId, targetType, text, rating, isPublic);
+        Verdict verdict =  verdictFactory.createVerdict(authorId, targetId, targetType, text, rating, isPublic);
         verdicts.put(verdict.getVerdictId(), verdict);
         return verdict;
     }

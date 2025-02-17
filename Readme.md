@@ -14,7 +14,10 @@ This is the repos
 - [Basic OOP](./concepts/oops/java.md#basic-oop)
 - [Collections](./concepts/oops/java.md#collections)
 - [Generics](./concepts/oops/java.md#generics)
-- [Springboot](./)
+- Springboot
+  - [Overview](./concepts/spring-boot/sb_overview.md)
+  - [Dependency Inversion - IOC](./concepts/spring-boot/di-ioc.md)
+  - 
 - [SOLID Principles](concepts/solid-principles/solid-principles.md)
 
 
@@ -40,6 +43,7 @@ This is the repos
 - [Parking Lot](./problems/parking-lot.md)
 - [PubSub Model](./problems/pub-sub-model.md)
 - [Bank Account System](./problems/bank-account-system.md)
+- [Linkedin Verdict](./problems/linkedin-verdict.md)
 
 
 ## Notations

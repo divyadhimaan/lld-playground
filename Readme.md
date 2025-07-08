@@ -17,24 +17,37 @@ This is the repos
 - Springboot
   - [Overview](./concepts/spring-boot/sb_overview.md)
   - [Dependency Inversion - IOC](./concepts/spring-boot/di-ioc.md)
-  - 
-- [SOLID Principles](concepts/solid-principles/solid-principles.md)
+  
+## SOLID Principles
+SOLID is an acronym for five fundamental principles of object-oriented programming and design that help create more maintainable, flexible, and robust software.
+- `S` - [Single Responsibility Principle](concepts/solid-principles/single-responsibility-principle.md)
+- `O` - [Open Closed Principle](concepts/solid-principles/open-closed-principle.md)
+- `L` - [Liskov Substitution Principle](concepts/solid-principles/liskov-substitution-principle.md)
+- `I` - [Interface Segmented Principle](concepts/solid-principles/interface-segmented-principle.md)
+- `D` - [Dependency Inversion Principle](concepts/solid-principles/dependency-Inversion-principle.md)
+
 
 
 ## Design Patterns
-
-| Creational Patterns                                                | Structural Patterns                        | Behavioral Patterns                            |
-|--------------------------------------------------------------------|--------------------------------------------|------------------------------------------------|
-| Singleton                                                          | Adapter                                    | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
-| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                     | Command                                        |
-| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | Composite                                  | Iterator                                       |
-| Builder                                                            | Decorator                                  | Mediator                                       |
-| Prototype                                                          | Facade                                     | Memento                                        |
-|                                                                    | Flyweight                                  | [Observer](concepts/design-patterns/observer.md) |
-|                                                                    | [Proxy](concepts/design-patterns/proxy.md) | State                                          |
-|                                                                    |                                            | [Strategy](concepts/design-patterns/strategy.md) |
-|                                                                    |                                            | Template Method                                |
-|                                                                    |                                            | Visitor                                        |
+- Design patterns are reusable solutions to commonly occurring problems in software design. 
+- They represent best practices and proven approaches that experienced developers have identified and documented over time.
+- Categories of design patterns include Creational, Structural, and Behavioral patterns.
+  - `Creational Patterns`: Deal with object creation mechanisms (Singleton, Factory, Builder)
+  - `Structural Patterns`: Deal with object composition and relationships (Adapter, Decorator, Facade)
+  - `Behavioral Patterns`: Deal with communication between objects and assignment of responsibilities (Observer, Strategy, Command)
+  
+  | Creational Patterns                                  | Structural Patterns                             | Behavioral Patterns                            |
+  |------------------------------------------------------|-------------------------------------------------|------------------------------------------------|
+  | Singleton                                            | Adapter                                         | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
+  | [Factory Method](./concepts/design-patterns/factory.md)                                | Bridge                                          | Command                                        |
+  | [Abstract Factory](./concepts/design-patterns/abstract-factory.md)                              | Composite                                       | Iterator                                       |
+  | Builder                                              | Decorator                                       | Mediator                                       |
+  | Prototype                                             | Facade                                         | Memento                                        |
+  |                                                      | Flyweight                                       | [Observer](concepts/design-patterns/observer.md) |
+  |                                                      | [Proxy](concepts/design-patterns/proxy.md)                                   | State                                          |
+  |                                                      |                                                 | [Strategy](concepts/design-patterns/strategy.md) |
+  |                                                      |                                                 | Template Method                                |
+  |                                                      |                                                 | Visitor                                        |
 
 ## Design Examples
 

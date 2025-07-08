@@ -12,8 +12,16 @@ This is the repos
 
 ## Concepts
 - [Basic OOP](./concepts/oops/java.md#basic-oop)
-- [Collections](./concepts/oops/java.md#collections)
-- [Generics](./concepts/oops/java.md#generics)
+  - [Classes in Java](./concepts/oops/java.md#classes-in-java)
+  - [Scope](./concepts/oops/java.md#scope)
+  - [Main OOP Concepts in Java](./concepts/oops/java.md#main-oop-concepts-in-java)
+    - [Encapsulation](./concepts/oops/java.md#encapsulation)
+    - [Abstraction](./concepts/oops/java.md#abstraction)
+    - [Inheritance](./concepts/oops/java.md#inheritance)
+    - [Polymorphism](./concepts/oops/java.md#polymorphism-)
+  - [Composition](./concepts/oops/java.md#composition)
+  - [Collections](./concepts/oops/java.md#collections)
+  - [Generics](./concepts/oops/java.md#generics)
 - [Springboot](./concepts/spring-boot/sb_overview.md)
   - [Dependency Inversion - IOC](./concepts/spring-boot/di-ioc.md)
   

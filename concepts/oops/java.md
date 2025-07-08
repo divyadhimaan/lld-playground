@@ -2,9 +2,7 @@
 
 Fundamental concepts (mostly Java-specific). We recommend learning / understanding all of these concepts before going through any of the **[Spring Boot](spring.md)** content.
 
-## Basic OOP
-
-### Classes in Java
+## Classes in Java
 
 ```java
 // this is a basic java class
@@ -44,7 +42,7 @@ Modifier: *public*<br/>Class Name: *Employee*<br/>Superclass: *Person*<br/>Inter
 * Constructors: **[Java Constructors (W3Schools)](https://www.w3schools.com/java/java_constructors.asp)**
 
 
-### Scope
+## Scope
 
 You can define and restrict the scope of a class, constructor, variable, or method with an *access modifier*. There are four access modifiers in Java:
 
@@ -57,8 +55,10 @@ You can define and restrict the scope of a class, constructor, variable, or meth
 
 * **[Access Modifiers in Java](https://www.geeksforgeeks.org/access-modifiers-java/)**
 * **[Java Modifiers (W3Schools)](https://www.w3schools.com/java/java_modifiers.asp)**
+---
+## Main OOP Concepts in Java
 
-### Main OOP Concepts in Java
+### Encapsulation
 
 **[Encapsulation](https://www.w3schools.com/java/java_encapsulation.asp)**: The practice of keeping fields within a class private, then providing access to them via public methods. It’s a protective barrier that keeps the data and code safe within the class itself. This way, we can re-use objects like code components or variables without allowing open access to the data system-wide.
 
@@ -76,6 +76,26 @@ public class Employee extends Person {
   }
 }
 ```
+
+### Abstraction
+
+**[Abstraction](https://www.w3schools.com/java/java_abstract.asp)**: Using simple things to represent complexity. We all know how to turn the TV on, but we don’t need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets avoid repeating the same work multiple times.
+
+```java
+// ABSTRACTION
+public abstract class Person {
+	// no implementation defined.
+	// subclass MUST implement this method.
+	public abstract void walk();
+}
+public class Employee extends Person {
+	public void walk() {
+	  // implementation of walk goes here.
+	}
+}
+```
+
+### Inheritance
 **[Inheritance](https://www.w3schools.com/java/java_inheritance.asp)**: Creating new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
 
 ```java
@@ -100,7 +120,26 @@ public class Employee extends Person {
   }
 }
 ```
-**[Composition](https://www.javatpoint.com/q/5101/what-is-composition-in-java?)**: Composition is the design technique to implement has-a relationship in classes. We can use java inheritance or Object composition for code reuse.
+### Polymorphism 
+
+**[Polymorphism](https://www.w3schools.com/java/java_polymorphism.asp)**: The practice of using the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables.
+
+```java
+// POLYMORPHISM
+public class Employee extends Person {
+  public Device[] getDevices() {
+    // get all devices owned by employee
+  }
+  
+  public Device[] getDevices(String type) {
+    // get all devices given a type.
+    // e.g. get all tablets owned by this employee 
+  }
+}
+```
+
+### Composition
+[Composition](https://www.javatpoint.com/q/5101/what-is-composition-in-java?) is the design technique to implement has-a relationship in classes. We can use java inheritance or Object composition for code reuse.
 
 ```java
 // COMPOSITION
@@ -148,36 +187,8 @@ public class Person {
   } 
 }
 ```
-**[Polymorphism](https://www.w3schools.com/java/java_polymorphism.asp)**: The practice of using the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables.
 
-```java
-// POLYMORPHISM
-public class Employee extends Person {
-  public Device[] getDevices() {
-    // get all devices owned by employee
-  }
-  
-  public Device[] getDevices(String type) {
-    // get all devices given a type.
-    // e.g. get all tablets owned by this employee 
-  }
-}
-```
-**[Abstraction](https://www.w3schools.com/java/java_abstract.asp)**: Using simple things to represent complexity. We all know how to turn the TV on, but we don’t need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets avoid repeating the same work multiple times.
 
-```java
-// ABSTRACTION
-public abstract class Person {
-	// no implementation defined.
-	// subclass MUST implement this method.
-	public abstract void walk();
-}
-public class Employee extends Person {
-	public void walk() {
-	  // implementation of walk goes here.
-	}
-}
-```
 
 
 **Learn more: [OOP Concepts in Java](https://stackify.com/oops-concepts-in-java/)**
@@ -186,8 +197,6 @@ public class Employee extends Person {
 ## Collections
 
 A collection, as name implies, is group of objects. Java Collections framework is consist of the interfaces and classes which helps in working with different types of collections such as lists, sets, maps, stacks and queues etc.
-
-![Collections Hierarchy](https://cdn2.howtodoinjava.com/wp-content/uploads/2018/11/Java-collections-interfaces.gif)
 
 **Learn more: [Collections in Java](https://howtodoinjava.com/java-collections/)**
 

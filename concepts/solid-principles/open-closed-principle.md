@@ -13,14 +13,15 @@
 # Code Sample with Explanation
 
 Code Samples:
-- [Violation](../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java) code
-- [OCP following](../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java) code
+- [Existing Code](../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java)
+> Feature Request: We need a different tax calculation (e.g., GST, VAT, regional tax rates)
 
+According to the Open Closed Principle, we should not modify the existing code (OpenClosedViolation.java) to add new tax calculation logic. Instead, we will create new implementations of TaxCalculator.
+- [OCP following code](../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java)
 
 1. **Interface-Based Design** (TaxCalculator)
     - The TaxCalculator interface defines a contract for tax calculation.
     - The StandardTaxCalculator implements this interface with a 15% tax rate. 
-      - If we need a different tax calculation (e.g., GST, VAT, regional tax rates), we do not modify existing code but create new implementations of TaxCalculator.
 2. Extending Functionality Without Modification
    - The Order class depends on the TaxCalculator abstraction rather than a concrete implementation.
    - If we want to apply a different tax strategy (e.g., ReducedTaxCalculator or NoTaxCalculator), we simply create new classes implementing TaxCalculator instead of modifying Order.

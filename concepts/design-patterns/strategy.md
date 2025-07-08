@@ -1,6 +1,6 @@
 # Strategy: Design Pattern
 
->A behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
+>  A behavioral design pattern that lets you define a family of algorithms, put each of them into a separate class, and make their objects interchangeable.
 > 
 >  It lets the algorithm vary independently from the clients that use it.
 

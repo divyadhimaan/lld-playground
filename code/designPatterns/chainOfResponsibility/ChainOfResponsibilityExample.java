@@ -1,3 +1,5 @@
+package chainOfResponsibility;
+
 // Step 1: Abstract Handler
 abstract class Logger {
     protected Logger nextLogger;

@@ -39,13 +39,6 @@ The destination remains the same, but the strategy to reach it changes based on 
 
 
 
-
-| References | Links                                                                                            |
-|------------|--------------------------------------------------------------------------------------------------|
-| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/strategy) |
-| Boiler Plate Code | [Strategy Example](../../code/designPatterns/strategy/StrategyExample.java)                      |
-
-
 ## Sample Code 
 
 [Payment Strategy Example](../../code/designPatterns/strategy/StrategySample.java)
@@ -137,3 +130,11 @@ StrategySample --> ShoppingCart
 - **Context:** Selectable or combined to serve better recommendations.
 
 ---
+
+
+
+| References | Links                                                                                            |
+|------------|--------------------------------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/strategy) |
+| Boiler Plate Code | [Strategy Example](../../code/designPatterns/strategy/StrategyExample.java)                      |
+

@@ -30,14 +30,6 @@
 ![img_1.png](../../images/decorator-2.png)
 
 
-
-| References | Links                                                                       |
-|------------|-----------------------------------------------------------------------------|
-| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/decorator)       |
-| Boiler Plate Code | [Observer Example](../../code/designPatterns/decorator/DecoratorExample.java) |
-
-
-
 ## Sample Code
 
 [Coffee Machine Example](../../code/designPatterns/decorator/DecoratorSample.java)
@@ -138,3 +130,11 @@ DecoratorSample --> Coffee
 ### 8. Data Transformation Pipelines
 - **Decorators:** `TrimDecorator`, `LowercaseDecorator`, `SanitizeDecorator`, `EncryptDecorator`
 - **Context:** Process input data in modular, stackable transformations before saving or displaying.
+
+
+
+| References | Links                                                                          |
+|------------|--------------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/decorator)         |
+| Boiler Plate Code | [Decorator Example](../../code/designPatterns/decorator/DecoratorExample.java) |
+

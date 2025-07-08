@@ -38,12 +38,6 @@
 - The Client creates publisher and subscriber objects separately and then registers subscribers for publisher updates.
 
 
-| References | Links                                                                       |
-|------------|-----------------------------------------------------------------------------|
-| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/observer)       |
-| Boiler Plate Code | [Observer Example](../../code/designPatterns/observer/ObserverExample.java) |
-
-
 ![img.png](../../images/observer-design-2.png)
 
 
@@ -140,3 +134,11 @@ classDiagram
 - **Context:** On weather data update, notify all UI displays and alert modules.
 
 ---
+
+
+
+| References | Links                                                                       |
+|------------|-----------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/observer)       |
+| Boiler Plate Code | [Observer Example](../../code/designPatterns/observer/ObserverExample.java) |
+

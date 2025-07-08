@@ -32,12 +32,6 @@ The Factory Method pattern suggests that you replace direct object construction 
 
 
 
-| References | Links                                                                       |
-|------------|-----------------------------------------------------------------------------|
-| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/factory-method) |
-| Boiler Plate Code | [Observer Example](../../code/designPatterns/factory/FactoryExample.java)   |
-
-
 
 ## Sample Code
 
@@ -143,3 +137,11 @@ PizzaFactory --> Pizza
 - **Context:** Unified access to different database types without changing business logic.
 
 ---
+
+
+| References | Links                                                                       |
+|------------|-----------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/factory-method) |
+| Boiler Plate Code | [Factory Example](../../code/designPatterns/factory/FactoryExample.java)    |
+
+

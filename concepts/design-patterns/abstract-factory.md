@@ -30,11 +30,6 @@
 - Promotes loose coupling between client code and concrete product classes
 - Makes adding new product families easier without changing existing code
 
-| References | Links                                                                                     |
-|------------|-------------------------------------------------------------------------------------------|
-| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/abstract-factory)             |
-| Boiler Plate Code | [Observer Example](../../code/designPatterns/abstractFactory/AbstractFactoryExample.java) |
-
 ## Sample Code
 
 [Pizza Factory Sample](../../code/designPatterns/abstractFactory/AbstractFactorySample.java)
@@ -200,3 +195,9 @@ classDiagram
 - **Context:** Render media differently based on the device type.
 
 ---
+
+
+| References | Links                                                                                     |
+|------------|-------------------------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/abstract-factory)             |
+| Boiler Plate Code | [Observer Example](../../code/designPatterns/abstractFactory/AbstractFactoryExample.java) |

@@ -1,10 +1,32 @@
 # Observer: Design Pattern
 
 > A behavioral design pattern that lets you define a subscription mechanism to notify multiple objects about any events that happen to the object they’re observing.
+> 
+> Defines a one-to-many dependency between objects
 
+## When to use Observer Pattern
 
+- When changes to one object require changing many other objects
+- When you want to notify multiple objects about events without making them tightly coupled
+- When you need to broadcast information to an unknown number of listeners
+- When you want to implement event-driven systems
+
+## Real world analogy
+
+- Think of a newspaper subscription service. 
+- When a new newspaper edition is published, all subscribers automatically receive a copy. 
+- Subscribers can join or leave the subscription list anytime. 
+- The newspaper doesn't need to know who the subscribers are individually - it just notifies everyone on the list when new content is available.
 
 ![img.png](../../images/observer-design.png)
+
+## Problem Solved
+
+- Reduces tight coupling between objects
+- Allows dynamic relationships between subjects and observers
+- Supports broadcast communication without knowing specific receivers
+- Makes it easy to add/remove observers without modifying the subject 
+- Enables event-driven programming patterns
 
 ## Summary
 
@@ -16,11 +38,54 @@
 - The Client creates publisher and subscriber objects separately and then registers subscribers for publisher updates.
 
 
-
-### Article Reference - [here](https://refactoring.guru/design-patterns/strategy)
-### Java Example - [here](../../code/designPatterns/ObserverExample.java)
+| References | Links                                                                       |
+|------------|-----------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/observer)       |
+| Boiler Plate Code | [Observer Example](../../code/designPatterns/observer/ObserverExample.java) |
 
 
 ![img.png](../../images/observer-design-2.png)
 
 
+## Sample Code
+
+[News Broadcast Example](../../code/designPatterns/observer/ObserverSample.java)
+```mermaid
+classDiagram
+
+    class Observer {
+        <<interface>>
+        +update(news: String): void
+    }
+
+    class Subject {
+        <<interface>>
+        +attach(observer: Observer): void
+        +detach(observer: Observer): void
+        +notifyObservers(): void
+    }
+
+    class NewsAgency {
+        -observers: List~Observer~
+        -news: String
+        +attach(observer: Observer): void
+        +detach(observer: Observer): void
+        +notifyObservers(): void
+        +setNews(news: String): void
+    }
+    Subject <|.. NewsAgency
+
+    class NewsChannel {
+        -channelName: String
+        +NewsChannel(channelName: String)
+        +update(news: String): void
+    }
+    Observer <|.. NewsChannel
+
+    class ObserverSample {
+        +main(args: String[]): void
+    }
+
+    ObserverSample --> NewsAgency
+    NewsAgency --> Observer
+```

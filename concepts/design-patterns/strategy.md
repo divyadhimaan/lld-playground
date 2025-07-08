@@ -46,9 +46,9 @@ The destination remains the same, but the strategy to reach it changes based on 
 | Boiler Plate Code | [Strategy Example](../../code/designPatterns/strategy/StrategyExample.java)                      |
 
 
-## Java Sample Code 
+## Sample Code 
 
-[Sample Code](../../code/designPatterns/strategy/StrategySample.java)
+[Payment Strategy Example](../../code/designPatterns/strategy/StrategySample.java)
 ```mermaid
 classDiagram
 

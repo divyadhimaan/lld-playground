@@ -14,8 +14,7 @@ This is the repos
 - [Basic OOP](./concepts/oops/java.md#basic-oop)
 - [Collections](./concepts/oops/java.md#collections)
 - [Generics](./concepts/oops/java.md#generics)
-- Springboot
-  - [Overview](./concepts/spring-boot/sb_overview.md)
+- [Springboot](./concepts/spring-boot/sb_overview.md)
   - [Dependency Inversion - IOC](./concepts/spring-boot/di-ioc.md)
   
 ## SOLID Principles

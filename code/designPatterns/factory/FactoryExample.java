@@ -1,3 +1,4 @@
+package factory;
 
 // Product Interface
 interface Shape{
@@ -8,7 +9,7 @@ interface Shape{
 class Rectangle implements Shape{
     @Override
     public void draw() {
-        System.out.println("Draw Rectangle");
+        System.out.println("Draw factory.Rectangle");
     }
 }
 
@@ -16,14 +17,14 @@ class Rectangle implements Shape{
 class Square implements Shape{
     @Override
     public void draw() {
-        System.out.println("Draw Square");
+        System.out.println("Draw factory.Square");
     }
 }
 // Concrete Products - Defines the behavior and properties of the object.
 class Circle implements Shape{
     @Override
     public void draw() {
-        System.out.println("Draw Circle");
+        System.out.println("Draw factory.Circle");
     }
 }
 

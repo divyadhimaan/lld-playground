@@ -1,4 +1,4 @@
-//Abstract Products: Button and Checkbox are the abstract product interfaces.
+package abstractFactory;//Abstract Products: Button and Checkbox are the abstract product interfaces.
 //Concrete Products: LightButton, DarkButton, LightCheckbox, and DarkCheckbox are the concrete implementations of the Button and Checkbox interfaces for different themes.
 //Abstract Factory: GUIFactory is the abstract factory that defines methods for creating buttons and checkboxes.
 //Concrete Factories: LightThemeFactory and DarkThemeFactory are the concrete factories that implement the GUIFactory interface. Each factory creates products that are part of a specific theme (either light or dark).

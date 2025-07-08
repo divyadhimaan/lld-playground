@@ -1,14 +1,16 @@
-// Base Pizza class
+package decorator;
+
+// Base decorator.Pizza class
 abstract class Pizza {
     public abstract String getDescription();
     public abstract double cost();
 }
 
-// Concrete Pizza class (Margherita)
+// Concrete decorator.Pizza class (Margherita)
 class MargheritaPizza extends Pizza {
     @Override
     public String getDescription() {
-        return "Margherita Pizza";
+        return "Margherita decorator.Pizza";
     }
 
     @Override

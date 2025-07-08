@@ -31,10 +31,63 @@
 
 
 
-### Article Reference - [here](https://refactoring.guru/design-patterns/decorator)
-### Java Example - [here](../../code/designPatterns/DecoratorExample.java)
+| References | Links                                                                       |
+|------------|-----------------------------------------------------------------------------|
+| Article Reference | [Refactoring Guru](https://refactoring.guru/design-patterns/decorator)       |
+| Boiler Plate Code | [Observer Example](../../code/designPatterns/decorator/DecoratorExample.java) |
 
 
 
+## Sample Code
 
+[Coffee Machine Example](../../code/designPatterns/decorator/DecoratorSample.java)
 
+```mermaid
+classDiagram
+
+class Coffee {
+    <<interface>>
+    +getDescription(): String
+    +getCost(): double
+}
+
+class SimpleCoffee {
+    +getDescription(): String
+    +getCost(): double
+}
+Coffee <|.. SimpleCoffee
+
+class CoffeeDecorator {
+    <<abstract>>
+    -coffee: Coffee
+    +CoffeeDecorator(coffee: Coffee)
+    +getDescription(): String
+    +getCost(): double
+}
+Coffee <|-- CoffeeDecorator
+
+class MilkDecorator {
+    +getDescription(): String
+    +getCost(): double
+}
+CoffeeDecorator <|-- MilkDecorator
+
+class SugarDecorator {
+    +getDescription(): String
+    +getCost(): double
+}
+CoffeeDecorator <|-- SugarDecorator
+
+class WhipDecorator {
+    +getDescription(): String
+    +getCost(): double
+}
+CoffeeDecorator <|-- WhipDecorator
+
+class DecoratorSample {
+    +main(args: String[]): void
+}
+
+DecoratorSample --> Coffee
+
+```

@@ -45,7 +45,7 @@
 ## Patterns Used
 
 - `ParkingLot` uses singleton method:  The system should have only one instance of the parking lot that manages the entire structure.
-- `PaymentProcessor` uses Strategy pattern: Different parking lots may have different pricing models.
+- `PaymentProcessor` uses strategy.Strategy pattern: Different parking lots may have different pricing models.
 - `ParkingDisplay` uses Observer pattern: Real-time update of parking space availability.
 - `EntryGate` and `ExitGate` uses command pattern: To handle parking entry and exit as commands for scalability.
 - To handle `concurreny` used synchronized methods: To handle multiple entry and exit points

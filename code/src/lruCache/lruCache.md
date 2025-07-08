@@ -2,7 +2,7 @@
 
 
 
-## Strategy Pattern
+## strategy.Strategy Pattern
 The eviction strategy (LRU) is encapsulated in the EvictionEngine. This allows for flexibility in changing the eviction strategy in the future without modifying the Cache class.
 
 

@@ -41,20 +41,21 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 - Categories of design patterns include Creational, Structural, and Behavioral patterns.
   - `Creational Patterns`: Deal with object creation mechanisms (Singleton, Factory, Builder)
   - `Structural Patterns`: Deal with object composition and relationships (Adapter, Decorator, Facade)
-  - `Behavioral Patterns`: Deal with communication between objects and assignment of responsibilities (Observer, Strategy, Command)
+  - `Behavioral Patterns`: Deal with communication between objects and assignment of responsibilities (Observer, strategy.Strategy, Command)
   
-  | Creational Patterns                                  | Structural Patterns                             | Behavioral Patterns                            |
-  |------------------------------------------------------|-------------------------------------------------|------------------------------------------------|
-  | Singleton                                            | Adapter                                         | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
-  | [Factory Method](./concepts/design-patterns/factory.md)                                | Bridge                                          | Command                                        |
-  | [Abstract Factory](./concepts/design-patterns/abstract-factory.md)                              | Composite                                       | Iterator                                       |
-  | Builder                                              | Decorator                                       | Mediator                                       |
-  | Prototype                                             | Facade                                         | Memento                                        |
-  |                                                      | Flyweight                                       | [Observer](concepts/design-patterns/observer.md) |
-  |                                                      | [Proxy](concepts/design-patterns/proxy.md)                                   | State                                          |
-  |                                                      |                                                 | [Strategy](concepts/design-patterns/strategy.md) |
-  |                                                      |                                                 | Template Method                                |
-  |                                                      |                                                 | Visitor                                        |
+
+| Creational Patterns                                  | Structural Patterns                             | Behavioral Patterns                            |
+|------------------------------------------------------|-------------------------------------------------|------------------------------------------------|
+| Singleton                                            | Adapter                                         | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md)                    |
+| [Factory Method](./concepts/design-patterns/factory.md)                                | Bridge                                          | Command                                        |
+| [Abstract Factory](./concepts/design-patterns/abstract-factory.md)                              | Composite                                       | Iterator                                       |
+| Builder                                              | Decorator                                       | Mediator                                       |
+| Prototype                                             | Facade                                         | Memento                                        |
+|                                                      | Flyweight                                       | [Observer](concepts/design-patterns/observer.md) |
+|                                                      | [Proxy](concepts/design-patterns/proxy.md)                                   | State                                          |
+|                                                      |                                                 | [strategy.Strategy](concepts/design-patterns/strategy.md) |
+|                                                      |                                                 | Template Method                                |
+|                                                      |                                                 | Visitor                                        |
 
 ## Design Examples
 

@@ -1,3 +1,5 @@
+package strategy;
+
 // The strategy interface declares operations common to all
 // supported versions. The context uses this
 // interface to call the algorithm defined by the concrete

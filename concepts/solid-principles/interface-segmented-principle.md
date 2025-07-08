@@ -10,9 +10,12 @@
 
 # Code Sample with Explanation
 
-- Violation of ISP [Refer](../../code/solidPrinciples/InterfaceSegmentation/InterfaceSegmentationViolation.java):
-    - The `Waiter` class is forced to implement `washDishes()` and `cookFood()`, which are not relevant.
-    - This leads to unused methods or runtime exceptions.
+- For a singe RestaurantEmployee class, we have a large interface `RestaurantEmployee` that includes methods for washing dishes, serving food, and cooking food.
+- But a waiter only needs to serve food, a chef only needs to cook food, and a dishwasher only needs to wash dishes.
+- This leads to unused methods or runtime exceptions.
+- Checkout the existing code for a restaurant employee interface: [Refer](../../code/solidPrinciples/InterfaceSegmentation/InterfaceSegmentationViolation.java)
+
+
 - Solution [Refer](../../code/solidPrinciples/InterfaceSegmentation/InterfaceSegmentationFixed.java):
   - Split the large interface into smaller, more specific interfaces (`DishWasher`, `Server`, `Chef` which extend the `RestaurantEmployee`). 
   - Avoids Unnecessary Implementations – Each class only implements methods relevant to its role.

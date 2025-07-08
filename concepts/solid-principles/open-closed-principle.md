@@ -1,6 +1,6 @@
 # ```O``` - Open Closed Principle (OCP)
 
-> Class should be Open for Extension but closed for Extension
+> Class should be Open for Extension but closed for Modification
 
 
 - Software entities should be open for extension, but closed for modifications

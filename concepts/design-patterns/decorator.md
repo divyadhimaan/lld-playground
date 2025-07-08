@@ -91,3 +91,50 @@ class DecoratorSample {
 DecoratorSample --> Coffee
 
 ```
+## Common LLD Problems Using Decorator Pattern:
+
+### 1. Text Editor / Rich Text Formatting
+- **Decorators:** `BoldText`, `ItalicText`, `UnderlineText`, `HighlightText`
+- **Context:** Apply multiple text styles without modifying core `TextComponent`.
+
+---
+
+### 2. UI Component Styling
+- **Decorators:** `BorderDecorator`, `ShadowDecorator`, `PaddingDecorator`, `ColorDecorator`
+- **Context:** Dynamically enhance visual components in GUI frameworks (like JavaFX/Swing).
+
+---
+
+### 3. Coffee Shop Billing System
+- **Decorators:** `MilkDecorator`, `SugarDecorator`, `WhipDecorator`, `VanillaDecorator`
+- **Context:** Add ingredients to a base coffee and calculate final cost dynamically.
+
+---
+
+### 4. File I/O Streams (Java / .NET)
+- **Decorators:** `BufferedInputStream`, `DataInputStream`, `ZipInputStream`
+- **Context:** Enhance file streams with buffering, compression, encryption.
+
+---
+
+### 5. Logging System
+- **Decorators:** `TimestampLogger`, `ErrorLevelLogger`, `FileLogger`, `EncryptedLogger`
+- **Context:** Add cross-cutting logging concerns (metadata, formatting, destinations).
+
+---
+
+### 6. Authentication & Authorization Middleware
+- **Decorators:** `JWTValidator`, `OAuthWrapper`, `RoleBasedAccessControl`
+- **Context:** Stack multiple validation/auth layers in web apps (e.g., Express.js or Spring filters).
+
+---
+
+### 7. Notification Enhancer
+- **Decorators:** `SlackNotifier`, `EmailNotifier`, `SMSNotifier`, `PushNotifier`
+- **Context:** Add channels to a base notification dynamically without hardcoding all variations.
+
+---
+
+### 8. Data Transformation Pipelines
+- **Decorators:** `TrimDecorator`, `LowercaseDecorator`, `SanitizeDecorator`, `EncryptDecorator`
+- **Context:** Process input data in modular, stackable transformations before saving or displaying.

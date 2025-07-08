@@ -86,5 +86,60 @@ PizzaFactoryExample --> PizzaFactory
 PizzaFactory --> Pizza
 
 ```
+## Common LLD Problems Using Factory Pattern:
 
+### 1. Notification Sender System
+- **Factory:** `NotificationFactory.create("email" | "sms" | "push")`
+- **Products:** `EmailNotification`, `SMSNotification`, `PushNotification`
+- **Context:** Create the right notification handler without exposing instantiation logic.
 
+---
+
+### 2. Food Ordering / Pizza System
+- **Factory:** `PizzaFactory.create("margherita" | "veggie" | "pepperoni")`
+- **Products:** `MargheritaPizza`, `VeggiePizza`, `PepperoniPizza`
+- **Context:** Decouple pizza creation from ordering logic.
+
+---
+
+### 3. Shape Drawing Tool / Graphics Editor
+- **Factory:** `ShapeFactory.create("circle" | "rectangle" | "triangle")`
+- **Products:** `Circle`, `Rectangle`, `Triangle`
+- **Context:** Used to create different shape objects in drawing or diagramming tools.
+
+---
+
+### 4. Payment Gateway Integration
+- **Factory:** `PaymentFactory.getPayment("upi" | "credit_card" | "paypal")`
+- **Products:** `UPIPayment`, `CreditCardPayment`, `PayPalPayment`
+- **Context:** Abstract away the initialization of payment processors.
+
+---
+
+### 5. Document Reader / File Parser
+- **Factory:** `ParserFactory.getParser("pdf" | "docx" | "csv")`
+- **Products:** `PDFParser`, `DocxParser`, `CSVParser`
+- **Context:** Read files of various formats without hardcoding parser logic.
+
+---
+
+### 6. Vehicle Manufacturing System
+- **Factory:** `VehicleFactory.getVehicle("car" | "bike" | "truck")`
+- **Products:** `Car`, `Bike`, `Truck`
+- **Context:** Manage object creation for different vehicle types.
+
+---
+
+### 7. Cloud Provider SDK Generator
+- **Factory:** `CloudFactory.getProvider("aws" | "gcp" | "azure")`
+- **Products:** `AWSClient`, `GCPClient`, `AzureClient`
+- **Context:** Simplify instantiation and configuration of cloud-specific clients.
+
+---
+
+### 8. Database Connection Provider
+- **Factory:** `ConnectionFactory.getConnection("mysql" | "postgres" | "mongodb")`
+- **Products:** `MySQLConnection`, `PostgresConnection`, `MongoDBConnection`
+- **Context:** Unified access to different database types without changing business logic.
+
+---

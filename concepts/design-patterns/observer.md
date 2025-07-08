@@ -89,3 +89,54 @@ classDiagram
     ObserverSample --> NewsAgency
     NewsAgency --> Observer
 ```
+
+
+## Common LLD Problems Using Observer Pattern:
+
+### 1. Notification System
+- **Observers:** `EmailNotifier`, `SMSNotifier`, `PushNotifier`
+- **Context:** Notify users across multiple channels on events like sign-up, purchase, or delivery.
+
+---
+
+### 2. Stock Market Ticker / Crypto Price Tracker
+- **Observers:** `TraderDashboard`, `MobileApp`, `AlertService`
+- **Context:** Broadcast price updates to all subscribed clients in real-time.
+
+---
+
+### 3. Chat / Messaging Application
+- **Observers:** `MobileClient`, `DesktopApp`, `WebApp`
+- **Context:** When a message is sent, notify all members in the group or chat room.
+
+---
+
+### 4. Real-time Dashboard / Admin Panel
+- **Observers:** `UIComponent`, `AnalyticsWidget`, `NotificationBanner`
+- **Context:** Reflect backend changes (e.g. order status, user activity) in real time.
+
+---
+
+### 5. Event Bus / Pub-Sub in Microservices
+- **Observers:** `InventoryService`, `BillingService`, `NotificationService`
+- **Context:** When an event like `OrderPlaced` is published, notify relevant services.
+
+---
+
+### 6. File System Watcher
+- **Observers:** `BackupService`, `LogMonitor`, `Indexer`
+- **Context:** Detect changes in file/directory and trigger actions accordingly.
+
+---
+
+### 7. Social Media Feed
+- **Observers:** `FollowerFeed`, `NotificationService`, `EmailDigest`
+- **Context:** Notify followers when a user posts new content.
+
+---
+
+### 8. Weather Monitoring System
+- **Observers:** `CurrentDisplay`, `ForecastPanel`, `AlertSystem`
+- **Context:** On weather data update, notify all UI displays and alert modules.
+
+---

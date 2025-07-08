@@ -135,4 +135,68 @@ classDiagram
 ```
 
 
+## Common LLD Problems Using Abstract Factory Pattern:
 
+### 1. Cross-Platform UI Toolkit
+- **Abstract Factory:** `WidgetFactory`
+- **Products:** `Button`, `Checkbox`, `TextField`
+- **Variants:** `MacWidgetFactory`, `WindowsWidgetFactory`, `LinuxWidgetFactory`
+- **Context:** UI components differ by OS but belong to the same "family".
+
+---
+
+### 2. Theme-Based UI System (Dark/Light Mode)
+- **Abstract Factory:** `UIThemeFactory`
+- **Products:** `ThemedButton`, `ThemedNavbar`, `ThemedCard`
+- **Variants:** `DarkThemeFactory`, `LightThemeFactory`
+- **Context:** Dynamically render full UI component sets based on selected theme.
+
+---
+
+### 3. Cloud Infrastructure Provisioning
+- **Abstract Factory:** `CloudResourceFactory`
+- **Products:** `Compute`, `Storage`, `Database`
+- **Variants:** `AWSFactory`, `AzureFactory`, `GCPFactory`
+- **Context:** Provision services in a cloud-agnostic way.
+
+---
+
+### 4. Operating System Driver Loader
+- **Abstract Factory:** `DriverFactory`
+- **Products:** `KeyboardDriver`, `MouseDriver`, `PrinterDriver`
+- **Variants:** `WindowsDriverFactory`, `LinuxDriverFactory`, `MacDriverFactory`
+- **Context:** Load platform-specific drivers transparently.
+
+---
+
+### 5. Game Environment Generator
+- **Abstract Factory:** `GameEnvironmentFactory`
+- **Products:** `Enemy`, `Terrain`, `NPC`
+- **Variants:** `DesertWorldFactory`, `SnowWorldFactory`, `ForestWorldFactory`
+- **Context:** Generate game entities tailored to level/environment.
+
+---
+
+### 6. Car Manufacturing System
+- **Abstract Factory:** `CarPartsFactory`
+- **Products:** `Engine`, `Tyre`, `Suspension`
+- **Variants:** `LuxuryCarPartsFactory`, `SportsCarPartsFactory`
+- **Context:** Build cars from consistent component sets.
+
+---
+
+### 7. OS-Specific File System or IO API
+- **Abstract Factory:** `FileSystemFactory`
+- **Products:** `File`, `Directory`, `PathResolver`
+- **Variants:** `UnixFileSystemFactory`, `WindowsFileSystemFactory`
+- **Context:** Provide a platform-independent file handling system.
+
+---
+
+### 8. Cross-Device Media Renderer
+- **Abstract Factory:** `MediaRendererFactory`
+- **Products:** `VideoPlayer`, `AudioPlayer`, `SubtitleRenderer`
+- **Variants:** `MobileRendererFactory`, `DesktopRendererFactory`, `SmartTVRendererFactory`
+- **Context:** Render media differently based on the device type.
+
+---

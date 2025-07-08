@@ -86,3 +86,54 @@ ShoppingCart --> PaymentStrategy
 StrategySample --> ShoppingCart
 
 ```
+
+
+## Common LLD Problems Using Strategy Pattern:
+
+### 1. Payment Gateway Integration
+- **Strategies:** `CreditCardPayment`, `UPIPayment`, `NetBankingPayment`, `WalletPayment`
+- **Context:** User selects a payment method dynamically.
+
+---
+
+### 2. Navigation / Map Routing System
+- **Strategies:** `ShortestPathStrategy`, `ScenicRouteStrategy`, `TollFreeRouteStrategy`
+- **Context:** Based on user’s route preference.
+
+---
+
+### 3. Compression Tool / File Zipper
+- **Strategies:** `ZipCompression`, `RarCompression`, `TarCompression`
+- **Context:** Chosen depending on file format or user input.
+
+---
+
+### 4. Tax Calculation System
+- **Strategies:** `IndiaTaxStrategy`, `USATaxStrategy`, `UKTaxStrategy`
+- **Context:** Ecommerce platforms dealing with international markets.
+
+---
+
+### 5. Sorting Algorithms
+- **Strategies:** `QuickSort`, `MergeSort`, `HeapSort`
+- **Context:** Selected dynamically based on data characteristics.
+
+---
+
+### 6. Discount / Promotion Engine
+- **Strategies:** `FlatDiscount`, `PercentageDiscount`, `BuyOneGetOneFree`
+- **Context:** Applied at checkout based on business rules.
+
+---
+
+### 7. Logging System
+- **Strategies:** `ConsoleLogger`, `FileLogger`, `DatabaseLogger`, `CloudLogger`
+- **Context:** Environment-based or pluggable logging backends.
+
+---
+
+### 8. Recommendation Engine
+- **Strategies:** `CollaborativeFiltering`, `ContentBased`, `TrendingBased`, `HybridRecommendation`
+- **Context:** Selectable or combined to serve better recommendations.
+
+---

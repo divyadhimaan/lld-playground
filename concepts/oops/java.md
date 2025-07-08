@@ -60,6 +60,8 @@ You can define and restrict the scope of a class, constructor, variable, or meth
 
 ### Main OOP Concepts in Java
 
+**[Encapsulation](https://www.w3schools.com/java/java_encapsulation.asp)**: The practice of keeping fields within a class private, then providing access to them via public methods. It’s a protective barrier that keeps the data and code safe within the class itself. This way, we can re-use objects like code components or variables without allowing open access to the data system-wide.
+
 ```java
 // ENCAPSULATION
 public class Employee extends Person {
@@ -74,7 +76,7 @@ public class Employee extends Person {
   }
 }
 ```
-**[Encapsulation](https://www.w3schools.com/java/java_encapsulation.asp)**: The practice of keeping fields within a class private, then providing access to them via public methods. It’s a protective barrier that keeps the data and code safe within the class itself. This way, we can re-use objects like code components or variables without allowing open access to the data system-wide.
+**[Inheritance](https://www.w3schools.com/java/java_inheritance.asp)**: Creating new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
 
 ```java
 // INHERITANCE
@@ -98,7 +100,7 @@ public class Employee extends Person {
   }
 }
 ```
-**[Inheritance](https://www.w3schools.com/java/java_inheritance.asp)**: Creating new classes that share some of the attributes of existing classes. This lets us build on previous work without reinventing the wheel.
+**[Composition](https://www.javatpoint.com/q/5101/what-is-composition-in-java?)**: Composition is the design technique to implement has-a relationship in classes. We can use java inheritance or Object composition for code reuse.
 
 ```java
 // COMPOSITION
@@ -146,7 +148,7 @@ public class Person {
   } 
 }
 ```
-**[Composition](https://www.javatpoint.com/q/5101/what-is-composition-in-java?)**: Composition is the design technique to implement has-a relationship in classes. We can use java inheritance or Object composition for code reuse.
+**[Polymorphism](https://www.w3schools.com/java/java_polymorphism.asp)**: The practice of using the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables.
 
 ```java
 // POLYMORPHISM
@@ -161,7 +163,7 @@ public class Employee extends Person {
   }
 }
 ```
-**[Polymorphism](https://www.w3schools.com/java/java_polymorphism.asp)**: The practice of using the same word to mean different things in different contexts. One form of polymorphism in Java is method overloading. That’s when different meanings are implied by the code itself. The other form is method overriding. That’s when the different meanings are implied by the values of the supplied variables.
+**[Abstraction](https://www.w3schools.com/java/java_abstract.asp)**: Using simple things to represent complexity. We all know how to turn the TV on, but we don’t need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets avoid repeating the same work multiple times.
 
 ```java
 // ABSTRACTION
@@ -177,7 +179,6 @@ public class Employee extends Person {
 }
 ```
 
-**[Abstraction](https://www.w3schools.com/java/java_abstract.asp)**: Using simple things to represent complexity. We all know how to turn the TV on, but we don’t need to know how it works in order to enjoy it. In Java, abstraction means simple things like objects, classes, and variables represent more complex underlying code and data. This is important because it lets avoid repeating the same work multiple times.
 
 **Learn more: [OOP Concepts in Java](https://stackify.com/oops-concepts-in-java/)**
 

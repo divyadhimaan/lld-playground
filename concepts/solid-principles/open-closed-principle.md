@@ -12,7 +12,7 @@
 
 # Code Sample with Explanation
 
-Code Samples:
+Checkout the existing code for calculating tax on an order in a shopping cart application.
 - [Existing Code](../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java)
 > Feature Request: We need a different tax calculation (e.g., GST, VAT, regional tax rates)
 

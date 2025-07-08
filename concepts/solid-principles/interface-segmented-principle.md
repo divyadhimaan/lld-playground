@@ -69,6 +69,7 @@ class Waiter2 {
 }
 Server <|.. Waiter2
 
+
 ```
   - Split the large interface into smaller, more specific interfaces (`DishWasher`, `Server`, `Chef` which extend the `RestaurantEmployee`). 
   - Avoids Unnecessary Implementations – Each class only implements methods relevant to its role.

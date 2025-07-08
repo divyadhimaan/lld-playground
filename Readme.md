@@ -50,9 +50,14 @@ This is the repos
 - Is-A (Inheritance)
 - Has-A (Composition/Aggregation)
 
+| Syntax | Symbol | Meaning | Usage                        | Line Style                   |                 |
+| ------ | ------ | ------- | ---------------------------- | ---------------------------- | --------------- |
+| \`<    | --\`   | Solid   | **Class inheritance**        | Concrete or abstract classes | **Solid line**  |
+| \`<    | ..\`   | Dotted  | **Interface implementation** | Class implements interface   | **Dotted line** |
+
+
 ## Resources
 
 - Design Patterns with [Refactoring Guru](https://refactoring.guru)
-- 
 
 > NOTE: This repository was created during my learning journey in Low-Level Design. If you notice any improvements or corrections, feel free to reach out.

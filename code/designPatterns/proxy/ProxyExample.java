@@ -1,3 +1,5 @@
+package proxy;
+
 // Step 1: Define the Interface
 interface UserService {
     void deleteUser(String username);

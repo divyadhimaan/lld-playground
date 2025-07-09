@@ -29,8 +29,82 @@
 ## Solution
 ![img_1.png](../../images/decorator-2.png)
 
+## Violation Code
 
-## Sample Code
+[Coffee Machine violation Code](../../code/designPatterns/decorator/DecoratorViolation.java)
+
+```mermaid
+classDiagram
+
+class SimpleCoffee2 {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithMilk {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithSugar {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithWhip {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithMilkAndSugar {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithMilkAndWhip {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithSugarAndWhip {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithMilkSugarAndWhip {
+    +getDescription(): String
+    +getCost(): double
+}
+
+class CoffeeWithFlags {
+    -hasMilk: boolean
+    -hasSugar: boolean
+    -hasWhip: boolean
+    +getDescription(): String
+    +getCost(): double
+}
+
+SimpleCoffee2 <|-- CoffeeWithMilk
+SimpleCoffee2 <|-- CoffeeWithSugar
+SimpleCoffee2 <|-- CoffeeWithWhip
+SimpleCoffee2 <|-- CoffeeWithMilkAndSugar
+SimpleCoffee2 <|-- CoffeeWithMilkAndWhip
+SimpleCoffee2 <|-- CoffeeWithSugarAndWhip
+SimpleCoffee2 <|-- CoffeeWithMilkSugarAndWhip
+
+```
+
+### Issues with Above Code
+1. Class explosion - N add-ons = 2^N possible combinations
+2. Violates Open/Closed Principle - adding new add-ons requires many new classes
+3. Code duplication - similar logic repeated across many classes
+4. Hard to maintain - changes to base cost logic need updates in all classes
+5. No runtime flexibility - combinations are fixed at compile time
+6. Boolean flag approach becomes unwieldy with many options
+7. Violates Single Responsibility - each class handles multiple concerns
+8. No composition - can't build objects dynamically
+
+## Enhanced Code
 
 [Coffee Machine Example](../../code/designPatterns/decorator/DecoratorSample.java)
 

@@ -35,7 +35,27 @@
 - Promotes single responsibility principle by giving each handler one specific task
 
 
-## Sample Code
+## Violation Code
+
+[Call Center Violation](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilityViolation.java)
+
+```mermaid
+classDiagram
+    class SupportService {
+        +handleRequest(issue: String, priority: int)
+    }
+
+    %% No Handler hierarchy, no delegation chain
+
+```
+### Issues with Violation Code
+1. No Abstraction Layer – There's no common Handler interface or abstract class to define a consistent handleRequest() method.
+2. Tight Coupling – All logic for all support levels is packed into a single method, making the code hard to modify or extend.
+3. No Delegation – Each level isn't responsible for its own logic; there's no delegation to a nextHandler.
+4. Violates Open/Closed Principle – Adding a new support level (e.g., Level 4) means modifying existing if-else logic.
+5. Difficult to Test – Cannot test support levels independently; all logic is tightly coupled in one place.
+
+## Enhanced Code
 
 [Call Center Sample](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilitySample.java)
 > Use builder/factory to create the chain of handlers

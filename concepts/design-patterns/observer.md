@@ -40,8 +40,51 @@
 
 ![img.png](../../images/observer-design-2.png)
 
+## Violation code
 
-## Sample Code
+[News Broadcast Violation](../../code/designPatterns/observer/ObserverViolation.java)
+
+```mermaid
+classDiagram
+
+class NewsAgency2 {
+    -news: String
+    -cnn: NewsChannel2
+    -bbc: NewsChannel2
+    -fox: NewsChannel2
+    +setCNN(cnn: NewsChannel2): void
+    +setBBC(bbc: NewsChannel2): void
+    +setFox(fox: NewsChannel2): void
+    +setNews(news: String): void
+}
+
+class NewsChannel2 {
+    -channelName: String
+    +NewsChannel2(channelName: String)
+    +receiveNews(news: String): void
+}
+
+class ObserverViolation {
+    +main(args: String[]): void
+}
+
+NewsAgency2 --> NewsChannel2
+ObserverViolation --> NewsAgency2
+ObserverViolation --> NewsChannel2
+
+```
+
+## Issues with above code
+
+1. Tight coupling - NewsAgency2 depends on concrete NewsChannel2 class
+2. Violates Open/Closed Principle - adding new observer types requires modifying NewsAgency2
+3. No dynamic subscription/unsubscription mechanism
+4. Hard to maintain - changes to observer interface affect the subject
+5. Not scalable - imagine having 50 different observer types
+6. Subject must know about all observer implementations
+7. No polymorphism - each observer type needs separate handling
+
+## Enhanced Code
 
 [News Broadcast Example](../../code/designPatterns/observer/ObserverSample.java)
 ```mermaid

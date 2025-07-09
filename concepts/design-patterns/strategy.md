@@ -37,9 +37,36 @@ The destination remains the same, but the strategy to reach it changes based on 
 - The `context` calls the execution method on the linked strategy object each time it needs to run the algorithm. It doesn’t know what type of strategy it works with or how the algorithm is executed.
 - The `Client` creates a specific strategy `object` and passes it to the `context`. The context exposes a setter which lets clients replace the strategy associated with the context at runtime.
 
+## Violation Code
 
+[Payment Strategy Violation Code](../../code/designPatterns/strategy/StrategyViolation.java)
 
-## Sample Code 
+```mermaid
+classDiagram
+
+class ShoppingCart2 {
+    -paymentMethod: String
+    +setPaymentMethod(paymentMethod: String): void
+    +checkout(amount: int): void
+}
+
+class StrategyViolation {
+    +main(args: String[]): void
+}
+
+StrategyViolation --> ShoppingCart2
+
+```
+
+### Issues with above code
+1. Violates Open/Closed Principle - Adding new payment methods requires modifying existing code
+2. All payment logic is tightly coupled in one class
+3. Conditional complexity increases with each new payment method
+4. Hard to test individual payment methods in isolation
+5. No polymorphism - uses string-based switching instead
+6. Prone to runtime errors with invalid payment method strings
+
+## Enhanced Code 
 
 [Payment Strategy Example](../../code/designPatterns/strategy/StrategySample.java)
 ```mermaid

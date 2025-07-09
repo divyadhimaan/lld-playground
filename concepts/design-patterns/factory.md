@@ -31,9 +31,62 @@
 The Factory Method pattern suggests that you replace direct object construction calls (using the `new` operator) with calls to a special factory method.
 
 
+## Violation code
 
+[Pizza factory Violation](../../code/designPatterns/factory/FactoryViolation.java)
 
-## Sample Code
+```mermaid
+classDiagram
+
+%% Product classes (no shared interface)
+    class MargheritaPizza2 {
+        +prepare()
+        +bake()
+        +serve()
+    }
+
+    class PepperoniPizza2 {
+        +prepare()
+        +bake()
+        +serve()
+    }
+
+    class VeggiePizza2 {
+        +prepare()
+        +bake()
+        +serve()
+    }
+
+%% Client classes with duplicated creation logic
+    class PizzaRestaurant {
+        +orderPizza(pizzaType)
+    }
+
+    class PizzaDeliveryService {
+        +processPizzaOrder(pizzaType)
+    }
+
+    PizzaRestaurant --> MargheritaPizza2
+    PizzaRestaurant --> PepperoniPizza2
+    PizzaRestaurant --> VeggiePizza2
+
+    PizzaDeliveryService --> MargheritaPizza2
+    PizzaDeliveryService --> PepperoniPizza2
+    PizzaDeliveryService --> VeggiePizza2
+
+```
+
+### Issues with above code
+1. Tight coupling - Client code depends directly on concrete pizza classes
+2. Violates Open/Closed Principle - adding new pizza types requires modifying existing code
+3. Code duplication - object creation logic repeated in multiple places
+4. Violates Single Responsibility - client classes handle both business logic AND object creation
+5. Hard to maintain - changes to object creation affect multiple classes
+6. No centralized creation logic - creation scattered throughout application
+7. Difficult to test - can't easily substitute mock objects
+8. Violates DRY principle - same creation logic written multiple times
+
+## Enhanced Code
 
 [Pizza factory Sample](../../code/designPatterns/factory/FactorySample.java)
 

@@ -30,7 +30,86 @@
 - Promotes loose coupling between client code and concrete product classes
 - Makes adding new product families easier without changing existing code
 
-## Sample Code
+## Violation Code
+
+[Pizza Factory Violation Code](../../code/designPatterns/abstractFactory/AbstractFactoryViolation.java)
+
+```mermaid
+classDiagram
+    %% --- Dominos Product Family ---
+    class DominosMargheritaPizza2 {
+        +prepare()
+    }
+    class DominosTomatoSauce2 {
+        +addSauce()
+    }
+    class DominosMozzarella2 {
+        +addCheese()
+    }
+
+    %% --- PizzaHut Product Family ---
+    class PizzaHutMargheritaPizza2 {
+        +prepare()
+    }
+    class PizzaHutTomatoSauce2 {
+        +addSauce()
+    }
+    class PizzaHutMozzarella2 {
+        +addCheese()
+    }
+
+    %% --- Client Classes ---
+    class PizzaStore2 {
+        -storeType : String
+        +makePizza()
+    }
+
+    class BadPizzaStore {
+        +makeMixedPizza()
+        +makeAnotherPizza(pizzaType, sauceType, cheeseType)
+    }
+
+    class UncoordinatedPizzaFactory {
+        +createPizza(brand, type)
+        +createSauce(brand, type)
+        +createCheese(brand, type)
+    }
+
+    %% --- Violations (Direct Dependencies) ---
+    PizzaStore2 --> DominosMargheritaPizza2
+    PizzaStore2 --> DominosTomatoSauce2
+    PizzaStore2 --> DominosMozzarella2
+    PizzaStore2 --> PizzaHutMargheritaPizza2
+    PizzaStore2 --> PizzaHutTomatoSauce2
+    PizzaStore2 --> PizzaHutMozzarella2
+
+    BadPizzaStore --> DominosMargheritaPizza2
+    BadPizzaStore --> PizzaHutTomatoSauce2
+    BadPizzaStore --> DominosMozzarella2
+    BadPizzaStore --> PizzaHutMozzarella2
+
+    UncoordinatedPizzaFactory --> DominosMargheritaPizza2
+    UncoordinatedPizzaFactory --> DominosTomatoSauce2
+    UncoordinatedPizzaFactory --> DominosMozzarella2
+    UncoordinatedPizzaFactory --> PizzaHutMargheritaPizza2
+    UncoordinatedPizzaFactory --> PizzaHutTomatoSauce2
+    UncoordinatedPizzaFactory --> PizzaHutMozzarella2
+
+```
+
+### Issue with the Violation Code
+1. No family consistency guarantee - can mix Dominos pizza with Pizza Hut sauce
+2. Tight coupling - client code depends on concrete product classes
+3. Violates Open/Closed Principle - adding new families requires modifying existing code
+4. Code duplication - creation logic repeated in multiple places
+5. Error-prone - easy to accidentally mix product families
+6. Hard to maintain - changes to product families affect multiple classes
+7. No polymorphism - can't treat different families uniformly
+8. Violates Single Responsibility - client handles both business logic and product creation
+9. Complex conditional logic - becomes unwieldy with more families
+10. Type safety issues - casting required with uncoordinated factory methods
+
+## Enhanced Code
 
 [Pizza Factory Sample](../../code/designPatterns/abstractFactory/AbstractFactorySample.java)
 

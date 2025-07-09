@@ -32,5 +32,53 @@ Weather Publisher App is implemented using the Observer Design Pattern, where mu
     - Implements WeatherListener to simulate a mobile app weather update system.
     - Prints "Weather Updated on Mobile" when notified.
 
-## Illustration
-![img.png](./../../../images/weather-publisher.png)
+## Class Diagram
+
+```mermaid
+classDiagram
+
+class WeatherListener {
+    <<interface>>
+    +Update()
+}
+
+class MobileWeatherListener {
+    -manager : WeatherManager
+    +MobileWeatherListener(manager : WeatherManager)
+    +Update()
+}
+
+class WebWeatherListener {
+    -manager : WeatherManager
+    +WebWeatherListener(manager : WeatherManager)
+    +Update()
+}
+
+class WeatherManager {
+    -listeners : Map<String, Set<WeatherListener>>
+    -temperatures : Map<String, Integer>
+    +subscribe(city : String, listener : WeatherListener)
+    +unSubscribe(city : String, listener : WeatherListener)
+    +notifyListeners(city : String)
+    +setTemp(city : String, newTemp : int)
+    +getTemp(city : String) int
+}
+
+class WeatherPublisherDemo {
+    +main(args : String[])
+}
+
+WeatherListener <|.. MobileWeatherListener
+WeatherListener <|.. WebWeatherListener
+
+MobileWeatherListener --> WeatherManager
+WebWeatherListener --> WeatherManager
+
+WeatherManager --> "listeners : Set<WeatherListener>" WeatherListener : manages
+
+WeatherPublisherDemo --> WeatherManager
+WeatherPublisherDemo --> WebWeatherListener
+WeatherPublisherDemo --> MobileWeatherListener
+
+
+```

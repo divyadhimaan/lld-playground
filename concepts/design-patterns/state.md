@@ -24,6 +24,10 @@
 - Encapsulates state-specific behavior into separate classes.
 - Makes it easier to add new states without altering existing code.
 
+## Class Structure
+
+![state-class-structure.png](../../images/structure/state.png)
+
 ## Violation Code
 
 [Traffic Light - Violation Code](../../code/designPatterns/state/StateViolation.java)

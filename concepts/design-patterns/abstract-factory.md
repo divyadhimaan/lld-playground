@@ -30,6 +30,10 @@
 - Promotes loose coupling between client code and concrete product classes
 - Makes adding new product families easier without changing existing code
 
+## Class Structure
+
+![abstract-factory-class-structure.png](../../images/structure/abstract-factory.png)
+
 ## Violation Code
 
 [Pizza Factory - Violation Code](../../code/designPatterns/abstractFactory/AbstractFactoryViolation.java)

@@ -30,6 +30,9 @@
 
 The Factory Method pattern suggests that you replace direct object construction calls (using the `new` operator) with calls to a special factory method.
 
+## Class Structure
+
+![factory-class-structure.png](../../images/structure/factory.png)
 
 ## Violation code
 

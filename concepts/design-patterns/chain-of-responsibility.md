@@ -34,6 +34,9 @@
 - Allows you to add or remove handlers dynamically
 - Promotes single responsibility principle by giving each handler one specific task
 
+## Class Structure
+
+![cor-class-structure.png](../../images/structure/cor.png)
 
 ## Violation Code
 

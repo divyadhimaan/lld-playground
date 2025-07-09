@@ -26,9 +26,9 @@
 - Simplifies client code — no need to differentiate between leaf and composite 
 - Supports recursive behavior (e.g., display all elements)
 
-## Code Structure
+## class Structure
 
-![img.png](../../images/structure/composite.png)
+![composite-class-structure.png](../../images/structure/composite.png)
 
 ## Violation Code
 

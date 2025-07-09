@@ -29,6 +29,9 @@
 - Helps with logging and monitoring
 - Manages remote object communication
 
+## Class Structure
+
+![proxy-class-structure.png](../../images/structure/proxy.png)
 
 ## Violation Code
 

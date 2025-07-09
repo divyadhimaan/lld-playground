@@ -23,6 +23,10 @@
 - Enables composition over inheritance
 - Maintains single responsibility principle by separating core functionality from decorative features
 
+## Class Structure
+
+![decorator-class-structure.png](../../images/structure/decorator.png)
+
 ## Problem
 ![img.png](../../images/decorator-1.png)
 

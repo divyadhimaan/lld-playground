@@ -18,7 +18,8 @@
 - Subscribers can join or leave the subscription list anytime. 
 - The newspaper doesn't need to know who the subscribers are individually - it just notifies everyone on the list when new content is available.
 
-![img.png](../../images/observer-design.png)
+
+
 
 ## Problem Solved
 
@@ -38,7 +39,8 @@
 - The Client creates publisher and subscriber objects separately and then registers subscribers for publisher updates.
 
 
-![img.png](../../images/observer-design-2.png)
+## Class Structure
+![observer-class-structure.png](../../images/structure/observer.png)
 
 ## Violation code
 

@@ -29,13 +29,16 @@ The destination remains the same, but the strategy to reach it changes based on 
 
 
 
-## Summary
+## Summary and Class Structure
 
 - You create a `Context class`, that contains `(has-a)` instance of `Strategy interface`.
 - The `Strategy interface` is common to all concrete strategies. It declares a method the context uses to execute a strategy.
 - Using this strategy interface implement `(is-a)` all concrete classes(strategies).
 - The `context` calls the execution method on the linked strategy object each time it needs to run the algorithm. It doesn’t know what type of strategy it works with or how the algorithm is executed.
 - The `Client` creates a specific strategy `object` and passes it to the `context`. The context exposes a setter which lets clients replace the strategy associated with the context at runtime.
+
+![strategy-class-structure.png](../../images/structure/strategy.png)
+
 
 ## Violation Code
 

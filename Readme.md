@@ -52,11 +52,11 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 | Builder                                                            | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |
 | Prototype                                                          | Facade                                             | Memento                                                                          |
 |                                                                    | Flyweight                                          | [Observer](concepts/design-patterns/observer.md)                                 |
-|                                                                    | [Proxy](concepts/design-patterns/proxy.md)         | State                                                                            |
+|                                                                    | [Proxy](concepts/design-patterns/proxy.md)         | [State](./concepts/design-patterns/state.md)                                                                        |
 |                                                                    |                                                    | [Strategy](concepts/design-patterns/strategy.md)                                 |
 |                                                                    |                                                    | Template Method                                                                  |
 |                                                                    |                                                    | Visitor                                                                          |
-|                                                                  |                                                    | [Null Object](concepts/design-patterns/null-object.md)                                                                      |
+|                                                                  |                                                    | [Null Object](concepts/design-patterns/null-object.md)                           |
 ## Design Examples
 
 - [Cache](./problems/LRU-based-cache.md)

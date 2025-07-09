@@ -1,6 +1,6 @@
 # Null Object: Design Pattern
 
-> The Null Object pattern provides a default object with neutral behavior to avoid null reference checks. 
+> A behavioral design pattern that provides a default object with neutral behavior to avoid null reference checks. 
 > 
 > Instead of returning null, it returns an object that implements the expected interface but performs no operations or provides default behavior.
 

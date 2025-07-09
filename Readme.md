@@ -46,9 +46,9 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 
 | Creational Patterns                                                | Structural Patterns                                | Behavioral Patterns                                                              |
 |--------------------------------------------------------------------|----------------------------------------------------|----------------------------------------------------------------------------------|
-| Singleton                                                          | [Adapter](concepts/design-patterns/adapter.md)                                            | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
+| Singleton                                                          | [Adapter](concepts/design-patterns/adapter.md)x    | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
 | [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                             | Command                                                                          |
-| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md)                                          | Iterator                                                                         |
+| [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md) | Iterator                                                                         |
 | Builder                                                            | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |
 | Prototype                                                          | Facade                                             | Memento                                                                          |
 |                                                                    | Flyweight                                          | [Observer](concepts/design-patterns/observer.md)                                 |
@@ -60,7 +60,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 ## Design Examples
 
 - [Cache](./problems/LRU-based-cache.md)
-- [Weather Pub Sub](./problems/weather-pub-sub)
+- [Weather Pub Sub](./problems/weather-pub-sub.md)
 - [Parking Lot](./problems/parking-lot.md)
 - [PubSub Model](./problems/pub-sub-model.md)
 - [Bank Account System](./problems/bank-account-system.md)

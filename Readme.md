@@ -46,7 +46,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 
 | Creational Patterns                                                | Structural Patterns                                | Behavioral Patterns                                                              |
 |--------------------------------------------------------------------|----------------------------------------------------|----------------------------------------------------------------------------------|
-| Singleton                                                          | Adapter                                            | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
+| Singleton                                                          | [Adapter](concepts/design-patterns/adapter.md)                                            | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
 | [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                             | Command                                                                          |
 | [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md)                                          | Iterator                                                                         |
 | Builder                                                            | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |

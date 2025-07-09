@@ -37,7 +37,7 @@
 
 ## Violation Code
 
-[Call Center Violation](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilityViolation.java)
+[Call Center - Violation Code](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilityViolation.java)
 
 ```mermaid
 classDiagram
@@ -57,7 +57,7 @@ classDiagram
 
 ## Enhanced Code
 
-[Call Center Sample](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilitySample.java)
+[Call Center - Sample](../../code/designPatterns/chainOfResponsibility/ChainOfResponsibilitySample.java)
 > Use builder/factory to create the chain of handlers
 
 ```mermaid

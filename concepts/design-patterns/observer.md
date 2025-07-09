@@ -42,7 +42,7 @@
 
 ## Violation code
 
-[News Broadcast Violation](../../code/designPatterns/observer/ObserverViolation.java)
+[News Broadcast - Violation code](../../code/designPatterns/observer/ObserverViolation.java)
 
 ```mermaid
 classDiagram
@@ -86,7 +86,7 @@ ObserverViolation --> NewsChannel2
 
 ## Enhanced Code
 
-[News Broadcast Example](../../code/designPatterns/observer/ObserverSample.java)
+[News Broadcast - Example](../../code/designPatterns/observer/ObserverSample.java)
 ```mermaid
 classDiagram
 

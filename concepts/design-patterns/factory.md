@@ -33,7 +33,7 @@ The Factory Method pattern suggests that you replace direct object construction 
 
 ## Violation code
 
-[Pizza factory Violation](../../code/designPatterns/factory/FactoryViolation.java)
+[Pizza factory - Violation Code](../../code/designPatterns/factory/FactoryViolation.java)
 
 ```mermaid
 classDiagram
@@ -88,7 +88,7 @@ classDiagram
 
 ## Enhanced Code
 
-[Pizza factory Sample](../../code/designPatterns/factory/FactorySample.java)
+[Pizza factory - Sample](../../code/designPatterns/factory/FactorySample.java)
 
 ```mermaid
 classDiagram

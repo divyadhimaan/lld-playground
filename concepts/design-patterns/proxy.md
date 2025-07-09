@@ -32,7 +32,7 @@
 
 ## Violation Code
 
-[Database Violation](../../code/designPatterns/proxy/ProxyViolation.java)
+[Database - Violation Code](../../code/designPatterns/proxy/ProxyViolation.java)
 
 ```mermaid
 classDiagram
@@ -61,7 +61,7 @@ WithoutProxyExample --> DatabaseService
 
 
 ## Enhanced Code with Proxy Pattern
-[Database Sample](../../code/designPatterns/proxy/ProxySample.java)
+[Database - Sample](../../code/designPatterns/proxy/ProxySample.java)
 
 ```mermaid
 classDiagram

@@ -32,7 +32,7 @@
 
 ## Violation Code
 
-[Pizza Factory Violation Code](../../code/designPatterns/abstractFactory/AbstractFactoryViolation.java)
+[Pizza Factory - Violation Code](../../code/designPatterns/abstractFactory/AbstractFactoryViolation.java)
 
 ```mermaid
 classDiagram
@@ -111,7 +111,7 @@ classDiagram
 
 ## Enhanced Code
 
-[Pizza Factory Sample](../../code/designPatterns/abstractFactory/AbstractFactorySample.java)
+[Pizza Factory - Sample](../../code/designPatterns/abstractFactory/AbstractFactorySample.java)
 
 ```mermaid
 classDiagram

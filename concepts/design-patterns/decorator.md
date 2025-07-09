@@ -31,7 +31,7 @@
 
 ## Violation Code
 
-[Coffee Machine violation Code](../../code/designPatterns/decorator/DecoratorViolation.java)
+[Coffee Machine - violation Code](../../code/designPatterns/decorator/DecoratorViolation.java)
 
 ```mermaid
 classDiagram
@@ -106,7 +106,7 @@ SimpleCoffee2 <|-- CoffeeWithMilkSugarAndWhip
 
 ## Enhanced Code
 
-[Coffee Machine Example](../../code/designPatterns/decorator/DecoratorSample.java)
+[Coffee Machine - Example](../../code/designPatterns/decorator/DecoratorSample.java)
 
 ```mermaid
 classDiagram

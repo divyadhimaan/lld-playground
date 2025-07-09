@@ -1,6 +1,6 @@
-# Decorator: Design Pattern
+# Decorator: Structural Design Pattern
 
-> A structural design pattern that lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
+> lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
 > 
 > It provides a flexible alternative to subclassing for extending functionality by wrapping objects in decorator classes.
 

@@ -1,6 +1,6 @@
-# State: Design Pattern
+# State: Behavioral Design Pattern
 
-> A behavioral Design Pattern allows an object to alter its behavior when its internal state changes. 
+> allows an object to alter its behavior when its internal state changes. 
 > 
 > It appears as if the object changed its class.
 

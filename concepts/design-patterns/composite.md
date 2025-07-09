@@ -1,6 +1,6 @@
-# Composite: Design Pattern
+# Composite: Structural Design Pattern
 
-> A structural design pattern, used to treat individual objects and compositions of objects uniformly. 
+> used to treat individual objects and compositions of objects uniformly. 
 > 
 > It lets you compose objects into tree structures to represent part-whole hierarchies.
 

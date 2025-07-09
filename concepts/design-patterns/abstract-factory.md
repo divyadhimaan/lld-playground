@@ -1,6 +1,6 @@
-# Abstract Factory: Design Pattern
+# Abstract Factory: Creational Design Pattern
 
-> A creational design pattern that lets you produce families of related objects without specifying their concrete classes.
+> lets you produce families of related objects without specifying their concrete classes.
 > 
 > It's a factory of factories that creates objects that are designed to work together.
 

@@ -1,6 +1,6 @@
-# Factory: Design Pattern
+# Factory: Creational Design Pattern
 
-> A creational design pattern that provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+>provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
 > 
 >  It encapsulates object creation logic in a separate method or class, allowing the system to create objects based on given parameters or conditions.
 

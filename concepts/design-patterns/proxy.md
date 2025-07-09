@@ -1,6 +1,6 @@
-# Proxy: Design Pattern
+# Proxy: Structural Design Pattern
 
-> A structural design pattern that lets you provide a substitute or placeholder for another object to control access to it.
+> lets you provide a substitute or placeholder for another object to control access to it.
 > 
 > The proxy acts as an intermediary that can add additional functionality like lazy loading, access control, caching, or logging without changing the original object.
 

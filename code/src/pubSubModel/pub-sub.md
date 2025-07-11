@@ -31,4 +31,74 @@ The `Publisher-Subscriber` (Pub-Sub) Model enables event-driven communication be
      - `publish()`: Distribute messages to subscribers.
      - `displayAllTopics()`: Show all available topics.
 
-![img.png](../../../images/pubsub-model.png)
+
+```mermaid
+classDiagram
+
+class TopicRegistry {
+    -topics : Map~String, Topic~
+    -instance : TopicRegistry
+    +getInstance() TopicRegistry
+    +createTopic(topicName : String)
+    +subscribe(topicName : String, subscriber : Subscriber)
+    +unsubscribe(topicName : String, subscriber : Subscriber)
+    +publish(topicName : String, message : Message)
+    +displayAllTopics()
+}
+
+class Topic {
+    -topicName : String
+    -subscribers : Set~Subscriber~
+    +Topic(name : String)
+    +subscribe(subscriber : Subscriber)
+    +unsubscribe(subscriber : Subscriber)
+    +broadcast(message : Message)
+}
+
+class SubscriberInterface {
+    <<interface>>
+    +update(topicName : String, message : Message)
+    +subscribe(topicRegistry : TopicRegistry, topicName : String)
+    +unsubscribe(topicRegistry : TopicRegistry, topicName : String)
+}
+
+class Subscriber {
+    -subscriberName : String
+    +Subscriber(name : String)
+    +getName() : String
+    +update(topicName : String, message : Message)
+    +subscribe(topicRegistry : TopicRegistry, topicName : String)
+    +unsubscribe(topicRegistry : TopicRegistry, topicName : String)
+}
+
+class PublisherInterface {
+    <<interface>>
+    +publish(topicName : String, message : Message)
+}
+
+class Publisher {
+    -publisherName : String
+    -topicRegistry : TopicRegistry
+    +Publisher(name : String, topicRegistry : TopicRegistry)
+    +publish(topicName : String, message : Message)
+}
+
+class Message {
+    -content : String
+    +Message(content : String)
+    +getContent() : String
+}
+
+SubscriberInterface <|.. Subscriber
+PublisherInterface <|.. Publisher
+
+TopicRegistry --> Topic : manages
+Topic --> Subscriber : notifies
+Subscriber --> TopicRegistry : subscribes/unsubscribes
+Publisher --> TopicRegistry : publishes
+TopicRegistry --> Message
+Topic --> Message
+Subscriber --> Message
+Publisher --> Message
+
+```

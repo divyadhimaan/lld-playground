@@ -1,5 +1,10 @@
+interface SubscriberInterface {
+    void update(String topicName, Message message);
+    void subscribe(TopicRegistry topicRegistry, String topicName);
+    void unsubscribe(TopicRegistry topicRegistry, String topicName);
+}
 
-public class Subscriber {
+public class Subscriber implements SubscriberInterface {
     private final String subscriberName;
 
     public Subscriber(String name)

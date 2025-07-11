@@ -1,9 +1,10 @@
-public class Publisher {
+interface PublisherInterface {
+    void publish(String topicName, Message message);
+}
+
+public class Publisher implements PublisherInterface {
     private String publisherName;
     private TopicRegistry topicRegistry;
-
-
-
 
     public Publisher(String name, TopicRegistry topicRegistry)
     {

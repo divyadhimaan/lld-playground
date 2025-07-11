@@ -10,9 +10,7 @@ Requirements -
 6. Temperature is the changing parameter. (city->temp)
 
 
-### [Java Implementation](./../code/src/weather-pub-sub)
-
-### [Design Explanation](./../code/src/weather-pub-sub/Weather-pub-sub.md)
+[Java Implementation](./../code/src/weather-pub-sub) | [Design Explanation](./../code/src/weather-pub-sub/Weather-pub-sub.md)
 
 
 

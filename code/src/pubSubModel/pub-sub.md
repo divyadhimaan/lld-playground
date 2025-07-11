@@ -1,5 +1,6 @@
 # PubSub Model
 The `Publisher-Subscriber` (Pub-Sub) Model enables event-driven communication between publishers and subscribers through topics. Publishers send messages to topics, and subscribers receive updates when new messages are published. This model decouples components, enhancing scalability and modularity.
+This is an example of `Observer` Design Pattern, where publishers act as subjects and subscribers as observers.
 
 ## Components Used
 

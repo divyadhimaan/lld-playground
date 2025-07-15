@@ -60,13 +60,15 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 ## Design Examples
 
 ### Easy Problems
-- [Design a Cache](./problems/LRU-based-cache.md)
 - [Design a Parking Lot](./problems/parking-lot.md)
 - [Design a PubSub Model](./problems/pub-sub-model.md)
 - [Design a Bank Account System](./problems/bank-account-system.md)
 - [Design Linkedin Verdict](./problems/linkedin-verdict.md)
 - [Design a Coffee Vending Machine](./problems/coffee-vending-machine.md)
 - [Design a Traffic Signal Control System](./problems/traffic-signal-control-system.md)
+
+### Medium Problems
+- [Design a LRU Cache](./problems/LRU-based-cache.md)
 
 
 ## Notations

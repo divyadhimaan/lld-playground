@@ -9,3 +9,5 @@
 - The machine should dispense the selected coffee and provide change if necessary. 
 - The machine should track the inventory of ingredients and notify when they are running low. 
 - The machine should handle multiple user requests concurrently and ensure thread safety.
+
+[Java Implementation](./../code/src/coffeeVendingMachine/myVendingMachine/CoffeeVendingMachine.java) | [Design Explanation](./../code/src/coffeeVendingMachine/coffeeVendingMachine.md)

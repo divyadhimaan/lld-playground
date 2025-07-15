@@ -44,19 +44,19 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
   - `Behavioral Patterns`: Deal with communication between objects and assignment of responsibilities (Observer, strategy.Strategy, Command)
   
 
-| Creational Patterns                                                | Structural Patterns                                | Behavioral Patterns                                                              |
-|--------------------------------------------------------------------|----------------------------------------------------|----------------------------------------------------------------------------------|
-| [Singleton](concepts/design-patterns/strategy.md)                  | [Adapter](concepts/design-patterns/adapter.md)x    | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
-| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                             | Command                                                                          |
+| Creational Patterns                                                | Structural Patterns                               | Behavioral Patterns                                                              |
+|--------------------------------------------------------------------|---------------------------------------------------|----------------------------------------------------------------------------------|
+| [Singleton](concepts/design-patterns/strategy.md)                  | [Adapter](concepts/design-patterns/adapter.md)    | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
+| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                            | Command                                                                          |
 | [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md) | Iterator                                                                         |
 | Builder                                                            | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |
-| Prototype                                                          | Facade                                             | Memento                                                                          |
-|                                                                    | Flyweight                                          | [Observer](concepts/design-patterns/observer.md)                                 |
-|                                                                    | [Proxy](concepts/design-patterns/proxy.md)         | [State](./concepts/design-patterns/state.md)                                     |
-|                                                                    |                                                    | [Strategy](concepts/design-patterns/strategy.md)                                 |
-|                                                                    |                                                    | Template Method                                                                  |
-|                                                                    |                                                    | Visitor                                                                          |
-|                                                                    |                                                    | [Null Object](concepts/design-patterns/null-object.md)                           |
+| Prototype                                                          | Facade                                            | Memento                                                                          |
+|                                                                    | Flyweight                                         | [Observer](concepts/design-patterns/observer.md)                                 |
+|                                                                    | [Proxy](concepts/design-patterns/proxy.md)        | [State](./concepts/design-patterns/state.md)                                     |
+|                                                                    |                                                   | [Strategy](concepts/design-patterns/strategy.md)                                 |
+|                                                                    |                                                   | Template Method                                                                  |
+|                                                                    |                                                   | Visitor                                                                          |
+|                                                                    |                                                   | [Null Object](concepts/design-patterns/null-object.md)                           |
 ## Design Examples
 
 - [Cache](./problems/LRU-based-cache.md)

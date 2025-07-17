@@ -57,6 +57,11 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 |                                                                    |                                                    | Template Method                                                                  |
 |                                                                    |                                                    | Visitor                                                                          |
 |                                                                    |                                                    | [Null Object](concepts/design-patterns/null-object.md)                           |
+
+## Common Confusing Patterns
+
+- [Builder vs Decorator](concepts/design-patterns/differences-among-design-patterns.md#builder-vs-decorator)
+
 ## Design Examples
 
 ### Easy Problems

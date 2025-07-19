@@ -58,7 +58,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 |                                                                    |                                                    | Visitor                                                                          |
 |                                                                    |                                                    | [Null Object](concepts/design-patterns/null-object.md)                           |
 
-## Common Confusing Patterns
+### Common Confusing Patterns
 
 - [Builder vs Decorator](concepts/design-patterns/differences-among-design-patterns.md#builder-vs-decorator)
 
@@ -87,6 +87,10 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 | ------ | ------ | ------- | ---------------------------- | ---------------------------- | --------------- |
 | \`<    | --\`   | Solid   | **Class inheritance**        | Concrete or abstract classes | **Solid line**  |
 | \`<    | ..\`   | Dotted  | **Interface implementation** | Class implements interface   | **Dotted line** |
+
+## Terminology
+
+- `DAO` (Data Access Object): A design pattern that provides an abstract interface to a database or other persistence mechanism.
 
 
 ## Resources

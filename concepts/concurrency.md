@@ -45,22 +45,56 @@
 
 # Creating Thread in Java
 
-```java
-class MyThread extends Thread{
-    @Override
-    public void run(){
-        System.out.println("Thread is running");
-        //some logic
-    }
-}
+1. Extending the `Thread` class
 
-public class ThreadExample {
-    public static void main(String[] args) {
-        MyThread thread1 = new MyThread();
-        
-        thread1.start(); // Start the thread1
-    }
-}
-```
-Refer for complete example [here](./../code/multithreading/ThreadExample.java)
+   ```java
+   class MyThread extends Thread{
+       @Override
+       public void run(){
+           System.out.println("Thread is running");
+           //some logic
+       }
+   }
+   
+   public class ThreadExample {
+       public static void main(String[] args) {
+           MyThread thread1 = new MyThread();
+           
+           thread1.start(); // Start the thread1
+       }
+   }
+   ```
+   Refer for complete example [here](./../code/multithreading/ThreadExample.java)
 
+   Drawbacks:
+      - **Single Inheritance Limitation** → Cannot extend another class if you extend `Thread`.
+      - **Tight Coupling** → Task logic is tied directly to the thread object.
+      - **Manual Management** → You have to handle creation, starting, and stopping of threads yourself.
+      - **Poor Scalability** → Creating many threads manually can lead to high memory and CPU overhead.
+
+2. Implementing the `Runnable` interface
+
+   ```java
+   class MyRunnable implements Runnable {
+       @Override
+       public void run() {
+           System.out.println("Thread is running");
+           //some logic
+       }
+   }
+   
+   public class ThreadExample {
+       public static void main(String[] args) {
+           Thread thread1 = new Thread(new MyRunnable());
+           
+           thread1.start(); // Start the thread1
+       }
+   }
+   ```
+   Refer for complete example [here](./../code/multithreading/RunnableExample.java)
+
+   Advantages:
+      - **Decoupling** → Task logic is separate from thread management.
+      - **Multiple Inheritance** → Can implement multiple interfaces.
+      - **Better Resource Management** → Use thread pools for efficient resource utilization.
+      - **Easier Testing** → Runnable can be tested independently of threading concerns.

@@ -2,7 +2,7 @@ class MyThread extends Thread{
     @Override
     public void run(){
         for(int i=0;i<5;i++){
-            System.out.println("Thread is running: " + i);
+            System.out.println("Thread "+ Thread.currentThread().getName()+" is running: " + i);
             try {
                 Thread.sleep(2000); // Sleep for 2 second
             } catch (InterruptedException e) {

@@ -45,7 +45,7 @@
 
 # Creating Thread in Java
 
-1. Extending the `Thread` class
+## 1. Extending the `Thread` class
 
    ```java
    class MyThread extends Thread{
@@ -66,13 +66,13 @@
    ```
    Refer for complete example [here](./../code/multithreading/ThreadExample.java)
 
-   Drawbacks:
-      - **Single Inheritance Limitation** → Cannot extend another class if you extend `Thread`.
-      - **Tight Coupling** → Task logic is tied directly to the thread object.
-      - **Manual Management** → You have to handle creation, starting, and stopping of threads yourself.
-      - **Poor Scalability** → Creating many threads manually can lead to high memory and CPU overhead.
+   #### Drawbacks:
+   - **Single Inheritance Limitation** → Cannot extend another class if you extend `Thread`.
+   - **Tight Coupling** → Task logic is tied directly to the thread object.
+   - **Manual Management** → You have to handle creation, starting, and stopping of threads yourself.
+   - **Poor Scalability** → Creating many threads manually can lead to high memory and CPU overhead.
 
-2. Implementing the `Runnable` interface
+## 2. Implementing the `Runnable` interface
 
    ```java
    class MyRunnable implements Runnable {
@@ -93,8 +93,52 @@
    ```
    Refer for complete example [here](./../code/multithreading/RunnableExample.java)
 
+   ### How `Runnable` Works in Java
+
+   ```plaintext
+   [Start Program]
+   |
+   v
+   [Create class implementing Runnable]
+   |
+   v
+   [Override run() method with task code]
+   |
+   v
+   [Create Runnable object]
+   |
+   v
+   [Create Thread object with Runnable as parameter]
+   |
+   v
+   [Call thread.start()]
+   |
+   v
+   [JVM creates new thread]
+   |
+   v
+   [Thread calls run() of Runnable]
+   |
+   v
+   [Task executes in parallel with main thread]
+   |
+   v
+   [Thread finishes execution]
+   |
+   v
+   [End Program]
+   ```
+
    Advantages:
-      - **Decoupling** → Task logic is separate from thread management.
-      - **Multiple Inheritance** → Can implement multiple interfaces.
-      - **Better Resource Management** → Use thread pools for efficient resource utilization.
-      - **Easier Testing** → Runnable can be tested independently of threading concerns.
+   - **Decoupling** → Task logic is separate from thread management.
+   - **Multiple Inheritance** → Can implement multiple interfaces.
+   - **Better Resource Management** → Use thread pools for efficient resource utilization.
+   - **Easier Testing** → Runnable can be tested independently of threading concerns.
+   - Same `Runnable` instance can be shared across multiple threads.
+   
+   Disadvantages:
+   - **More Boilerplate** → Requires more code to set up compared to extending `Thread`.
+   - **Manual Thread Creation** → You still need to create and manage threads explicitly.
+   - **No Thread Control** → Cannot directly control thread lifecycle (e.g., pause, resume) like with `Thread` class.
+   
+   

@@ -72,6 +72,8 @@
    - **Manual Management** → You have to handle creation, starting, and stopping of threads yourself.
    - **Poor Scalability** → Creating many threads manually can lead to high memory and CPU overhead.
 
+---
+
 ## 2. Implementing the `Runnable` interface
 
    ```java
@@ -141,5 +143,75 @@
    - **Manual Thread Creation** → You still need to create and manage threads explicitly.
    - **No Thread Control** → Cannot directly control thread lifecycle (e.g., pause, resume) like with `Thread` class.
    
+---
 
-## 3. 
+## 3. Implementing `Callable` Interface
+   - Similar to `Runnable`, but:
+      - Can **return a result**.
+      - Can **throw checked exceptions**.
+      - Works with **`Future`** objects to retrieve results asynchronously (after task completion).
+      - Used with `ExecutorService` for concurrent execution.
+      
+      > - `Checked exceptions` are exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
+      >   - They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
+      >   - Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
+      > 
+      > - `Unchecked exceptions` are exceptions that do not need to be explicitly handled or declared.
+      >   - They are checked at runtime, meaning the compiler does not enforce handling them.
+      >   - Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
+
+   ```java
+   import java.util.concurrent.Callable;
+   import java.util.concurrent.ExecutorService;
+   import java.util.concurrent.Executors;
+   import java.util.concurrent.Future;
+   
+   class MyCallable implements Callable<String> {
+      @Override
+      public String call() throws Exception {
+         System.out.println("Callable task is running");
+         // some logic
+         return "Task Completed";
+      }
+   }
+   
+   public class CallableExample {
+      public static void main(String[] args) throws Exception {
+         ExecutorService executor = Executors.newSingleThreadExecutor();
+   
+         Future<String> future = executor.submit(new MyCallable()); // Start task in a separate thread
+   
+         String result = future.get(); // Wait and get the result from call()
+   
+         System.out.println("Result from Callable: " + result);
+   
+         executor.shutdown();
+      }
+   }
+   ```
+   Refer for complete example [here](./../code/multithreading/CallableExample.java)
+
+   | Term                | Meaning                                                                                                                                                                                                                                                                        | Use Case |
+   | ------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------- |
+   | **ExecutorService** | An `Executor` is a  java interface that represents an object capable of running *submitted* tasks. While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.). | Instead of creating threads manually, we submit tasks to an executor.<br/>The executor manages threads internally and reuses them (thread pool → better performance & scalability). |
+   | **Future**           | Represents the result of an asynchronous computation. It allows you to retrieve the result of a task once it completes, or check if it is done.                                                                                                                                | Used with `Callable` to get results after task completion.<br/>Can also check if the task is still running or has completed. |
+   
+
+   ### Callable Flow
+    Callable task  -->  submitted to ExecutorService  -->  runs in a thread
+                  ^                                    |
+                  |                                    v
+            Future object  <--------- result returned via Future.get()
+---
+
+## Difference between `Thread`, `Runnable` and `Callable`
+
+| Aspect / Feature               | **Thread**                      | **Runnable**                                | **Callable**                                                    |
+| ------------------------------ | ------------------------------- | ------------------------------------------- | --------------------------------------------------------------- |
+| **Type**                       | Class                           | Functional Interface                        | Functional Interface                                            |
+| **Method to implement**        | `void run()`                    | `void run()`                                | `V call() throws Exception`                                     |
+| **Returns value?**             | ❌ No                            | ❌ No                                        | ✅ Yes (returns a value of type `V`)                             |
+| **Throws Checked Exceptions?** | ❌ Not allowed                   | ❌ Not allowed                               | ✅ Allowed                                                       |
+| **How to execute**             | `thread.start()`                | Create `Thread` → pass Runnable → `start()` | Submit to `ExecutorService` → `submit(callable)` → get `Future` |
+| **Thread management**          | Manual                          | Manual                                      | Managed by ExecutorService (thread pool)                        |
+| **When to use**                | Very simple/quick demo programs | When task needs to be decoupled from Thread | When task produces **result** and/or **may throw exception**    |

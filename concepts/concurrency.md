@@ -205,7 +205,130 @@
 | **When to use**                | Very simple/quick demo programs | When task needs to be decoupled from Thread | When task produces **result** and/or **may throw exception**    |
 
 
+# FAQs
 
+#### Q1. What is the difference between `start()` and `run()` in Java threads?
+- The `start()` method begins thread execution by invoking the `run()` method in a new thread of execution.
+- While the `run()` method contains the code that defines the thread's task, calling `run()` directly does not start a new thread; it executes the code in the current thread.
+
+    ```java
+    class MyThread extends Thread {
+        public void run(){
+            System.out.println("Thread is running");
+        }
+    }
+    
+    class ThreadExample {
+        public static void main(String[] args) {
+            MyThread thread = new MyThread();
+    
+            thread.run(); // Executes run() in the current(main) thread, not a new one
+            thread.start(); // Starts a new thread and calls run() in that new thread
+        }
+    }
+    ```
+  
+
+#### Q2.Can we call the start() method multiple times on the same thread object in Java?
+- No, calling `start()` multiple times on the same thread object will throw an `IllegalThreadStateException`.
+- A thread can only be started once; subsequent calls to `start()` on the same thread instance are illegal.
+    ```java
+    class MyThread extends Thread {
+        public void run() {
+            System.out.println("Thread is running");
+        }
+    }
+    
+    class ThreadExample {
+        public static void main(String[] args) {
+            MyThread thread = new MyThread();
+            thread.start(); // First call - valid
+            thread.start(); // Second call - throws IllegalThreadStateException
+        }
+    }
+    ```
+  
+#### Q3. What is thread safety and how can we achieve it in Java?
+- **Thread safety** refers to the property of a piece of code or data structure that guarantees safe execution by multiple threads concurrently without causing data corruption or unexpected behavior.
+- It can be achieved through:
+  - `Synchronization`: Using synchronized blocks or methods to ensure that only one thread can access a resource at a time.
+  - `Immutable objects`: Creating objects that cannot be modified after creation, ensuring thread safety by design.
+  - `Concurrent collections`: Using thread-safe collections like `ConcurrentHashMap`, `CopyOnWriteArrayList`, etc.
+  - `Atomic variables`: Using classes from the `java.util.concurrent.atomic` package, such as `AtomicInteger`, which provide lock-free thread-safe operations.
+  - `ThreadLocal`: Using `ThreadLocal` variables to provide each thread with its own instance of a variable, avoiding shared state.
+
+#### Q4. What happens id exception occurs in a thread's run method?
+- If an exception occurs in a thread's `run()` method and is not caught, the thread will terminate, and the exception will be printed to the console.
+- The exception does not get propagated to the main thread or other threads, and the program may continue running unless the exception is critical (like `OutOfMemoryError`).
+
+
+#### Q5. What is the difference between `sleep()` and `wait()` in Java?
+- `Sleep()`: 
+  - Belongs to the `Thread` class.
+  - Causes the current thread to pause execution for a specified duration.
+  - Does not release any locks held by the thread.
+  - Used for delaying execution without affecting synchronization.
+- `Wait()`:
+  - Belongs to the `Object` class.
+  - Causes the current thread to release the lock it holds on an object and wait until another thread calls `notify()` or `notifyAll()` on that object.
+  - Used for inter-thread communication and synchronization.
+  - Must be called from a synchronized context (inside a synchronized block or method).
+
+#### Q6. What happens to the resource a thread was holding when the `wait()` method is called?
+- When a thread calls the `wait()` method on an object, it releases the lock it holds on that object.
+- This allows other threads to acquire the lock and proceed with their execution.
+- The waiting thread remains in the waiting state until another thread calls `notify()` or `notifyAll()` on the same object, at which point it can attempt to reacquire the lock and continue execution.
+
+#### Q7. What happens when the `notify()` or `notifyAll()` method is called on an object?
+- Another thread holding the same lock can call `notify()` or `notifyAll()` on that object to wake up waiting threads.
+- `notify()`: Wakes up a single thread that is waiting on the object's monitor. If multiple threads are waiting, one is chosen arbitrarily.
+- `notifyAll()`: Wakes up all threads that are waiting on the object's monitor. All awakened threads will compete to acquire the lock once it is released.
+- The idle thread(s) will not proceed until they can successfully reacquire the lock on the object. i.e. thread(s) don't start executing immediately after notify/notifyAll is called.
+
+    ```java
+    class SharedResource {
+        synchronized void waitMethod() {
+            try {
+                System.out.println(Thread.currentThread().getName() + " waiting...");
+                wait(); // releases lock, waits to be notified
+                System.out.println(Thread.currentThread().getName() + " resumed!");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    
+        synchronized void notifyOne() {
+            notify(); // wakes up ONE waiting thread
+        }
+    
+        synchronized void notifyAllThreads() {
+            notifyAll(); // wakes up ALL waiting threads
+        }
+    }
+    
+    public class NotifyExample {
+        public static void main(String[] args) throws InterruptedException {
+            SharedResource resource = new SharedResource();
+    
+            Runnable task = () -> resource.waitMethod();
+    
+            Thread t1 = new Thread(task, "Thread-1");
+            Thread t2 = new Thread(task, "Thread-2");
+            Thread t3 = new Thread(task, "Thread-3");
+    
+            t1.start();
+            t2.start();
+            t3.start();
+    
+            Thread.sleep(1000);
+    
+            // Try notify() vs notifyAll()
+            resource.notifyOne();      // only ONE thread wakes up
+            // resource.notifyAllThreads(); // ALL threads wake up
+        }
+    }
+    
+    ```
 
 # Glossary
 

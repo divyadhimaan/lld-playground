@@ -185,12 +185,6 @@
    ```
    Refer for complete example [here](./../code/multithreading/CallableExample.java)
 
-   | Term                | Meaning                                                                                                                                                                                                                                                                        | Use Case |
-   | ------------------- |--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------| ---------------------- |
-   | **ExecutorService** | An `Executor` is a  java interface that represents an object capable of running *submitted* tasks. While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.). | Instead of creating threads manually, we submit tasks to an executor.<br/>The executor manages threads internally and reuses them (thread pool → better performance & scalability). |
-   | **Future**           | Represents the result of an asynchronous computation. It allows you to retrieve the result of a task once it completes, or check if it is done.                                                                                                                                | Used with `Callable` to get results after task completion.<br/>Can also check if the task is still running or has completed. |
-   
-
    ### Callable Flow
     Callable task  -->  submitted to ExecutorService  -->  runs in a thread
                   ^                                    |

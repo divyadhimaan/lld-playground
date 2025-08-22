@@ -2,7 +2,7 @@
 
 > Fundamental units of execution that allows programs to perform multiple tasks concurrently.
 > 
-> Can utilize [multi-core](glossary.md#multicore) processors efficiently and improve overall application performance.
+> Can utilize [multi-core](#multicore) processors efficiently and improve overall application performance.
 
 # Process vs Thread
 
@@ -148,17 +148,11 @@
 ## 3. Implementing `Callable` Interface
    - Similar to `Runnable`, but:
       - Can **return a result**.
-      - Can **throw checked exceptions**.
-      - Works with **`Future`** objects to retrieve results asynchronously (after task completion).
-      - Used with `ExecutorService` for concurrent execution.
+      - Can **throw [checked exceptions](#checked-exceptions).**
+      - Works with **[Future](#future)** objects to retrieve results asynchronously (after task completion).
+      - Used with [ExecutorService](#executor-service) for concurrent execution.
       
-      > - `Checked exceptions` are exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
-      >   - They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
-      >   - Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
-      > 
-      > - `Unchecked exceptions` are exceptions that do not need to be explicitly handled or declared.
-      >   - They are checked at runtime, meaning the compiler does not enforce handling them.
-      >   - Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
+      
 
    ```java
    import java.util.concurrent.Callable;
@@ -215,3 +209,43 @@
 | **How to execute**             | `thread.start()`                | Create `Thread` → pass Runnable → `start()` | Submit to `ExecutorService` → `submit(callable)` → get `Future` |
 | **Thread management**          | Manual                          | Manual                                      | Managed by ExecutorService (thread pool)                        |
 | **When to use**                | Very simple/quick demo programs | When task needs to be decoupled from Thread | When task produces **result** and/or **may throw exception**    |
+
+
+
+
+# Glossary
+
+## `Multicore`
+
+- A multicore processor is a single computing component with two or more independent actual processing units (called "cores").
+- Each core can read and execute program instructions, allowing for parallel processing.
+- This means that a multicore processor can perform multiple tasks simultaneously, improving performance and efficiency for applications that are designed to take advantage of multiple cores.
+- Multicore processors are commonly used in modern computers, smartphones, and other devices to enhance multitasking capabilities and overall system performance.
+- Example-
+    - Single-core → One worker doing all the jobs sequentially.
+    - Quad-core → Four workers doing separate jobs at the same time.
+
+
+## `Checked exceptions`
+- Exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
+- They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
+- Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
+
+## `Unchecked exceptions`
+- Exceptions that do not need to be explicitly handled or declared.
+- They are checked at runtime, meaning the compiler does not enforce handling them.
+- Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
+
+## `Future`
+
+- Represents the result of an asynchronous computation.
+- It allows you to retrieve the result of a task once it completes, or check if it is done.
+- Used with `Callable` to get results after task completion.
+- Can also check if the task is still running or has completed.
+
+## `Executor Service`
+
+- An `Executor` is a  java interface that represents an object capable of running *submitted* tasks.
+- While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.).
+- Instead of creating threads manually, we submit tasks to an executor.
+- The executor manages threads internally and reuses them (thread pool → better performance & scalability).

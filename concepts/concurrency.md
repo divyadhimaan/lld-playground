@@ -205,6 +205,112 @@
 | **When to use**                | Very simple/quick demo programs | When task needs to be decoupled from Thread | When task produces **result** and/or **may throw exception**    |
 
 
+---
+
+# Thread Life Cycle
+
+> The thread life cycle represents the different states a `Thread` can be in, from creation to completion.
+
+## Thread States
+
+### 1. `New`: 
+   - The thread is created but not yet started. (Thread object is instantiated)
+   - Exists after creating Thread t = new Thread(...).
+   - Not scheduled for running until .start() is called.
+   - No system resources are allocated yet.
+      ```java
+      Thread thread = new Thread(() -> System.out.println("Hello from thread")); 
+      // Thread is in NEW state here
+      ```   
+
+### 2. `Runnable`: 
+   - The thread is ready to run and waiting for CPU time.
+   - After calling .start(), the thread moves to the Runnable state.
+   - The thread scheduler picks threads from this state to run on the CPU.
+   - The thread may not run immediately; it depends on CPU availability and scheduling.
+      ```java
+      Thread thread = new Thread(() -> System.out.println("Hello from thread")); 
+      thread.start(); // Thread moves to RUNNABLE state here
+      System.out.println(thread.getState());
+      ```
+   
+### 3. `Running`:
+   - The thread is currently executing its task.
+   - The thread scheduler has selected the thread from the Runnable state to run on the CPU.
+   - The thread remains in this state until it completes its task, is preempted, or voluntarily yields control.
+   - Only one thread per CPU core can be RUNNING at a time.
+      ```java
+      // When the CPU scheduler picks a RUNNABLE thread, it enters the RUNNING state 
+      // Inside the run() method of the thread
+      public void run() {
+          System.out.println("Thread is running"); // Thread is in RUNNING state here
+      }
+      ```
+### 4. `Blocked`:
+   - The thread is waiting to acquire a lock to enter a synchronized block/method.
+   - It cannot proceed until the lock becomes available.
+   - This state occurs when multiple threads try to access a synchronized resource simultaneously.
+      ```java
+      //synchronized method
+      synchronized void synchronizedMethod() {
+          // If another thread holds the lock, this thread enters BLOCKED state
+      }
+      ```
+        or
+
+        ```java
+        //synchronized block
+        synchronized(lockObject) { 
+        // If another thread holds lockObject's monitor,  
+        // this thread will be BLOCKED until lock is available
+        }
+        ```
+  
+### 5. `Waiting`:
+   - The thread is waiting indefinitely for another thread to perform a particular action (like notify).
+   - Entered by calling `wait()`, `join()` without timeout, or `park()`.
+   - It can only be moved out of this state by another thread calling `notify()` or `notifyAll()` on the same object.
+   - The thread does not consume CPU resources while waiting.
+      ```java
+      synchronized void waitMethod() {
+          try {
+              wait(); // Thread enters WAITING state here
+          } catch (InterruptedException e) {
+              e.printStackTrace();
+          }
+      }
+      ```
+   
+
+### 6. `Timed Waiting`:
+   - The thread is waiting for a specified amount of time.
+   - Entered by calling methods like `sleep()`, `wait(timeout)`, `join(timeout)`, or `parkNanos()`.
+   - After the timeout expires, the thread automatically moves back to the Runnable state.
+   - The thread does not consume CPU resources while waiting.
+      ```java
+      try {
+          Thread.sleep(1000); // Thread enters TIMED_WAITING state here for 1 second
+      } catch (InterruptedException e) {
+          e.printStackTrace();
+      }
+      ```
+
+### 7. `Terminated`:
+   - The thread has completed its execution or has been terminated.
+   - It cannot be restarted once it reaches this state.
+   - This state occurs when the `run()` method finishes or if the thread is stopped using deprecated methods (not recommended).
+      ```java
+      // After the run() method completes, the thread enters TERMINATED state
+      public void run() {
+          System.out.println("Thread is running");
+          // Thread will enter TERMINATED state after this method completes
+      }
+      ```
+   
+
+![img.png](../images/thread-state-diagram.png)
+
+
 # FAQs
 
 #### Q1. What is the difference between `start()` and `run()` in Java threads?
@@ -227,7 +333,7 @@
         }
     }
     ```
-  
+
 
 #### Q2.Can we call the start() method multiple times on the same thread object in Java?
 - No, calling `start()` multiple times on the same thread object will throw an `IllegalThreadStateException`.
@@ -247,15 +353,15 @@
         }
     }
     ```
-  
+
 #### Q3. What is thread safety and how can we achieve it in Java?
 - **Thread safety** refers to the property of a piece of code or data structure that guarantees safe execution by multiple threads concurrently without causing data corruption or unexpected behavior.
 - It can be achieved through:
-  - `Synchronization`: Using synchronized blocks or methods to ensure that only one thread can access a resource at a time.
-  - `Immutable objects`: Creating objects that cannot be modified after creation, ensuring thread safety by design.
-  - `Concurrent collections`: Using thread-safe collections like `ConcurrentHashMap`, `CopyOnWriteArrayList`, etc.
-  - `Atomic variables`: Using classes from the `java.util.concurrent.atomic` package, such as `AtomicInteger`, which provide lock-free thread-safe operations.
-  - `ThreadLocal`: Using `ThreadLocal` variables to provide each thread with its own instance of a variable, avoiding shared state.
+    - `Synchronization`: Using synchronized blocks or methods to ensure that only one thread can access a resource at a time.
+    - `Immutable objects`: Creating objects that cannot be modified after creation, ensuring thread safety by design.
+    - `Concurrent collections`: Using thread-safe collections like `ConcurrentHashMap`, `CopyOnWriteArrayList`, etc.
+    - `Atomic variables`: Using classes from the `java.util.concurrent.atomic` package, such as `AtomicInteger`, which provide lock-free thread-safe operations.
+    - `ThreadLocal`: Using `ThreadLocal` variables to provide each thread with its own instance of a variable, avoiding shared state.
 
 #### Q4. What happens id exception occurs in a thread's run method?
 - If an exception occurs in a thread's `run()` method and is not caught, the thread will terminate, and the exception will be printed to the console.
@@ -263,16 +369,16 @@
 
 
 #### Q5. What is the difference between `sleep()` and `wait()` in Java?
-- `Sleep()`: 
-  - Belongs to the `Thread` class.
-  - Causes the current thread to pause execution for a specified duration.
-  - Does not release any locks held by the thread.
-  - Used for delaying execution without affecting synchronization.
+- `Sleep()`:
+    - Belongs to the `Thread` class.
+    - Causes the current thread to pause execution for a specified duration.
+    - Does not release any locks held by the thread.
+    - Used for delaying execution without affecting synchronization.
 - `Wait()`:
-  - Belongs to the `Object` class.
-  - Causes the current thread to release the lock it holds on an object and wait until another thread calls `notify()` or `notifyAll()` on that object.
-  - Used for inter-thread communication and synchronization.
-  - Must be called from a synchronized context (inside a synchronized block or method).
+    - Belongs to the `Object` class.
+    - Causes the current thread to release the lock it holds on an object and wait until another thread calls `notify()` or `notifyAll()` on that object.
+    - Used for inter-thread communication and synchronization.
+    - Must be called from a synchronized context (inside a synchronized block or method).
 
 #### Q6. What happens to the resource a thread was holding when the `wait()` method is called?
 - When a thread calls the `wait()` method on an object, it releases the lock it holds on that object.
@@ -329,40 +435,115 @@
     }
     
     ```
+#### Q8. How Another Thread Wakes the waiting Thread?
+- A thread that is in the waiting state (after calling `wait()`) can be woken up by another thread that holds the same object's lock.
+- The waking thread can call either `notify()` or `notifyAll()` on the same object to wake up one or all waiting threads, respectively.
+- Scenario: Chef and Waiter analogy
+    - Thread A (`Waiter`) takes the customer's order and waits for the chef to prepare the food.
+    - Thread B (`Chef`) prepares the food and notifies the waiter when it's ready.
+- Both threads synchronize on the same `Restaurant` object to coordinate their actions.
+
+    ```java
+    // WaiterThread.java
+    class WaiterThread extends Thread {
+        private final Object lock;
+    
+        public WaiterThread(Object restaurantLock) {
+            this.lock = restaurantLock;
+        }
+    
+        @Override
+        public void run() {
+            synchronized (lock) {
+                try {
+                    System.out.println("Waiter: Waiting for the food to be ready... ⏳");
+                    lock.wait();  // Waiter enters WAITING state
+                    System.out.println("Waiter: Food is ready! Delivering to the customer. 🍽️");
+                } catch (InterruptedException e) {
+                    Thread.currentThread().interrupt();
+                }
+            }
+        }
+    }
+    
+    ```
+    
+    ```java
+    // ChefThread.java
+    class ChefThread extends Thread {
+        private final Object lock;
+    
+        public ChefThread(Object restaurantLock) {
+            this.lock = restaurantLock;
+        }
+    
+        @Override
+        public void run() {
+            try {
+                Thread.sleep(2000); // Simulate food preparation time
+                synchronized (lock) {
+                    System.out.println("Chef: Food is ready! Notifying the waiter. 🔔");
+                    lock.notify(); // Wake up the waiting waiter thread
+                }
+            } catch (InterruptedException e) {
+                Thread.currentThread().interrupt();
+            }
+        }
+    }
+    ```
+    
+    ```java
+    // RestaurantSimulation.java
+    public class RestaurantSimulation {
+        public static void main(String[] args) {
+            Object restaurantLock = new Object(); // act as lock object
+    
+            Thread waiter = new WaiterThread(restaurantLock);
+            Thread chef = new ChefThread(restaurantLock);
+    
+            waiter.start();
+            chef.start();
+        }
+    }
+    ```
+    
+    ```
+    // Output:
+    Waiter: Waiting for the food to be ready... ⏳
+    Chef: Food is ready! Notifying the waiter. 🔔
+    Waiter: Food is ready! Delivering to the customer. 🍽️
+    ```
 
 # Glossary
 
-`Multicore`
+1. `Multicore`
 
-- A multicore processor is a single computing component with two or more independent actual processing units (called "cores").
-- Each core can read and execute program instructions, allowing for parallel processing.
-- This means that a multicore processor can perform multiple tasks simultaneously, improving performance and efficiency for applications that are designed to take advantage of multiple cores.
-- Multicore processors are commonly used in modern computers, smartphones, and other devices to enhance multitasking capabilities and overall system performance.
-- Example-
-    - Single-core → One worker doing all the jobs sequentially.
-    - Quad-core → Four workers doing separate jobs at the same time.
+   - A multicore processor is a single computing component with two or more independent actual processing units (called "cores").
+   - Each core can read and execute program instructions, allowing for parallel processing.
+   - This means that a multicore processor can perform multiple tasks simultaneously, improving performance and efficiency for applications that are designed to take advantage of multiple cores.
+   - Multicore processors are commonly used in modern computers, smartphones, and other devices to enhance multitasking capabilities and overall system performance.
+   - Example-
+       - Single-core → One worker doing all the jobs sequentially.
+       - Quad-core → Four workers doing separate jobs at the same time.
 
+2. `Checked exceptions`
+   - Exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
+   - They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
+   - Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
 
-`Checked exceptions`
-- Exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
-- They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
-- Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
+3. `Unchecked exceptions`
+   - Exceptions that do not need to be explicitly handled or declared.
+   - They are checked at runtime, meaning the compiler does not enforce handling them.
+   - Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
 
-`Unchecked exceptions`
-- Exceptions that do not need to be explicitly handled or declared.
-- They are checked at runtime, meaning the compiler does not enforce handling them.
-- Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
+4. `Future`
+  - Represents the result of an asynchronous computation.
+  - It allows you to retrieve the result of a task once it completes, or check if it is done.
+  - Used with `Callable` to get results after task completion.
+  - Can also check if the task is still running or has completed.
 
-`Future`
-
-- Represents the result of an asynchronous computation.
-- It allows you to retrieve the result of a task once it completes, or check if it is done.
-- Used with `Callable` to get results after task completion.
-- Can also check if the task is still running or has completed.
-
-`Executor Service`
-
-- An `Executor` is a  java interface that represents an object capable of running *submitted* tasks.
-- While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.).
-- Instead of creating threads manually, we submit tasks to an executor.
-- The executor manages threads internally and reuses them (thread pool → better performance & scalability).
+5. `Executor Service`
+   - An `Executor` is a  java interface that represents an object capable of running *submitted* tasks.
+   - While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.).
+   - Instead of creating threads manually, we submit tasks to an executor.
+   - The executor manages threads internally and reuses them (thread pool → better performance & scalability).

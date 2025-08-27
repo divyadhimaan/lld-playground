@@ -306,11 +306,49 @@
           // Thread will enter TERMINATED state after this method completes
       }
       ```
-   
-
 ![img.png](../images/thread-state-diagram.png)
 
+  
+---
+# Thread Pools
 
+A thread pool is a collection of pre-initialized worker threads that are reused to execute multiple tasks concurrently.
+- Instead of creating a new thread for every task → threads are taken from the pool.
+- Managed by the Executor Framework (`java.util.concurrent`).
+
+- Thread pools help by:
+  - **Resource Management**: Limit the number of threads to prevent system overload. 
+  - **Performance Improvement**: Reuse existing threads instead of creating new ones. 
+  - **Predictability**: Control thread creation and scheduling for better application behavior. 
+  - **Task Management**: Queuing, scheduling, and monitoring tasks becomes streamlined. 
+
+## Creating a Thread Pool
+
+Using `Executors` factory methods:
+```java
+// Fixed number of threads - Bounded
+ExecutorService fixedPool = Executors.newFixedThreadPool(3);
+
+// Single thread pool (sequential execution)
+ExecutorService singlePool = Executors.newSingleThreadExecutor();
+
+// Cached pool (creates new threads as needed, reuses idle threads) - unbounded, good for short-lived tasks.
+ExecutorService cachedPool = Executors.newCachedThreadPool();
+
+// Scheduled pool (run tasks after delay or periodically)
+ScheduledExecutorService scheduledPool = Executors.newScheduledThreadPool(2);
+
+```
+Refer for complete example [here](./../code/multithreading/ThreadPoolExample.java)
+
+### Working Explanation:
+1. Thread Pool Creation: 
+   - `Executors.newFixedThreadPool(3)` creates a pool with 3 reusable threads.
+2. Task Submission:
+   - Five tasks are submitted. Since only 3 threads exist, the first 3 tasks start immediately. 
+   - As tasks complete, the available threads pick up the remaining tasks.
+- 
+---
 # FAQs
 
 #### Q1. What is the difference between `start()` and `run()` in Java threads?

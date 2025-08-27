@@ -349,6 +349,7 @@ Refer for complete example [here](./../code/multithreading/ThreadPoolExample.jav
    - As tasks complete, the available threads pick up the remaining tasks.
 
 ## Lifecycle of Thread Pool
+
 1. **Creation**: 
    - A thread pool is created using `Executors` factory methods.
    - When a thread pool is created, it may pre-create some threads (core threads) in the NEW state and immediately start them to RUNNABLE.

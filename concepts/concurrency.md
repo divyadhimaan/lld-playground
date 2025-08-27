@@ -2,7 +2,7 @@
 
 > Fundamental units of execution that allows programs to perform multiple tasks concurrently.
 > 
-> Can utilize [multi-core](#multicore) processors efficiently and improve overall application performance.
+> Can utilize [multi-core](#1-multicore) processors efficiently and improve overall application performance.
 
 # Process vs Thread
 
@@ -148,9 +148,9 @@
 ## 3. Implementing `Callable` Interface
    - Similar to `Runnable`, but:
       - Can **return a result**.
-      - Can **throw [checked exceptions](#checked-exceptions).**
-      - Works with **[Future](#future)** objects to retrieve results asynchronously (after task completion).
-      - Used with [ExecutorService](#executor-service) for concurrent execution.
+      - Can **throw [checked exceptions](#2-checked-exceptions).**
+      - Works with **[Future](#4-future)** objects to retrieve results asynchronously (after task completion).
+      - Used with [ExecutorService](#5-executor-service) for concurrent execution.
       
       
 
@@ -669,7 +669,7 @@ public class ThreadPoolLifecycleDemo {
 
 # Glossary
 
-1. `Multicore`
+#### 1. `Multicore`
 
    - A multicore processor is a single computing component with two or more independent actual processing units (called "cores").
    - Each core can read and execute program instructions, allowing for parallel processing.
@@ -679,23 +679,23 @@ public class ThreadPoolLifecycleDemo {
        - Single-core → One worker doing all the jobs sequentially.
        - Quad-core → Four workers doing separate jobs at the same time.
 
-2. `Checked exceptions`
+#### 2. `Checked exceptions`
    - Exceptions that must be either caught or declared in the method signature, ensuring that the programmer handles them appropriately.
    - They are checked at compile time, meaning the compiler verifies that these exceptions are handled in the code.
    - Examples: `IOException`, `SQLException`, `InterruptedException`(Thread Interruption).
 
-3. `Unchecked exceptions`
+#### 3. `Unchecked exceptions`
    - Exceptions that do not need to be explicitly handled or declared.
    - They are checked at runtime, meaning the compiler does not enforce handling them.
    - Examples: `NullPointerException`, `ArrayIndexOutOfBoundsException`, `IllegalArgumentException`.
 
-4. `Future`
+#### 4. `Future`
   - Represents the result of an asynchronous computation.
   - It allows you to retrieve the result of a task once it completes, or check if it is done.
   - Used with `Callable` to get results after task completion.
   - Can also check if the task is still running or has completed.
 
-5. `Executor Service`
+#### 5. `Executor Service`
    - An `Executor` is a  java interface that represents an object capable of running *submitted* tasks.
    - While `ExecutorService` is a  more advanced sub-interface of `Executor` that supports **thread pooling**, **task scheduling**, and **lifecycle management** (shutdown, etc.).
    - Instead of creating threads manually, we submit tasks to an executor.

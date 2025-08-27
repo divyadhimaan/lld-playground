@@ -347,7 +347,102 @@ Refer for complete example [here](./../code/multithreading/ThreadPoolExample.jav
 2. Task Submission:
    - Five tasks are submitted. Since only 3 threads exist, the first 3 tasks start immediately. 
    - As tasks complete, the available threads pick up the remaining tasks.
-- 
+
+## Lifecycle of Thread Pool
+1. **Creation**: 
+   - A thread pool is created using `Executors` factory methods.
+   - When a thread pool is created, it may pre-create some threads (core threads) in the NEW state and immediately start them to RUNNABLE.
+2. **Task Execution**: 
+   - Available threads pick up tasks from the queue and execute them.
+   - When a task is submitted: An idle thread in the pool executes the task.
+   - The thread's state changes according to task operations (RUNNABLE, RUNNING, BLOCKED, WAITING, etc.) 
+   - After completing the task: Thread does not die → goes back to idle (RUNNABLE), waiting for the next task.
+3. **Pool Shutdown**: 
+   - When `shutdown()` or `shutdownNow()` is called, the pool stops accepting new tasks.
+   - Existing tasks are completed before threads are terminated.
+   - Threads transition to TERMINATED state after completing their tasks and the pool is fully shut down.
+
+```java
+import java.util.concurrent.*;
+
+// Task class simulating various thread states
+class Task implements Runnable {
+    private final int taskId;
+
+    public Task(int taskId) {
+        this.taskId = taskId;
+    }
+
+    @Override
+    public void run() {
+        System.out.println(Thread.currentThread().getName() + " - STARTING Task " + taskId);
+
+        try {
+            // Simulating different thread states
+
+            // RUNNABLE → TIMED_WAITING (sleep)
+            Thread.sleep(2000);
+
+            synchronized (this) {
+                System.out.println(Thread.currentThread().getName() + " - WAITING on Task " + taskId);
+
+                // RUNNING → WAITING (wait)
+                this.wait(1000);
+
+                // After timeout/notify → RUNNABLE again
+            }
+
+            // Re-enters RUNNING when picked by scheduler
+            System.out.println(Thread.currentThread().getName() + " - Task " + taskId + " COMPLETED");
+
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+
+            System.out.println(Thread.currentThread().getName() + " - INTERRUPTED Task " + taskId);
+
+            // If interrupted in TIMED_WAITING / WAITING → becomes RUNNABLE
+            // If interrupted while RUNNING → may go TERMINATED depending on shutdown
+        }
+
+        // After completion:
+        // → goes back to RUNNABLE waiting in pool
+        // → or TERMINATED if pool is shutting down
+    }
+}
+
+public class ThreadPoolLifecycleDemo {
+    public static void main(String[] args) {
+        // Step 1: Create a Thread Pool with 3 core threads
+        ExecutorService executor = Executors.newFixedThreadPool(3);
+        System.out.println("Thread Pool Created 🏊‍♂️");
+
+        // Step 2: Submit 5 tasks to the pool
+        for (int i = 1; i <= 5; i++) {
+            executor.execute(new Task(i));
+        }
+
+        // Step 3: Initiate shutdown after all tasks are submitted
+        executor.shutdown();
+        System.out.println("Thread Pool Shutdown Initiated 🚦");
+
+        try {
+            // Wait for all threads to finish
+            if (!executor.awaitTermination(10, TimeUnit.SECONDS)) {
+                executor.shutdownNow(); // Interrupts running/waiting threads
+                System.out.println("Forcing Shutdown! 🚧");
+            }
+        } catch (InterruptedException e) {
+            executor.shutdownNow();
+        }
+
+        System.out.println("All Threads Terminated ✅");
+
+        // Once shutdown is complete:
+        // → all threads (RUNNING, BLOCKED, WAITING, TIMED_WAITING)
+        // → will finish/interrupt → TERMINATED
+    }
+}
+```
 ---
 # FAQs
 
@@ -551,6 +646,25 @@ Refer for complete example [here](./../code/multithreading/ThreadPoolExample.jav
     Chef: Food is ready! Notifying the waiter. 🔔
     Waiter: Food is ready! Delivering to the customer. 🍽️
     ```
+#### Q9. Differentiate between `shutdown()` and `shutdownNow()` methods of ExecutorService?
+- `shutdown()`
+  - Initiates a graceful shutdown. 
+  - No new tasks are accepted. 
+  - Already submitted tasks (in queue + running) will complete normally. 
+  - Threads terminate after finishing their tasks.
+  - ```java
+    executorService.shutdown();
+    ```
+  - Use when you want an orderly shutdown without abruptly killing tasks.
+- `shutdownNow()`
+  - Initiates an immediate shutdown. 
+  - Attempts to stop all running tasks by interrupting them. 
+  - Removes all waiting tasks from the queue. 
+  - Returns a List<Runnable> of tasks that never started.
+  - ```java
+    List<Runnable> pendingTasks = executorService.shutdownNow();
+    ```
+  - Running tasks may not stop immediately — it depends on whether they handle interrupts properly.
 
 # Glossary
 

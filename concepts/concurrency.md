@@ -347,6 +347,7 @@ Refer for complete example [here](./../code/multithreading/ThreadPoolExample.jav
 2. Task Submission:
    - Five tasks are submitted. Since only 3 threads exist, the first 3 tasks start immediately. 
    - As tasks complete, the available threads pick up the remaining tasks.
+---
 
 ## Lifecycle of Thread Pool
 
@@ -444,6 +445,14 @@ public class ThreadPoolLifecycleDemo {
     }
 }
 ```
+---
+## Thread Life Cycle Management
+1. **Handle interrupted exceptions properly to allow threads to exit gracefully**: 
+   - A worker thread checking for updates in a loop should exit gracefully when interrupted instead of ignoring the exception.
+2. **Avoid thread leaks by ensuring threads are properly terminated when no longer needed**:  
+   - A thread waiting indefinitely for a signal can cause a leak. Use timeouts to prevent this while acquiring locks or waiting on conditions.
+   - Wait with a timeout instead of indefinitely.
+
 ---
 # FAQs
 

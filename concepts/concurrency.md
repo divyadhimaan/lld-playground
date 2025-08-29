@@ -445,6 +445,7 @@ public class ThreadPoolLifecycleDemo {
     }
 }
 ```
+
 ---
 ## Thread Life Cycle Management
 1. **Handle interrupted exceptions properly to allow threads to exit gracefully**: 

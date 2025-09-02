@@ -507,7 +507,7 @@ public class ThreadPoolLifecycleDemo {
     - `Atomic variables`: Using classes from the `java.util.concurrent.atomic` package, such as `AtomicInteger`, which provide lock-free thread-safe operations.
     - `ThreadLocal`: Using `ThreadLocal` variables to provide each thread with its own instance of a variable, avoiding shared state.
 
-#### Q4. What happens id exception occurs in a thread's run method?
+#### Q4. What happens if exception occurs in a thread's run method?
 - If an exception occurs in a thread's `run()` method and is not caught, the thread will terminate, and the exception will be printed to the console.
 - The exception does not get propagated to the main thread or other threads, and the program may continue running unless the exception is critical (like `OutOfMemoryError`).
 
@@ -676,6 +676,16 @@ public class ThreadPoolLifecycleDemo {
     List<Runnable> pendingTasks = executorService.shutdownNow();
     ```
   - Running tasks may not stop immediately — it depends on whether they handle interrupts properly.
+
+#### Q10. What happens to a thread in a thread pool after it finishes executing a task?
+- After task completion, the thread doesn't terminate but returns to the pool, ready to execute another task. 
+- This reuse eliminates the overhead of constantly creating and destroying threads. 
+
+#### Q11. How does a ThreadPoolExecutor's queue size affect its behavior?
+- The queue stores tasks when all core threads are busy. 
+- A larger queue can handle more pending tasks but consumes more memory. 
+- If the queue reaches capacity, the pool creates additional threads up to `maxPoolSize`.
+- If `maxPoolSize` is reached and the queue is full, the rejection policy is applied.
 
 # Glossary
 

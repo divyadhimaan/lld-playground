@@ -52,7 +52,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 | [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                             | Command                                                                          |
 | [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md) | Iterator                                                                         |
 | [Builder](concepts/design-patterns/builder.md)                     | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |
-| Prototype                                                          | Facade                                             | Memento                                                                          |
+| Prototype                                                          | [Facade](concepts/design-patterns/facade.md)       | Memento                                                                          |
 |                                                                    | Flyweight                                          | [Observer](concepts/design-patterns/observer.md)                                 |
 |                                                                    | [Proxy](concepts/design-patterns/proxy.md)         | [State](./concepts/design-patterns/state.md)                                     |
 |                                                                    |                                                    | [Strategy](concepts/design-patterns/strategy.md)                                 |

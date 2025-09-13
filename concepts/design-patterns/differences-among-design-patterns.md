@@ -1,7 +1,7 @@
 # Builder v/s Decorator
 
 
-Analogy where both might confuse:
+#### Analogy where both might confuse:
 
 You walk into a coffee shop. You want your ideal cup of coffee, possibly with different ingredients and extra add-ons.
 
@@ -27,3 +27,58 @@ You walk into a coffee shop. You want your ideal cup of coffee, possibly with di
 | **Flexibility**      | Flexibility in object construction                              | Flexibility in extending behavior without subclassing               |
 | **Example**          | Constructing a `Burger` with bun, patty, cheese, toppings       | Wrapping a `TextBox` with a `ScrollDecorator` and `BorderDecorator` |
 
+---
+# Facade vs Proxy
+
+#### Analogy where both might confuse:
+
+Imagine you want to watch a movie:
+
+- `Facade Thinking`: 
+  - Instead of buying tickets, adjusting the sound system, dimming the lights, and starting the movie yourself, you just press “Play Movie” on a home theater remote. 
+  - The facade hides the complexity of all subsystems and gives you a simplified interface.
+
+- `Proxy Thinking`: 
+  - You could watch the movie directly, but instead, you go through a movie rental service agent. 
+  - The agent controls access (e.g., checking subscription, caching, restricting bandwidth). 
+  - You still get the same movie, but with an additional layer of control/optimization.
+
+| Aspect               | **Facade Pattern**                                                          | **Proxy Pattern**                                                                               |
+|----------------------|-----------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------|
+| **Intent**           | Provide a **simplified interface** to a complex subsystem                   | Provide a **surrogate/placeholder** to control access to a real object. Follows same interface. |
+| **Focus**            | Hiding complexity of multiple subsystems                                    | Controlling access, adding extra behavior (security, caching, lazy loading)                     |
+| **Used When**        | Clients need easy access to a complex system without learning its internals | Direct access is expensive, sensitive, or needs additional control                              |
+| **Resulting Object** | A high-level interface that delegates work to multiple classes              | A stand-in object that forwards requests to the real object                                     |
+| **Pattern Type**     | Structural                                                                  | Structural                                                                                      |
+| **Structure**        | Facade → Subsystems                                                         | Client → Proxy → RealSubject                                                                    |
+| **Flexibility**      | Simplifies client usage, but doesn’t usually extend functionality           | Adds flexibility by intercepting calls and adding logic before/after delegation                 |
+| **Example**          | `HomeTheaterFacade` to start movie (lights, projector, sound)               | `ImageProxy` that loads an image lazily only when needed                                        |
+
+---
+
+# Facade vs Adapter
+
+#### Analogy where both might confuse
+
+You walk into a coffee shop:
+
+- `Facade Thinking`: 
+  - You just say “Give me a Latte”. 
+  - Behind the counter, the barista coordinates the grinder, espresso machine, milk steamer, and cashier. 
+  - You don’t see the complexity — you just use a simple unified interface.
+
+- `Adapter Thinking`: 
+  - You brought your own coffee mug from home, but the coffee shop machines only accept their own cups. 
+  - Instead of changing the machine, the shop provides a cupholder adapter so your mug fits. 
+  - The adapter translates between incompatible interfaces.
+
+| Aspect               | **Facade Pattern**                                                            | **Adapter Pattern**                                                               |
+|----------------------|-------------------------------------------------------------------------------|-----------------------------------------------------------------------------------|
+| **Intent**           | Provide a **simplified interface** to a complex subsystem                     | Convert the **interface of one class into another** expected by clients           |
+| **Focus**            | Hiding internal complexity                                                    | Making incompatible interfaces work together                                      |
+| **Used When**        | Clients shouldn’t need to know subsystem details                              | You want to reuse existing classes but their interface doesn’t match requirements |
+| **Resulting Object** | A high-level interface that internally coordinates many subsystems            | A wrapper object that **translates method calls**                                 |
+| **Pattern Type**     | Structural                                                                    | Structural                                                                        |
+| **Structure**        | Facade → Subsystems                                                           | Client → Adapter → Adaptee                                                        |
+| **Flexibility**      | Simplifies usage, but doesn’t change subsystem behavior                       | Adds flexibility by **bridging mismatched interfaces**                            |
+| **Example**          | `HomeTheaterFacade` that starts movie (lights, sound, projector all together) | `SquarePegAdapter` that lets a `SquarePeg` fit into a `RoundHole`                 |

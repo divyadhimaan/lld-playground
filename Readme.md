@@ -63,6 +63,8 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 ### Common Confusing Patterns
 
 - [Builder vs Decorator](concepts/design-patterns/differences-among-design-patterns.md#builder-vs-decorator)
+- [Facade vs Proxy](concepts/design-patterns/differences-among-design-patterns.md#facade-vs-proxy)
+- [Facade vs Adapter](concepts/design-patterns/differences-among-design-patterns.md#facade-vs-adapter)
 
 ## Design Examples
 

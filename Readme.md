@@ -49,7 +49,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 | Creational Patterns                                                | Structural Patterns                                | Behavioral Patterns                                                              |
 |--------------------------------------------------------------------|----------------------------------------------------|----------------------------------------------------------------------------------|
 | [Singleton](concepts/design-patterns/strategy.md)                  | [Adapter](concepts/design-patterns/adapter.md)     | [Chain of Responsibility](./concepts/design-patterns/chain-of-responsibility.md) |
-| [Factory Method](./concepts/design-patterns/factory.md)            | Bridge                                             | Command                                                                          |
+| [Factory Method](./concepts/design-patterns/factory.md)            | [Bridge](./concepts/design-patterns/bridge.md)     | Command                                                                          |
 | [Abstract Factory](./concepts/design-patterns/abstract-factory.md) | [Composite](concepts/design-patterns/composite.md) | Iterator                                                                         |
 | [Builder](concepts/design-patterns/builder.md)                     | [Decorator](concepts/design-patterns/decorator.md) | Mediator                                                                         |
 | Prototype                                                          | [Facade](concepts/design-patterns/facade.md)       | Memento                                                                          |
@@ -59,7 +59,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 |                                                                    |                                                    | Template Method                                                                  |
 |                                                                    |                                                    | Visitor                                                                          |
 |                                                                    |                                                    | [Null Object](concepts/design-patterns/null-object.md)                           |
- 
+
 ### Common Confusing Patterns
 
 - [Builder vs Decorator](concepts/design-patterns/differences-among-design-patterns.md#builder-vs-decorator)

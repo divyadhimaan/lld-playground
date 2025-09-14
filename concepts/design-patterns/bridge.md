@@ -60,6 +60,7 @@ classDiagram
 
 ## Enhanced Code
 
+[Remote Control - Example Code](./../../code/designPatterns/bridge/BridgeExample.java)
 
 ```mermaid
 classDiagram

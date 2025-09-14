@@ -82,3 +82,29 @@ You walk into a coffee shop:
 | **Structure**        | Facade → Subsystems                                                           | Client → Adapter → Adaptee                                                        |
 | **Flexibility**      | Simplifies usage, but doesn’t change subsystem behavior                       | Adds flexibility by **bridging mismatched interfaces**                            |
 | **Example**          | `HomeTheaterFacade` that starts movie (lights, sound, projector all together) | `SquarePegAdapter` that lets a `SquarePeg` fit into a `RoundHole`                 |
+
+
+# Strategy vs Bridge
+
+#### Analogy where both might confuse
+
+Imagine you’re listening to music 🎶
+
+- `Strategy Thinking`: “How do I play this song?”
+  - You can switch the algorithm of playback: play normally, shuffle, repeat, or apply an equalizer.
+  - You swap strategies at runtime depending on your need.
+
+- `Bridge Thinking`: “On which device do I play this song?”
+  - You separate the abstraction (MusicPlayer) from the implementation (Speakers, Bluetooth headphones, Car stereo).
+  - You can change either side independently without modifying the other.
+
+| Aspect               | **Strategy Pattern**                                                                    | **Bridge Pattern**                                                              |
+|----------------------|-----------------------------------------------------------------------------------------|---------------------------------------------------------------------------------|
+| **Intent**           | Define a family of algorithms, encapsulate each one, and make them interchangeable      | Decouple an abstraction from its implementation so they can vary independently  |
+| **Focus**            | **Behavior selection** (which algorithm to use)                                         | **Abstraction–Implementation separation**                                       |
+| **Used When**        | You need to switch between different algorithms at runtime                              | You want to combine different abstractions with different implementations       |
+| **Resulting Object** | A context object delegates work to the selected strategy                                | An abstraction delegates work to the chosen implementor                         |
+| **Pattern Type**     | Behavioral                                                                              | Structural                                                                      |
+| **Structure**        | Context → Strategy Interface → ConcreteStrategies                                       | Abstraction → RefinedAbstraction → Implementor Interface → ConcreteImplementors |
+| **Flexibility**      | High flexibility in changing **how something is done**                                  | High flexibility in changing **where / which implementation does it**           |
+| **Example**          | `PaymentContext` choosing between `CreditCardStrategy`, `PayPalStrategy`, `UPIStrategy` | `RemoteControl` (Abstraction) working with `TV` or `Radio` (Implementations)    |

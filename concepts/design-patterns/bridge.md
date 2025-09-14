@@ -42,12 +42,13 @@ classDiagram
         +off() void
     }
 
-    class Client {
+    class BridgeViolation {
         +main(args: String[]) void
     }
 
-    Client --> TVRemote
-    Client --> RadioRemote
+    BridgeViolation --> TVRemote
+    BridgeViolation --> RadioRemote
+
 
 ```
 
@@ -58,3 +59,60 @@ classDiagram
 3. Poor maintainability: Changes in one require changes in the other.
 
 ## Enhanced Code
+
+
+```mermaid
+classDiagram
+    %% Implementation Hierarchy
+    class Device {
+        <<interface>>
+        +on() void
+        +off() void
+    }
+
+    class TV {
+        +on() void
+        +off() void
+    }
+
+    class Radio {
+        +on() void
+        +off() void
+    }
+
+    Device <|.. TV
+    Device <|.. Radio
+
+    %% Abstraction Hierarchy
+    class Remote {
+        <<abstract>>
+        #Device device
+        +Remote(device: Device)
+        +on() void
+        +off() void
+    }
+
+    class BasicRemote {
+        +BasicRemote(device: Device)
+        +on() void
+        +off() void
+    }
+
+    class AdvancedRemote {
+        +AdvancedRemote(device: Device)
+        +on() void
+        +off() void
+    }
+
+    Remote <|-- BasicRemote
+    Remote <|-- AdvancedRemote
+    Remote --> Device
+
+    %% Client
+    class BridgeExample {
+        +main(args: String[]) void
+    }
+
+    BridgeExample --> Remote
+
+```

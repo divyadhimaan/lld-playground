@@ -117,3 +117,29 @@ classDiagram
     BridgeExample --> Remote
 
 ```
+
+## Common LLD problems using Bridge Pattern
+
+1. **Remote Control System**
+    - Decouple `Remote` abstraction from different `Device` implementations (TV, Radio).
+
+2. **Payment System**
+    - Separate `PaymentMethod` abstraction (CreditCard, UPI) from `PaymentGateway` implementation (PayPal, Stripe).
+
+3. **Drawing Application**
+    - Split `Shape` abstraction (Circle, Rectangle) from `RenderingAPI` (OpenGL, DirectX).
+
+4. **Notification System**
+    - Decouple `Notification` type (Email, SMS, Push) from `MessageSender` implementation.
+
+5. **Document Management System**
+    - Separate `Document` abstraction (PDF, Word) from `Storage` implementation (Local, Cloud).
+
+6. **Audio Player**
+    - Bridge between `MediaPlayer` abstraction (BasicPlayer, AdvancedPlayer) and `AudioFormat` implementation (MP3, WAV, FLAC).
+
+7. **Report Generation System**
+    - Abstract `Report` (Summary, Detailed) from `ExportFormat` (PDF, Excel, HTML).
+
+8. **E-commerce Discount System**
+    - Separate `Discount` abstraction (Seasonal, Festival, Loyalty) from `CalculationStrategy` implementation.

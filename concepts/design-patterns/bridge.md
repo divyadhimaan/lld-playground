@@ -4,6 +4,7 @@
 > 
 > It separates what is done from how it is done.
 
+![representation](../../images/bridge-dp.png)
 
 ## When to use Bridge Pattern
 - When a class has multiple dimensions of variation (e.g., shapes × colors, devices × remotes).

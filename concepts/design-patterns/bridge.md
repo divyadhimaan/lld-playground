@@ -24,4 +24,37 @@
 - Reduces tight coupling between abstraction and implementation.
 
 ## Class Structure
-![img.png](../../images/structure/bridge.png)
+![bridge-class-structure](../../images/structure/bridge.png)
+
+## Violation Code
+
+[Remote Control - Violation Code](./../../code/designPatterns/bridge/BridgeViolation.java)
+
+```mermaid
+classDiagram
+    class TVRemote {
+        +on() void
+        +off() void
+    }
+
+    class RadioRemote {
+        +on() void
+        +off() void
+    }
+
+    class Client {
+        +main(args: String[]) void
+    }
+
+    Client --> TVRemote
+    Client --> RadioRemote
+
+```
+
+### Issues with above code
+
+1. Class explosion: Adding a new device requires a new remote class. 
+2. No flexibility: Remote and device are tightly bound. 
+3. Poor maintainability: Changes in one require changes in the other.
+
+## Enhanced Code

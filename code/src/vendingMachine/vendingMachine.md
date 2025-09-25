@@ -3,9 +3,8 @@
 
 ## Actors (Initial Thoughts)
 
-- Vending Machine
-  - has-a inventory
-  - has-a (many) product
+- Vending Machine (facade)
+  - has-a controller
 
 - Product 
   - Represents different items with prices & quantities. 
@@ -18,10 +17,15 @@
 - Controller 
   - Orchestrates product dispensing. 
   - Calls Inventory update after successful transaction.
+  - has-a inventory
+  - has-a state
+  - has-a payment strategy
 
 - Inventory 
   - Maintains Product → Quantity mapping.
+  - has-a (many) product
   - Must be thread-safe (handles concurrent transactions).
+  - Is a subject, Whenever products are added (restock) or money is collected, the Inventory notifies observers.
 
 - Concurrency
   - Synchronization around critical sections (inventory updates, cash handling). 
@@ -84,49 +88,51 @@ classDiagram
     PaymentService --> PaymentStrategy
     PaymentService --> Denomination
 
-
 %% === Inventory (Singleton + Thread Safe) ===
     class Inventory {
         <<Singleton>>
         - productStock : Map<Product, Integer>
+        - observers : List<Observer>
         + addProduct(p: Product, qty: int)
         + updateStock(p: Product, qty: int)
         + checkAvailability(p: Product) : boolean
         + dispense(p: Product) : boolean <<synchronized>>
+        + addObserver(obs : Observer)
+        + removeObserver(obs : Observer)
+        + notifyObservers()
     }
 
     Inventory --> Product : "has many"
-
+    Inventory --> Observer : "notifies"
 
 %% === Controller (Internal) ===
     class Controller {
         - inventory : Inventory
         - paymentService : PaymentService
+        - state : State
         + selectProduct(type : String)
         + handlePayment(amount : double)
         + dispenseProduct(p: Product)
+        + restockProduct(p: Product, qty: int)
+        + collectMoney()
     }
 
     Controller --> Inventory
     Controller --> PaymentService
-
+    Controller --> State
 
 %% === Vending Machine (Facade) ===
     class VendingMachine {
         <<Facade>>
         - controller : Controller
-        - inventory : Inventory
-        - state : State
         + insertMoney(amount : double)
         + selectProduct(type : String)
         + dispenseProduct()
         + restock(p: Product, qty: int)
+        + collectMoney()
     }
 
     VendingMachine --> Controller : "uses internally"
-    VendingMachine --> Inventory
-    VendingMachine --> State
-
 
 %% === Observer Pattern for Restock & Collection ===
     class Observer {
@@ -142,16 +148,9 @@ classDiagram
         + update()
     }
 
-    class Subject {
-        + addObserver(obs : Observer)
-        + removeObserver(obs : Observer)
-        + notifyObservers()
-    }
-
-    Inventory ..|> Subject
+    Inventory ..|> Observer : "subject"
     RestockService ..|> Observer
     MoneyCollectionService ..|> Observer
-
 
 %% === State Pattern ===
     class State {

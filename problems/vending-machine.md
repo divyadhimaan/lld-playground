@@ -1,12 +1,12 @@
-# Coffee Vending Machine 
+# Vending Machine 
 
 
 ### Requirements:
 
-- The coffee vending machine should support different types of coffee, such as espresso, cappuccino, and latte. 
-- Each type of coffee should have a specific price and recipe (ingredients and their quantities). 
-- The machine should have a menu to display the available coffee options and their prices. 
-- Users should be able to select a coffee type and make a payment. 
-- The machine should dispense the selected coffee and provide change if necessary. 
-- The machine should track the inventory of ingredients and notify when they are running low. 
-- The machine should handle multiple user requests concurrently and ensure thread safety.
+- The vending machine should support multiple products with different prices and quantities. 
+- The machine should accept coins and notes of different denominations. 
+- The machine should dispense the selected product and return change if necessary. 
+- The machine should keep track of the available products and their quantities. 
+- The machine should handle multiple transactions concurrently and ensure data consistency. 
+- The machine should provide an interface for restocking products and collecting money. 
+- The machine should handle exceptional scenarios, such as insufficient funds or out-of-stock products.

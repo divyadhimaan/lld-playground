@@ -52,6 +52,14 @@ classDiagram
         - quantity : int
     }
 
+%% === Product Factory ===
+  class ProductFactory {
+    + createProduct(name : String) : Product
+  }
+
+  ProductFactory --> Product
+
+
 %% === Payment & Strategies ===
     class Denomination {
         <<enum>>
@@ -91,18 +99,19 @@ classDiagram
 %% === Inventory (Singleton + Thread Safe) ===
     class Inventory {
         <<Singleton>>
-        - productStock : Map<Product, Integer>
-        - observers : List<Observer>
-        + addProduct(p: Product, qty: int)
-        + updateStock(p: Product, qty: int)
-        + checkAvailability(p: Product) : boolean
-        + dispense(p: Product) : boolean <<synchronized>>
+        - productsAvailable : Map<String, Product>
+        + addProduct(name: String, qty: int)
+        + getProduct(name: String) : Product
+        + checkAvailability(name: String) : boolean
+        + updateProductStock(name: String)
+        + dispense(name: String) : boolean <<synchronized>>
         + addObserver(obs : Observer)
         + removeObserver(obs : Observer)
         + notifyObservers()
     }
 
-    Inventory --> Product : "has many"
+    Inventory --> ProductFactory : "uses"
+    Inventory --> Product : "manages"
     Inventory --> Observer : "notifies"
 
 %% === Controller (Internal) ===
@@ -110,9 +119,9 @@ classDiagram
         - inventory : Inventory
         - paymentService : PaymentService
         - state : State
-        + selectProduct(type : String)
+        + selectProduct(name : String)
         + handlePayment(amount : double)
-        + dispenseProduct(p: Product)
+        + dispenseProduct(name : String)
         + restockProduct(p: Product, qty: int)
         + collectMoney()
     }
@@ -128,6 +137,7 @@ classDiagram
         + insertMoney(amount : double)
         + selectProduct(type : String)
         + dispenseProduct()
+        + showOptions()
         + restock(p: Product, qty: int)
         + collectMoney()
     }
@@ -171,3 +181,7 @@ classDiagram
     State <|.. InsufficientFundsState
 
 ```
+
+# Observations
+
+- One Product selected at a time.

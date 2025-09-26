@@ -9,7 +9,7 @@ public class VendingMachine {
     private PaymentService payment;
 
 
-    private VendingMachine() {
+    public VendingMachine() {
         this.inventory = Inventory.getInstance();
         this.payment = PaymentService.getInstance();
         System.out.print("Vending Machine Initialized. ");

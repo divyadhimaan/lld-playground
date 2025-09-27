@@ -97,7 +97,7 @@ classDiagram
     PaymentService --> Denomination
 
 %% === Inventory (Singleton + Thread Safe) ===
-    class Inventory {
+    class VendingInventory {
         <<Singleton>>
         - productsAvailable : Map<String, Product>
         + addProduct(name: String, qty: int)
@@ -110,23 +110,23 @@ classDiagram
         + notifyObservers()
     }
 
-    Inventory --> ProductFactory : "uses"
-    Inventory --> Product : "manages"
-    Inventory --> Observer : "notifies"
+  VendingInventory --> ProductFactory : "uses"
+  VendingInventory --> Product : "manages"
+  VendingInventory --> Observer : "notifies"
 
 %% === Controller (Internal) ===
     class Controller {
-        - inventory : Inventory
+        - inventory : VendingInventory
         - paymentService : PaymentService
-        - state : State
+        - MachineState state
+        - Product selectedProduct
         + selectProduct(name : String)
         + handlePayment(amount : double)
         + dispenseProduct(name : String)
-        + restockProduct(p: Product, qty: int)
         + collectMoney()
     }
 
-    Controller --> Inventory
+    Controller --> VendingInventory
     Controller --> PaymentService
     Controller --> MachineState
 
@@ -138,8 +138,6 @@ classDiagram
         + selectProduct(type : String)
         + dispenseProduct()
         + showOptions()
-        + restock(p: Product, qty: int)
-        + collectMoney()
     }
 
     VendingMachine --> Controller : "uses internally"
@@ -158,7 +156,7 @@ classDiagram
         + update()
     }
 
-    Inventory ..|> Observer : "subject"
+  VendingInventory ..|> Observer : "subject"
     RestockService ..|> Observer
     MoneyCollectionService ..|> Observer
 
@@ -176,11 +174,16 @@ classDiagram
     class InsufficientFundsState
     class IdleState
 
+  class RestockService {
+    +update(Product)
+  }
+
   MachineState <|.. WaitingForMoney
   MachineState <|.. DispensingProduct
   MachineState <|.. OutOfStockState
   MachineState <|.. InsufficientFundsState
   MachineState <|.. IdleState
+  VendingInventory --> RestockService : notifies
 
 ```
 

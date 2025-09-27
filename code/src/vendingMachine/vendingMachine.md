@@ -128,7 +128,7 @@ classDiagram
 
     Controller --> Inventory
     Controller --> PaymentService
-    Controller --> State
+    Controller --> MachineState
 
 %% === Vending Machine (Facade) ===
     class VendingMachine {
@@ -163,7 +163,7 @@ classDiagram
     MoneyCollectionService ..|> Observer
 
 %% === State Pattern ===
-    class State {
+    class MachineState {
         <<interface>>
         + insertMoney(amount : double)
         + selectProduct(type : String)
@@ -174,14 +174,99 @@ classDiagram
     class DispensingProduct
     class OutOfStockState
     class InsufficientFundsState
+    class IdleState
 
-    State <|.. WaitingForMoney
-    State <|.. DispensingProduct
-    State <|.. OutOfStockState
-    State <|.. InsufficientFundsState
+  MachineState <|.. WaitingForMoney
+  MachineState <|.. DispensingProduct
+  MachineState <|.. OutOfStockState
+  MachineState <|.. InsufficientFundsState
+  MachineState <|.. IdleState
 
 ```
 
-# Observations
+## Actors & Responsibilities
 
-- One Product selected at a time.
+### 1. `MyVendingMachine` (Facade)
+
+* Entry point for the client.
+* Provides simple methods:
+
+  * `selectProduct()`
+  * `insertMoney()`
+  * `dispenseProduct()`
+  * `showOptions()`
+* Internally delegates requests to the **VendingMachineController**.
+
+---
+
+### 2. `VendingMachineController` (Core Orchestrator)
+
+* Coordinates between **inventory**, **payment service**, and **state machine**.
+* Maintains the current state (`Idle`, `WaitingForMoney`, etc.) and current product selection.
+* Routes calls:
+
+  * `selectProduct()` → handled by current state
+  * `handlePayment()` → forwards to current state
+  * `dispenseProduct()` → handled by current state
+* Responsible for giving change (`collectMoney()`).
+
+---
+
+### 3. `MachineState` & Implementations (State Pattern)
+
+Represents different machine conditions:
+
+* **IdleState** → waiting for user to pick a product.
+* **WaitingForMoneyState** → product selected, waiting for payment.
+* **DispensingProductState** → dispensing product + returning change.
+* **OutOfStockState** → selected product not available.
+* **InsufficientFundsState** → user inserted less money, needs to add more.
+
+Each state defines allowed operations and restricts invalid actions.
+
+---
+
+### 4. `VendingInventory` (Singleton + Subject)
+
+* Manages stock of products.
+* Provides methods to check availability, dispense, and update stock.
+* Notifies observers (e.g., `RestockService`) when product stock changes.
+
+---
+
+### 5. `Product` & `ProductFactory`
+
+* **Product**: Represents an item (name, price, quantity).
+* **ProductFactory**: Creates predefined products (`coke`, `pepsi`, `water`).
+
+---
+
+### 6. `VendingPaymentService` (Payment Handler)
+
+* Handles received money, tracks balance, and calculates change.
+* Uses **PaymentStrategy** to handle mode-specific logic (coin/note).
+
+---
+
+### 7. `PaymentStrategy` & Implementations (Strategy Pattern)
+
+* **CoinPaymentStrategy** → handles payment in coins.
+* **NotePaymentStrategy** → handles payment in notes.
+
+---
+
+### 8. `Observer` Pattern (Restock Service)
+
+* `RestockService` observes inventory stock changes.
+* Prints a notification and alerts if restock is needed.
+
+---
+
+## Flow (High-Level)
+
+1. **User selects product** → `IdleState` validates availability.
+2. Machine enters `WaitingForMoneyState`.
+3. **User inserts money** → payment processed via `VendingPaymentService` and appropriate strategy.
+4. If enough → moves to `DispensingProductState` → product dispensed + change returned → state resets to `IdleState`.
+5. If insufficient → `InsufficientFundsState` prompts for more money.
+6. If product is out of stock → `OutOfStockState`.

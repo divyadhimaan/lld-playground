@@ -7,7 +7,6 @@ import java.util.Scanner;
 public class VendingMachineMain {
     public static void main(String[] args){
         MyVendingMachine vendingMachine= new MyVendingMachine();
-//        vendingMachine.a
         vendingMachine.showOptions();
 
         vendingMachine.selectProduct("coke");

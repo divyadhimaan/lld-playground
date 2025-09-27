@@ -39,42 +39,48 @@ public class MyVendingMachine {
 
 class VendingMachineController {
     VendingInventory inventory;
-    VendingPaymentService paymentService;
-    MachineState machineState;
-    private Product currentSelection;
+    private ThreadLocal<MachineState> machineState = ThreadLocal.withInitial(() -> new IdleState(this));
+    private ThreadLocal<Product> currentSelection;
+    private ThreadLocal<VendingPaymentService> paymentService =
+            ThreadLocal.withInitial(VendingPaymentService::new);
 
     VendingMachineController(){
         inventory = VendingInventory.getInstance();
-        paymentService = new VendingPaymentService();
-        this.machineState = new IdleState(this);
     }
 
     public void setState(MachineState state){
-        this.machineState = state;
+        machineState.set(state);
     }
 
+    public MachineState getState(){
+        return machineState.get();
+    }
+
+    public VendingPaymentService getPaymentService() {
+        return paymentService.get();
+    }
 
     // one product can be selected at a time
     void selectProduct(String productName){
-        machineState.selectProduct(productName);
+        getState().selectProduct(productName);
 
     }
 
     void handlePayment(Denomination type, double amount){
-        machineState.insertMoney(type, amount);
+        getState().insertMoney(type, amount);
     }
 
     void dispenseProduct(){
-        machineState.dispenseProduct();
+        getState().dispenseProduct();
 
     }
 
     void setCurrentSelected(Product selected){
-        this.currentSelection = selected;
+        currentSelection.set(selected);
     }
 
     Product getCurrentSelected(){
-        return this.currentSelection;
+        return currentSelection.get();
     }
 
     void showOptions()
@@ -89,8 +95,7 @@ class VendingMachineController {
 
 
     void collectMoney(){
-
-        double change = paymentService.returnChange(currentSelection.getProductPrice());
+        double change = getPaymentService().returnChange(getCurrentSelected().getProductPrice());
         System.out.println("User can collect the money: "+ change);
     }
 }
@@ -172,7 +177,7 @@ class VendingInventory implements Subject{
         return inventoryInstance;
     }
 
-    public void addProduct(String productName, int quantity){
+    public synchronized void addProduct(String productName, int quantity){
         Product product = ProductFactory.createProduct(productName);
         product.setQuantity(quantity);
         productsAvailable.put(productName, product);
@@ -180,14 +185,14 @@ class VendingInventory implements Subject{
         notifyObservers(productName, quantity);
     }
 
-    public Product getProduct(String productName){
+    public synchronized Product getProduct(String productName){
         if(productsAvailable.containsKey(productName)) {
             return productsAvailable.get(productName);
         }
         return null;
     }
 
-    private void updateProductStock(String productName){
+    private synchronized void updateProductStock(String productName){
         System.out.println("Updating Stock...");
         getProduct(productName).decrementQuantity();
         System.out.println("Quantity Left: " + getProduct(productName).getQuantity());
@@ -202,7 +207,7 @@ class VendingInventory implements Subject{
         return false;
     }
 
-    public void dispense(String productName){
+    public synchronized void dispense(String productName){
         if(!checkAvailability(productName)){
             throw new IllegalArgumentException("Product not in Stock");
         }

@@ -273,3 +273,39 @@ Each state defines allowed operations and restricts invalid actions.
 4. If enough → moves to `DispensingProductState` → product dispensed + change returned → state resets to `IdleState`.
 5. If insufficient → `InsufficientFundsState` prompts for more money.
 6. If product is out of stock → `OutOfStockState`.
+
+
+
+## Changes to ensure thread safety and Concurrency
+### 1. VendingMachineController
+
+- Original: VendingMachineController.currentSelection was a single shared field.
+
+- Change: Made it ThreadLocal<Product>, so each user/thread can select a product independently without collisions.
+
+- ```private ThreadLocal<Product> currentSelection;```
+
+### 2. Per-thread payment tracking
+
+- Original: VendingPaymentService.amountReceived was shared across threads → race conditions.
+
+- Change: Made amountReceived ThreadLocal or used ThreadLocal PaymentService per thread.
+
+- Ensures each transaction maintains its own payment state.
+
+- ```private ThreadLocal<Double> amountReceived = ThreadLocal.withInitial(() -> 0.0);```
+
+### 3. Synchronized inventory operations
+
+- Original: Inventory methods could be accessed concurrently → stock updates could collide.
+
+- Change: Added synchronized to critical inventory methods:
+
+  - addProduct()
+  - getProduct()
+  - dispense()
+  - updateProductStock()
+
+- ```public synchronized void dispense(String productName) { ... }```
+
+- Ensures that stock decrement, availability check, and notification happen atomically.

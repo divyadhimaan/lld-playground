@@ -22,5 +22,17 @@ public class VendingMachineMain {
 
         vendingMachine.insertMoney(paymentMode, paymentAmount);
 
+
+        vendingMachine.selectProduct("coke");
+
+
+        System.out.println("Select Payment mode: (note/coin)");
+        String paymentMode2 = scanner.nextLine();
+
+        System.out.println("Enter amount: ");
+        double paymentAmount2 = Double.parseDouble(scanner.nextLine());
+
+        vendingMachine.insertMoney(paymentMode2, paymentAmount2);
+
     }
 }

@@ -46,51 +46,35 @@ class VendingMachineController {
     VendingMachineController(){
         inventory = VendingInventory.getInstance();
         paymentService = new VendingPaymentService();
-        machineState = new MachineState();
+        this.machineState = new IdleState(this);
+    }
+
+    public void setState(MachineState state){
+        this.machineState = state;
     }
 
 
     // one product can be selected at a time
     void selectProduct(String productName){
-        Product p = inventory.getProduct(productName);
+        machineState.selectProduct(productName);
 
-        if(p==null){
-            //call out of stock state
-            throw new IllegalArgumentException("Product not found");
-        }
-
-        if(p.getQuantity() < 0){
-            //call out of stock state
-            throw new IllegalStateException("Out of stock");
-        }
-
-        this.currentSelection = p;
     }
 
     void handlePayment(Denomination type, double amount){
-        switch(type) {
-            case COIN -> paymentService.setStrategy(new CoinPaymentStrategy());
-            case NOTE -> paymentService.setStrategy(new NotePaymentStrategy());
-        }
-
-        boolean success = paymentService.processPayment(amount, currentSelection.getProductPrice());
-        if(success){
-            dispenseProduct();
-        } else {
-            //TODO: handle state
-//            state = new InsufficientFundsState(this);
-            System.out.println("payment failed");
-        }
+        machineState.insertMoney(type, amount);
     }
 
     void dispenseProduct(){
-        if(currentSelection != null && currentSelection.getQuantity() > 0){
-            inventory.dispense(currentSelection.getProductName());
-            System.out.println("Dispensed: " + currentSelection.getProductName());
-            collectMoney();
-            currentSelection=null;
-        }
+        machineState.dispenseProduct();
 
+    }
+
+    void setCurrentSelected(Product selected){
+        this.currentSelection = selected;
+    }
+
+    Product getCurrentSelected(){
+        return this.currentSelection;
     }
 
     void showOptions()
@@ -103,9 +87,6 @@ class VendingMachineController {
         }
     }
 
-    void restockProduct(){
-
-    }
 
     void collectMoney(){
 
@@ -237,8 +218,6 @@ class VendingInventory implements Subject{
         return productPriceMap;
     }
 
-    // TODO: Add observer pattern to observe the stock
-
     @Override
     public void addObserver(Observer observer){
         observers.add(observer);
@@ -309,6 +288,10 @@ class RestockService implements Observer {
     @Override
     public void update(String productName, int quantity) {
         System.out.println("[RestockService] Product: " + productName + " new quantity: " + quantity);
+
+        if(quantity == 0){
+            System.out.println("[RestockService] Restock for " + productName + " needed!! ");
+        }
     }
 }
 
@@ -318,8 +301,142 @@ interface MachineState {
     void dispenseProduct();
 }
 
-class WaitingForMoney implements MachineState{
+class IdleState implements MachineState {
+    private VendingMachineController controller;
 
+    IdleState(VendingMachineController controller) {
+        this.controller = controller;
+    }
+
+    @Override
+    public void selectProduct(String productName){
+        Product product = controller.inventory.getProduct(productName);
+        if (product == null || product.getQuantity() <= 0) {
+            System.out.println("Product not available.");
+            controller.setState(new OutOfStockState(controller));
+            return;
+        }
+        controller.setCurrentSelected(product);
+        System.out.println("Product " + product.getProductName() + " selected. Price: " + product.getProductPrice());
+        controller.setState(new WaitingForMoneyState(controller));
+
+    }
+
+    @Override
+    public void insertMoney(Denomination type, double amount){
+        System.out.println("Please select a product first.");
+    }
+
+    @Override
+    public void dispenseProduct() {
+        System.out.println("No product selected yet.");
+    }
+}
+
+class WaitingForMoneyState implements MachineState{
+    private VendingMachineController controller;
+
+    WaitingForMoneyState(VendingMachineController c){
+        this.controller = c;
+    }
+
+    @Override
+    public void insertMoney(Denomination type, double amount){
+        System.out.println("In waiting for Money State");
+        switch(type) {
+            case COIN -> controller.paymentService.setStrategy(new CoinPaymentStrategy());
+            case NOTE -> controller.paymentService.setStrategy(new NotePaymentStrategy());
+        }
+
+        boolean success = controller.paymentService.processPayment(amount, controller.getCurrentSelected().getProductPrice());
+        if(success){
+            controller.setState(new DispensingProductState(controller));
+            controller.dispenseProduct();
+        } else {
+            controller.setState(new InsufficientFundsState(controller));
+            System.out.println("payment failed");
+        }
+    }
+    @Override
+    public void selectProduct(String productName){
+        System.out.println("Product already selected. Please insert money.");
+    }
+    @Override
+    public void dispenseProduct()
+    {
+        System.out.println("Cannot dispense. Waiting for money.");
+    }
+}
+
+class DispensingProductState implements MachineState{
+    private VendingMachineController controller;
+
+
+    DispensingProductState(VendingMachineController c){
+        this.controller = c;
+    }
+
+    @Override
+    public void insertMoney(Denomination type, double amount){
+        System.out.println("Dispensing in progress. Cannot insert money now.");
+    }
+    @Override
+    public void selectProduct(String productName){
+        System.out.println("Dispensing in progress. Cannot select product now.");
+    }
+    @Override
+    public void dispenseProduct(){
+        if(controller.getCurrentSelected() != null && controller.getCurrentSelected().getQuantity() > 0){
+            controller.inventory.dispense(controller.getCurrentSelected().getProductName());
+            System.out.println("Dispensed: " + controller.getCurrentSelected().getProductName());
+            controller.collectMoney();
+            controller.setCurrentSelected(null);
+        }
+        controller.setState(new IdleState(controller));
+    }
+}
+
+class OutOfStockState implements MachineState{
+    private VendingMachineController controller;
+
+    OutOfStockState(VendingMachineController c){
+        this.controller = c;
+    }
+
+    @Override
+    public void insertMoney(Denomination type, double amount){
+        System.out.println("Product out of stock. Cannot accept money.");
+    }
+    @Override
+    public void selectProduct(String productName){
+        System.out.println("Product out of stock.");
+    }
+    @Override
+    public void dispenseProduct(){
+        System.out.println("Product out of stock.");
+    }
+}
+
+class InsufficientFundsState implements MachineState{
+    private VendingMachineController controller;
+
+    InsufficientFundsState(VendingMachineController c){
+        this.controller = c;
+    }
+
+    @Override
+    public void insertMoney(Denomination type, double amount){
+        System.out.println("Insufficient funds. Insert more money.");
+
+    }
+    @Override
+    public void selectProduct(String productName){
+        System.out.println("Insert money first.");
+    }
+    @Override
+    public void dispenseProduct(){
+        System.out.println("Cannot dispense. Insufficient funds.");
+    }
 }
 
 

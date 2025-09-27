@@ -10,3 +10,5 @@
 - The machine should handle multiple transactions concurrently and ensure data consistency. 
 - The machine should provide an interface for restocking products and collecting money. 
 - The machine should handle exceptional scenarios, such as insufficient funds or out-of-stock products.
+
+[Java Implementation](./../code/src/vendingMachine/Simulation/VendingMachineMain.java) | [Design Explanation](./../code/src/vendingMachine/vendingMachine.md)

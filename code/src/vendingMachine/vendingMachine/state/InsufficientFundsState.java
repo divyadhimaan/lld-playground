@@ -1,9 +1,12 @@
-package vendingMachine;
+package vendingMachine.state;
 
-public class InsufficientFundsState implements MachineState{
+import vendingMachine.strategy.Denomination;
+import vendingMachine.VendingMachineController;
+
+public class InsufficientFundsState implements MachineState {
     private VendingMachineController controller;
 
-    InsufficientFundsState(VendingMachineController c){
+    public InsufficientFundsState(VendingMachineController c){
         this.controller = c;
     }
 

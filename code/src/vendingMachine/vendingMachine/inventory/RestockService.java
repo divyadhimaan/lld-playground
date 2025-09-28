@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.inventory;
 
 public class RestockService implements Observer {
     @Override

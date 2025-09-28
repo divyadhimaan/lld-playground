@@ -1,4 +1,7 @@
-package vendingMachine;
+package vendingMachine.inventory;
+
+import vendingMachine.product.Product;
+import vendingMachine.product.ProductFactory;
 
 import java.util.ArrayList;
 import java.util.HashMap;

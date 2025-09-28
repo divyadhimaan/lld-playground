@@ -1,9 +1,16 @@
 package vendingMachine;
 
+import vendingMachine.inventory.VendingInventory;
+import vendingMachine.product.Product;
+import vendingMachine.state.IdleState;
+import vendingMachine.state.MachineState;
+import vendingMachine.strategy.Denomination;
+import vendingMachine.strategy.VendingPaymentService;
+
 import java.util.Map;
 
 public class VendingMachineController {
-    VendingInventory inventory;
+    private VendingInventory inventory;
     private ThreadLocal<MachineState> machineState = ThreadLocal.withInitial(() -> new IdleState(this));
     private ThreadLocal<Product> currentSelection;
     private ThreadLocal<VendingPaymentService> paymentService =
@@ -11,6 +18,10 @@ public class VendingMachineController {
 
     VendingMachineController(){
         inventory = VendingInventory.getInstance();
+    }
+
+    public VendingInventory getInventory(){
+        return inventory;
     }
 
     public void setState(MachineState state){
@@ -35,20 +46,20 @@ public class VendingMachineController {
         getState().insertMoney(type, amount);
     }
 
-    void dispenseProduct(){
+    public void dispenseProduct(){
         getState().dispenseProduct();
 
     }
 
-    void setCurrentSelected(Product selected){
+    public void setCurrentSelected(Product selected){
         currentSelection.set(selected);
     }
 
-    Product getCurrentSelected(){
+    public Product getCurrentSelected(){
         return currentSelection.get();
     }
 
-    void showOptions()
+    public void showOptions()
     {
         Map<String, Double> products = inventory.getAllProducts();
         System.out.println("Available Products: ");
@@ -59,7 +70,7 @@ public class VendingMachineController {
     }
 
 
-    void collectMoney(){
+    public void collectMoney(){
         double change = getPaymentService().returnChange(getCurrentSelected().getProductPrice());
         System.out.println("User can collect the money: "+ change);
     }

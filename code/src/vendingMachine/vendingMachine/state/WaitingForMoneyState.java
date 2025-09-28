@@ -1,9 +1,14 @@
-package vendingMachine;
+package vendingMachine.state;
 
-public class WaitingForMoneyState implements MachineState{
+import vendingMachine.strategy.Denomination;
+import vendingMachine.VendingMachineController;
+import vendingMachine.strategy.CoinPaymentStrategy;
+import vendingMachine.strategy.NotePaymentStrategy;
+
+public class WaitingForMoneyState implements MachineState {
     private VendingMachineController controller;
 
-    WaitingForMoneyState(VendingMachineController c){
+    public WaitingForMoneyState(VendingMachineController c){
         this.controller = c;
     }
 

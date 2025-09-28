@@ -1,6 +1,6 @@
-package vendingMachine;
+package vendingMachine.strategy;
 
-public class NotePaymentStrategy implements PaymentStrategy{
+public class NotePaymentStrategy implements PaymentStrategy {
     @Override
     public void handlePayment(double receivedAmount, double deductionAmount){
         System.out.println("Handling note payment. Deducting: " + deductionAmount);

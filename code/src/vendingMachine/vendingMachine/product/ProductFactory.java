@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.product;
 
 public class ProductFactory{
     public static Product createProduct(String productName){

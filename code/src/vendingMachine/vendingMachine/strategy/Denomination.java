@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.strategy;
 
 public enum Denomination {
     COIN,

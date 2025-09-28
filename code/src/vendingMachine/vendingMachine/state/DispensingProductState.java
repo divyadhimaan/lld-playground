@@ -1,10 +1,13 @@
-package vendingMachine;
+package vendingMachine.state;
 
-public class DispensingProductState implements MachineState{
+import vendingMachine.strategy.Denomination;
+import vendingMachine.VendingMachineController;
+
+public class DispensingProductState implements MachineState {
     private VendingMachineController controller;
 
 
-    DispensingProductState(VendingMachineController c){
+    public DispensingProductState(VendingMachineController c){
         this.controller = c;
     }
 
@@ -19,7 +22,7 @@ public class DispensingProductState implements MachineState{
     @Override
     public void dispenseProduct(){
         if(controller.getCurrentSelected() != null && controller.getCurrentSelected().getQuantity() > 0){
-            controller.inventory.dispense(controller.getCurrentSelected().getProductName());
+            controller.getInventory().dispense(controller.getCurrentSelected().getProductName());
             System.out.println("Dispensed: " + controller.getCurrentSelected().getProductName());
             controller.collectMoney();
             controller.setCurrentSelected(null);

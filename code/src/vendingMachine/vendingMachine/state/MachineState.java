@@ -1,4 +1,6 @@
-package vendingMachine;
+package vendingMachine.state;
+
+import vendingMachine.strategy.Denomination;
 
 public interface MachineState {
     void insertMoney(Denomination type, double amount);

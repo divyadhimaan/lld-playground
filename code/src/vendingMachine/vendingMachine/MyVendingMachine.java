@@ -1,9 +1,7 @@
 package vendingMachine;
 
 
-import lombok.Setter;
-
-import java.util.*;
+import vendingMachine.strategy.Denomination;
 
 // facade
 public class MyVendingMachine {

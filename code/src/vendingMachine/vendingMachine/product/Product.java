@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.product;
 
 public class Product {
     private final String productName;
@@ -10,23 +10,23 @@ public class Product {
         this.productPrice = price;
     }
 
-    String getProductName(){
+    public String getProductName(){
         return this.productName;
     }
 
-    double getProductPrice(){
+    public double getProductPrice(){
         return this.productPrice;
     }
 
-    int getQuantity(){
+    public int getQuantity(){
         return this.quantity;
     }
 
-    void setQuantity(int quantity){
+    public void setQuantity(int quantity){
         this.quantity = this.quantity + quantity;
     }
 
-    void decrementQuantity(){
+    public void decrementQuantity(){
         if(this.quantity > 0)
         {
             this.quantity = this.quantity-1;

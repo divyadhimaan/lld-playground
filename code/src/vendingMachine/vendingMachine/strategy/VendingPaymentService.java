@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.strategy;
 
 import lombok.Setter;
 

@@ -1,9 +1,12 @@
-package vendingMachine;
+package vendingMachine.state;
 
-public class OutOfStockState implements MachineState{
+import vendingMachine.strategy.Denomination;
+import vendingMachine.VendingMachineController;
+
+public class OutOfStockState implements MachineState {
     private VendingMachineController controller;
 
-    OutOfStockState(VendingMachineController c){
+    public OutOfStockState(VendingMachineController c){
         this.controller = c;
     }
 

@@ -1,4 +1,4 @@
-package vendingMachine;
+package vendingMachine.inventory;
 
 public interface Subject{
     void addObserver(Observer observer);

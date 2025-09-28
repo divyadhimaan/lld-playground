@@ -1,7 +1,92 @@
 # Vending Machine
 
+## Design Patterns Used
 
-## Rough Flow
+| Pattern       | Purpose / Need                         |
+|---------------|----------------------------------------|
+| **Facade**    | Simplifies usage for client            |
+| **State**     | Manages machine conditions cleanly     |
+| **Strategy**  | Flexible payment handling              |
+| **Singleton** | One consistent inventory across system |
+| **Observer**  | Decoupled stock/collection monitoring  |
+| **Factory**   | Centralized product creation           |
+### 1. Facade Pattern
+
+**Where:** `VendingMachine` (MyVendingMachine)
+
+**Need:**
+
+* Provides a **simple interface** for clients (`selectProduct()`, `insertMoney()`, etc.).
+* Hides internal complexity (controller, inventory, payments, states).
+* Keeps client usage clean and straightforward.
+
+---
+
+### 2. State Pattern
+
+**Where:** `MachineState` and its implementations (`IdleState`, `WaitingForMoneyState`, `DispensingProductState`, `OutOfStockState`, `InsufficientFundsState`)
+
+**Need:**
+
+* Machine behavior **changes based on state** (idle, waiting for money, dispensing, etc.).
+* Removes long `if-else` / `switch` logic.
+* Each state defines its **own valid actions and transitions**.
+
+---
+
+### 3. Strategy Pattern
+
+**Where:** `PaymentStrategy`, `CoinPaymentStrategy`, `NotePaymentStrategy`, `PaymentService`
+
+**Need:**
+
+* Different logic for different payment methods (coin vs note).
+* Enables **easily plugging in new strategies** (e.g., CardPayment, UPI).
+* Makes `PaymentService` flexible and **open for extension**.
+
+---
+
+### 4. Singleton Pattern
+
+**Where:** `VendingInventory`
+
+**Need:**
+
+* Only one **shared inventory** should exist.
+* Ensures **global access** to stock data.
+* Prevents inconsistencies in stock management.
+* Thread-safety with `synchronized` methods ensures **safe concurrent access**.
+
+---
+
+### 5. Observer Pattern
+
+**Where:** `VendingInventory` (subject) → `RestockService`, `MoneyCollectionService` (observers)
+
+**Need:**
+
+* Automatic **notifications** when stock is low or collection is required.
+* Decouples inventory from dependent services.
+* Supports adding new observers (e.g., analytics, logging, alerts) without changing core logic.
+
+---
+
+### 6. Factory Pattern
+
+**Where:** `ProductFactory`
+
+**Need:**
+
+* Provides a **centralized way** to create products.
+* Simplifies adding new product types.
+* Keeps creation logic separate from business logic.
+
+---
+
+
+
+
+## Flow Diagram
 
 ```mermaid
 classDiagram

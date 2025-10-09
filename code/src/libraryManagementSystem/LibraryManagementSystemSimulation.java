@@ -40,6 +40,11 @@ public class LibraryManagementSystemSimulation {
         library.borrowBookCopy("C209", "user1", new Date("2024/06/02")); //trying to borrow more than borrow limit
 
         library.returnBookCopy("C205");
+        library.returnBookCopy("C208");
+
+        library.printBorrowedBooks("user1");
+        library.printBorrowedBooks("user2");
+        library.printBorrowedBooks("user3"); // non-existing user
 
 
 //        library.displayRacks();

@@ -49,6 +49,10 @@ class LibraryManagementInterface {
         libraryManagementSystem.returnBookCopy(bookCopyId);
     }
 
+    public void printBorrowedBooks(String userId){
+        libraryManagementSystem.printBorrowedBooks(userId);
+    }
+
 
 }
 
@@ -147,7 +151,7 @@ class LibraryManagementSystem {
 
     public void borrowBook(String bookId, String userId, Date borrowDate) {
         LibraryUser user = userIdToLibraryUser.get(userId);
-        if(!verifyUser(user))
+        if(!verifyUser(user, true))
             return;
 
         if(!bookIdToBook.containsKey(bookId)){
@@ -187,7 +191,7 @@ class LibraryManagementSystem {
 
     public void borrowBookCopy(String bookCopyId, String userId, Date borrowDate) {
         LibraryUser user = userIdToLibraryUser.get(userId);
-        if(!verifyUser(user))
+        if(!verifyUser(user, true))
             return;
 
         BookCopy bookCopy = copyIdToBookCopy.get(bookCopyId);
@@ -250,12 +254,36 @@ class LibraryManagementSystem {
         System.out.println("[INFO]    | Book copy ID: " + bookCopyId + " has been returned and is now available in Rack: " + bookCopy.getRackNumber());
     }
 
-    private boolean verifyUser(LibraryUser user){
+    public void printBorrowedBooks(String userId){
+        if(!verifyUser(userIdToLibraryUser.get(userId))){
+            return;
+        }
+
+        LibraryUser user = userIdToLibraryUser.get(userId);
+        List<BookCopy> borrowedBooks = user.getBorrowedBooks();
+        if(borrowedBooks.isEmpty()) {
+            System.out.println("[INFO]    | User " + user.getName() + " has no borrowed books.");
+            return;
+        }
+        System.out.println("[INFO]    | User " + user.getName() + " has borrowed the following books:");
+
+        for(BookCopy bookCopy: borrowedBooks){
+            System.out.println("[DETAILS] | Book Copy: "+ bookCopy.getCopyId()+ " "+ " Title: "+bookCopy.getTitle()+ " Due Date: "+ bookCopy.getDueDate());
+        }
+
+
+    }
+
+    private boolean verifyUser(LibraryUser user) {
+        return verifyUser(user, false);
+    }
+
+    private boolean verifyUser(LibraryUser user, Boolean checkLimit) {
         if(user == null) {
             System.out.println("[ERROR]   | Invalid User ID");
             return false;
         }
-        if(user.getBorrowedBooks() != null && user.getBorrowedBooks().size() >= borrowLimitPerUser) {
+        if(checkLimit && user.getBorrowedBooks() != null && user.getBorrowedBooks().size() >= borrowLimitPerUser) {
             System.out.println("[ERROR]   | Overlimit: User has reached the borrow limit");
             return false;
         }

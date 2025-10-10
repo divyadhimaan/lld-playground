@@ -1,52 +1,107 @@
-import java.util.Date;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class LibraryManagementSystemSimulation {
-    public static void main(String[] args) {
-        LibraryManagementInterface library = new LibraryManagementInterface("lib1", 10);
+    public static void main(String[] args) throws Exception {
+        Scanner scanner = new Scanner(System.in);
+        LibraryManagementInterface library = null;
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd");
 
-        // adding a book
-        library.addBook(
-                "B101",
-                "Design Patterns",
-                "Erich Gamma,Richard Helm,Ralph Johnson,John Vlissides",
-                "Addison-Wesley",
-                "C101,C102,C103,C104"
-        );
+        while (true) {
+            String input = scanner.nextLine().trim();
+            if (input.equalsIgnoreCase("exit")) break;
+            if (input.isEmpty()) continue;
 
-        library.addBook(
-                "B201",
-                "Book-sample1",
-                "Erich Gamma,Richard Helm,Ralph Johnson,John Vlissides",
-                "Addison-Wesley",
-                "C201,C202,C203,C204,C205,C206,C207,C208,C209,C210"
-        );
+            String[] parts = input.split(" ", 2);
+            String command = parts[0];
+            String[] params = (parts.length > 1) ? parts[1].split(" ") : new String[0];
 
-        library.removeBookCopy("C102");
-        library.removeBookCopy("C204");
-        library.removeBookCopy("C304"); // removing non-existing copy
+            try {
+                switch (command) {
+                    case "create_library":
+                        library = new LibraryManagementInterface(params[0], Integer.parseInt(params[1]));
+                        break;
 
-        library.addUser("user1", "Alice");
-        library.addUser("user2","Bob");
+                    case "add_book":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.addBook(params[0], params[1], params[2], params[3], params[4]);
+                        break;
 
-        library.borrowBook("B101", "user1", new Date("2024/06/01"));
-        library.borrowBook("B201", "user1", new Date("2024/06/01"));
-        library.borrowBook("B101", "user2", new Date("2024/06/02"));
+                    case "remove_book_copy":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.removeBookCopy(params[0]);
+                        break;
 
-        library.borrowBookCopy("C205", "user2", new Date("2024/06/02"));
-        library.borrowBookCopy("C206", "user1", new Date("2024/06/02"));
-        library.borrowBookCopy("C207", "user1", new Date("2024/06/02"));
-        library.borrowBookCopy("C207", "user2", new Date("2024/06/02")); //trying to borrow already borrowed copy
-        library.borrowBookCopy("C208", "user1", new Date("2024/06/02"));
-        library.borrowBookCopy("C209", "user1", new Date("2024/06/02")); //trying to borrow more than borrow limit
+                    case "add_user":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.addUser(params[0], params[1]);
+                        break;
 
-        library.returnBookCopy("C205");
-        library.returnBookCopy("C208");
+                    case "borrow_book":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.borrowBook(params[0], params[1], sdf.parse(params[2]));
+                        break;
 
-        library.printBorrowedBooks("user1");
-        library.printBorrowedBooks("user2");
-        library.printBorrowedBooks("user3"); // non-existing user
+                    case "borrow_book_copy":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.borrowBookCopy(params[0], params[1], sdf.parse(params[2]));
+                        break;
 
+                    case "return_book_copy":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.returnBookCopy(params[0]);
+                        break;
 
-//        library.displayRacks();
+                    case "print_borrowed":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.printBorrowedBooks(params[0]);
+                        break;
+
+                    case "search":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.searchBooks(params[0], params[1]);
+                        break;
+
+                    case "display_racks":
+                        if(library == null) {
+                            System.out.println("[ERROR]   | Library not created. Use create_library command first.");
+                            break;
+                        }
+                        library.displayRacks();
+                        break;
+
+                    default:
+                        System.out.println("[ERROR]   | Unknown command: " + command);
+                }
+            } catch (Exception e) {
+                System.out.println("[ERROR]   | Invalid parameters for command: " + command);
+            }
+        }
+
+        System.out.println("Exiting...");
     }
 }

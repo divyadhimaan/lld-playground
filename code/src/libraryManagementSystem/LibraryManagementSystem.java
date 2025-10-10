@@ -53,6 +53,9 @@ class LibraryManagementInterface {
         libraryManagementSystem.printBorrowedBooks(userId);
     }
 
+    public void searchBooks(String attribute, String value){
+        libraryManagementSystem.searchBooks(attribute, value);
+    }
 
 }
 
@@ -272,6 +275,120 @@ class LibraryManagementSystem {
         }
 
 
+    }
+
+    public void searchBooks(String attribute, String value){
+        if(!checkInputSearchParam(attribute, value)){
+            return;
+        }
+
+        switch(attribute){
+            case "book_id":
+                searchByBookId(value);
+                break;
+            case "author":
+                searchByAuthor(value);
+                break;
+            case "publisher":
+                searchByPublisher(value);
+                break;
+            case "title":
+                searchByTitle(value);
+                break;
+            default:
+                System.out.println("[ERROR]   | Invalid attribute. Allowed: book_id, author, publisher, title");
+        }
+    }
+
+    private void searchByBookId(String bookId) {
+        boolean found = false;
+
+        for(BookCopy bookCopy: copyIdToBookCopy.values()){
+            if(bookCopy.getBookId().equalsIgnoreCase(bookId)){
+                printBookCopyDetails(bookCopy);
+                found=true;
+            }
+        }
+
+        if(!found){
+            System.out.println("[ERROR]    | No books found for Book ID: " + bookId);
+        }
+    }
+
+    private void searchByTitle(String title){
+        boolean found = false;
+
+        for(BookCopy bookCopy: copyIdToBookCopy.values()){
+            if(bookCopy.getTitle().equalsIgnoreCase(title)){
+                printBookCopyDetails(bookCopy);
+                found=true;
+            }
+        }
+
+        if(!found){
+            System.out.println("[ERROR]    | No books found for title: " + title);
+        }
+    }
+
+    private void searchByAuthor(String author){
+        boolean found = false;
+
+        for(BookCopy bookCopy: copyIdToBookCopy.values()){
+            if(bookCopy.getAuthors() != null && bookCopy.getAuthors().stream().anyMatch(a->a.equalsIgnoreCase(author))){
+                printBookCopyDetails(bookCopy);
+                found=true;
+            }
+        }
+        if(!found){
+            System.out.println("[ERROR]    | No books found for Author: " + author);
+        }
+    }
+
+    private void searchByPublisher(String publisher){
+        boolean found = false;
+
+        for(BookCopy bookCopy: copyIdToBookCopy.values()){
+            if(bookCopy.getPublishingCompany() != null && bookCopy.getPublishingCompany().stream().anyMatch(p->p.equalsIgnoreCase(publisher))){
+                printBookCopyDetails(bookCopy);
+                found=true;
+            }
+        }
+        if(!found){
+            System.out.println("[ERROR]    | No books found for Publisher: " + publisher);
+        }
+    }
+
+    private void printBookCopyDetails(BookCopy copy) {
+        Book book = copy.getBook();
+        String authors = String.join(",", book.getAuthors());
+        String publishers = String.join(",", book.getPublishingCompany());
+        String borrowedById = (copy.getBorrowedBy() != null) ? copy.getBorrowedBy().getUserId() : "N/A";
+        String dueDate = "N/A";
+
+        for (LibraryBorrowedLog log : borrowedLogs) {
+            if (log.getBookCopy().equals(copy) && log.getReturnDate() == null) {
+                dueDate = log.getDueDate().toString();
+                break;
+            }
+        }
+
+        System.out.println("Book Copy: " +
+                copy.getCopyId() + " " +
+                book.getBookId() + " " +
+                book.getTitle() + " " +
+                authors + " " +
+                publishers + " " +
+                copy.getRackNumber() + " " +
+                borrowedById + " " +
+                dueDate);
+    }
+
+    private boolean checkInputSearchParam(String attribute, String value) {
+        if (attribute == null || value == null || value.trim().isEmpty()) {
+            System.out.println("[ERROR]   | Please provide a valid attribute and value");
+            return false;
+        }
+        return true;
     }
 
     private boolean verifyUser(LibraryUser user) {

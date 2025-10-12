@@ -92,3 +92,5 @@ Returns all matching book copies with their details.
 
 ---
 
+
+[Java Implementation](./../code/src/vendingMachine/Simulation/VendingMachineMain.java) | [Design Explanation](./../code/src/vendingMachine/vendingMachine.md)

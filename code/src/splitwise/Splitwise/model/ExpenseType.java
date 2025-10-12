@@ -1,4 +1,4 @@
-package Splitwise;
+package Splitwise.model;
 
 public enum ExpenseType {
     CREATED,

@@ -13,111 +13,68 @@
 ![Dependency-inversion.png](../../images/dependency-inversion.png)
   
 
+## Violation of DIP
 
-# Code Sample with Explanation
-
-## Without Dependency Inversion Principle (DIP) 
-  ```mermaid
-  classDiagram
-  
-  class WiredMouse {
-      +click(): void
-  }
-  
-  class WirelessMouse {
-      +click(): void
-  }
-  
-  class WiredKeyboard {
-      +type(): void
-  }
-  
-  class WirelessKeyboard {
-      +type(): void
-  }
-  
-  class Macbook {
-      -wiredMouse2: WiredMouse2
-      -wiredKeyboard2: WiredKeyboard2
-      +Macbook()
-      +useDevice(): void
-  }
-  
-  class DependencyInversionViolation {
-      +main(String[]): void
-  }
-  
-  DependencyInversionViolation --> Macbook
-  Macbook --> WiredMouse2
-  Macbook --> WiredKeyboard2
-  
-  ```
-- Direct Dependency on Concrete Classes:
-  The `Macbook` class is tightly coupled to `WiredMouse2` and `WiredKeyboard2`. It directly creates instances of these concrete classes inside its constructor.
-  If you wanted to use a `WirelessMouse2` or a `WirelessKeyboard2`, you would need to modify the `Macbook` class, breaking the **Open/Closed Principle** (part of SOLID principles).
-- Low-level classes (WiredMouse2, WirelessMouse2) and high-level class (Macbook) are coupled.
-  This violates the _Dependency Inversion Principle_ because high-level modules (like Macbook) should not depend on low-level modules (like WiredMouse2, WirelessMouse2, etc.). Instead, both should depend on abstractions.
-
--  [Checkout Code for Violation of DIP](../../code/solidPrinciples/DependencyInversion/DependencyInversionViolation.java):
-
-## With Dependency Inversion Principle (DIP)
-```mermaid
-classDiagram
-
-class Mouse {
-    <<interface>>
-    +click(): void
+```java
+class MySQLDatabase {
+    public void connect() {
+        System.out.println("Connecting to MySQL");
+    }
 }
 
-class Keyboard {
-    <<interface>>
-    +type(): void
-}
+class UserService {
+    private MySQLDatabase database = new MySQLDatabase(); // high-level depends on low-level
 
-class WiredMouse2 {
-    +click(): void
+    public void saveUser() {
+        database.connect();
+        System.out.println("Saving user");
+    }
 }
-Mouse <|.. WiredMouse2
-
-class WirelessMouse2 {
-    +click(): void
-}
-Mouse <|.. WirelessMouse2
-
-class WiredKeyboard2 {
-    +type(): void
-}
-Keyboard <|.. WiredKeyboard2
-
-class WirelessKeyboard2 {
-    +type(): void
-}
-Keyboard <|.. WirelessKeyboard2
-
-class Macbook2 {
-    -mouse: Mouse
-    -keyboard: Keyboard
-    +Macbook2(mouse: Mouse, keyboard: Keyboard)
-    +useDevice(): void
-}
-
-class DependencyInversionFixed {
-    +main(String[]): void
-}
-
-DependencyInversionFixed --> Macbook2
 
 ```
-- Solution:
-  - **Abstraction Interfaces**:
-  
-    `Mouse` and `Keyboard` are interfaces that define the expected behavior (click and type methods).
-  - **Concrete Implementations**:
-  
-    `WiredMouse2`, `WirelessMouse2`, `WiredKeyboard2`, and `WirelessKeyboard2` are the concrete classes implementing the `Mouse` and `Keyboard` interfaces.
-  - **Macbook Class**:
-  
-    The `Macbook` class depends on abstractions (Mouse and Keyboard interfaces), not on concrete classes. This is key to the Dependency Inversion Principle.
-    The dependencies (mouse and keyboard) are injected via the _**constructor (Dependency Injection)**_.
 
-  - [Checkout Code using DIP](../../code/solidPrinciples/DependencyInversion/DependencyInversionFixed.java)
+### Problem:
+- UserService (high-level module) depends directly on MySQLDatabase (low-level module).
+- Hard to change the database or unit test.
+- Violates DIP: High-level modules should not depend on low-level modules; both should depend on abstractions.
+
+## Following DIP
+```java
+interface Database {
+    void connect();
+}
+
+class MySQLDatabase implements Database {
+    public void connect() {
+        System.out.println("Connecting to MySQL");
+    }
+}
+
+class UserService {
+    private Database database;  // depends on abstraction
+
+    public UserService(Database database) {
+        this.database = database;
+    }
+
+    public void saveUser() {
+        database.connect();
+        System.out.println("Saving user");
+    }
+}
+
+// Usage
+class Main {
+    public static void main(String[] args) {
+        Database db = new MySQLDatabase();
+        UserService service = new UserService(db);
+        service.saveUser();
+    }
+}
+
+```
+
+### Benefits:
+- UserService now depends on abstraction (Database) instead of a concrete class. 
+- Easy to swap database types (e.g., PostgreSQLDatabase) without modifying UserService. 
+- Better testability and flexibility.

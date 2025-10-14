@@ -9,70 +9,57 @@
 ![Liskov Substitution Principle.png](../../images/liskov-substitution.png)
   
 
+## Violation of LSP
 
-# Code Sample with Explanation
-## Without Liskov Substitution Principle [LSP]
-```mermaid
-classDiagram
-
+```java
 class Bird {
-    <<abstract>>
-    +fly(): void
+    public void fly() {
+        System.out.println("I can fly");
+    }
 }
 
-class Sparrow {
-    +fly(): void
+class Ostrich extends Bird {
+    @Override
+    public void fly() {
+        throw new UnsupportedOperationException("Ostriches can't fly!");
+    }
 }
-Bird <|-- Sparrow
-
-class Penguin {
-    +fly(): void
-}
-Bird <|-- Penguin
-
-class LiskovSubstitutionViolation {
-    +main(String[]): void
-}
-
-LiskovSubstitutionViolation --> Bird
 
 ```
-- The Penguin class extends Bird but does not support fly(), violating LSP.
-- A better approach would be segregating the hierarchy.
-- [Code Violating LSP](../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionViolation.java)
-## With Liskov Substitution Principle [LSP]
-```mermaid
-classDiagram
 
-class Bird2 {
-    <<abstract>>
+### Problem:
+- Ostrich is a Bird but cannot fly.
+- Code that expects any Bird to fly will break.
+- Violates LSP: subclasses should be replaceable without altering program correctness.
+
+## Following LSP
+
+```java
+abstract class Bird {}
+
+interface Flyable {
+    void fly();
 }
 
-class FlyingBird2 {
-    <<abstract>>
-    +fly(): void
-}
-Bird2 <|-- FlyingBird2
-
-class NonFlyingBird2 {
-    <<abstract>>
-}
-Bird2 <|-- NonFlyingBird2
-
-class Sparrow2 {
-    +fly(): void
-}
-FlyingBird2 <|-- Sparrow2
-
-class Penguin2
-NonFlyingBird2 <|-- Penguin2
-
-class LiskovSubstitutionFixed {
-    +main(String[]): void
+class Sparrow extends Bird implements Flyable {
+    public void fly() {
+        System.out.println("Sparrow is flying");
+    }
 }
 
-LiskovSubstitutionFixed --> FlyingBird2
-LiskovSubstitutionFixed --> NonFlyingBird2
+class Ostrich extends Bird {
+    // No fly method, behaves correctly as Bird
+}
+
+class BirdSimulator {
+    public void makeItFly(Flyable bird) {
+        bird.fly();
+    }
+}
 
 ```
-Fixed version: [Refer](../../code/solidPrinciples/LiskovSubstitution/LiskovSubstitutionFixed.java)
+
+### Benefits:
+- Only birds that can actually fly implement Flyable.
+- No unexpected exceptions.
+- Subtypes can safely replace their base types.

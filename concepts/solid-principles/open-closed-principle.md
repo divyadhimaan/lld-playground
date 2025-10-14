@@ -9,139 +9,71 @@
 ![open-close.png](../../images/open-closed.png)
   
 
+## Violation of OCP
 
-
-## Without Open Closed Principle (OCP)
-Checkout the existing code for calculating tax on an order in a shopping cart application.
-- [Existing Code](../../code/solidPrinciples/OpenClosed/OpenClosedViolation.java)
-```mermaid
-classDiagram
-
-class TaxCalculator {
-<<interface>>
-+calculateTax(double): double
+```java
+class Rectangle {
+    public double length, width;
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
 }
 
-class OrderItem {
--name: String
--price: double
--quantity: int
-+OrderItem(name: String, price: double, quantity: int)
-+getPrice(): double
-+getQuantity(): int
-+toString(): String
+class AreaCalculator {
+    public double calculateArea(Object shape) {
+        if (shape instanceof Rectangle) {
+            Rectangle r = (Rectangle) shape;
+            return r.length * r.width;
+        }
+        // Later, adding more shapes will require modifying this method
+        return 0;
+    }
 }
-
-class Order {
--orderId: String
--customerEmail: String
--items: List~OrderItem~
-+Order(orderId: String, customerEmail: String)
-+addItem(item: OrderItem): void
-+getItems(): List~OrderItem~
-+processOrder(taxCalculator: TaxCalculator): double
-}
-
-class OrderCalculatorOCP {
--TAX_RATE: double
-+calculateTotal(order: Order): double
-}
-
-class OpenClosedViolation {
-+main(String[]): void
-}
-
-Order --> "1..*" OrderItem
-OpenClosedViolation --> Order
-OpenClosedViolation --> OrderCalculatorOCP
-Order --> TaxCalculator
 
 ```
-> Feature Request: We need a different tax calculation (e.g., GST, VAT, regional tax rates)
 
-According to the Open Closed Principle, we should not modify the existing code (OpenClosedViolation.java) to add new tax calculation logic. Instead, we will create new implementations of TaxCalculator.
-## With Open Closed Principle (OCP)
+### Problem:
+- AreaCalculator is not closed for modification.
+- Every time we add a new shape (e.g., Circle), we must modify the calculateArea method.
 
-- [OCP following code](../../code/solidPrinciples/OpenClosed/OpenClosedFixed.java)
-```mermaid
-classDiagram
 
-class TaxCalculator2 {
-    <<interface>>
-    +calculateTax(double): double
+## Following OCP
+
+```java
+interface Shape {
+    double area();
 }
 
-class ReducedTaxCalculator2 {
-    +calculateTax(double): double
-}
-TaxCalculator2 <|.. ReducedTaxCalculator2
-
-class StandardTaxCalculator2 {
-    +calculateTax(double): double
-}
-TaxCalculator2 <|.. StandardTaxCalculator2
-
-class OrderItem2 {
-    -name: String
-    -price: double
-    -quantity: int
-    +OrderItem2(name, price, quantity)
-    +getPrice(): double
-    +getQuantity(): int
-    +toString(): String
+class Rectangle implements Shape {
+    public double length, width;
+    public Rectangle(double length, double width) {
+        this.length = length;
+        this.width = width;
+    }
+    public double area() {
+        return length * width;
+    }
 }
 
-class Order2 {
-    -orderId: String
-    -customerEmail: String
-    -items: List~OrderItem2~
-    +Order2(orderId: String, customerEmail: String)
-    +addItem(item: OrderItem2): void
-    +getItems(): List~OrderItem2~
-    +processOrder(taxCalculator: TaxCalculator2): double
+class Circle implements Shape {
+    public double radius;
+    public Circle(double radius) {
+        this.radius = radius;
+    }
+    public double area() {
+        return Math.PI * radius * radius;
+    }
 }
 
-class OrderCalculatorOCP2 {
-    -TAX_RATE: double
-    +calculateTotal(order: Order2): double
+class AreaCalculator {
+    public double calculateArea(Shape shape) {
+        return shape.area();  // Works for any new Shape without modification
+    }
 }
-
-class OpenClosedFixed {
-    +main(String[]): void
-}
-
-Order2 --> "1..*" OrderItem2
-Order2 --> TaxCalculator2
-OpenClosedFixed --> Order2
-OpenClosedFixed --> OrderCalculatorOCP2
-OpenClosedFixed --> ReducedTaxCalculator2
-OpenClosedFixed --> StandardTaxCalculator2
 
 ```
-1. **Interface-Based Design** (TaxCalculator)
-    - The TaxCalculator interface defines a contract for tax calculation.
-    - The StandardTaxCalculator implements this interface with a 15% tax rate. 
-2. Extending Functionality Without Modification
-   - The Order class depends on the TaxCalculator abstraction rather than a concrete implementation.
-   - If we want to apply a different tax strategy (e.g., ReducedTaxCalculator or NoTaxCalculator), we simply create new classes implementing TaxCalculator instead of modifying Order.
-   
 
-
-   - **Example of Extension**: 
-   Suppose a new tax rule requires a reduced tax rate for certain products. We can create a new class:
-      ```java
-      class ReducedTaxCalculator implements TaxCalculator {
-          private static final double REDUCED_TAX_RATE = 0.05;
-          
-          public double calculateTax(double amount) {
-          return amount * REDUCED_TAX_RATE;
-          }
-      }
-                
-      ```
-        
-   - Now, in Main, we can use:
-      ```java
-      TaxCalculator taxCalculator = new ReducedTaxCalculator();
-     ```
-      No changes are made to the Order class, making the system open for extension but closed for modification.
+## Benefits:
+- AreaCalculator is open for extension (new shapes can be added) but closed for modification.
+- Adding a Triangle just requires creating a new class implementing Shape — no need to touch AreaCalculator.

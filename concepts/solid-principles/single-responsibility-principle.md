@@ -10,7 +10,7 @@
   
 
 
-## Principle Violation
+## Violation of SRP
 
 ```java
 class User {

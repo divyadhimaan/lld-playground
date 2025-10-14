@@ -1,3 +1,5 @@
+package factory;
+
 // Product interface
 interface Pizza {
     void prepare();

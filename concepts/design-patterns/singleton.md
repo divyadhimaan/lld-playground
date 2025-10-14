@@ -31,8 +31,33 @@
 
 ## Violation Code
 
-[Printer Spooler - Violation Code](../../code/designPatterns/singleton/SingletonViolation.java)
+```java
+package singleton;
 
+
+class PrinterSpooler {
+    public PrinterSpooler() {
+        System.out.println("Spooler started");
+    }
+
+    public void addPrintJob(String job) {
+        System.out.println("Added print job: " + job);
+    }
+}
+
+public class SingletonViolation {
+    public static void main(String[] args) {
+        PrinterSpooler spooler1 = new PrinterSpooler();
+        spooler1.addPrintJob("Doc1");
+
+        PrinterSpooler spooler2 = new PrinterSpooler();
+        spooler2.addPrintJob("Doc2");
+
+        // ❌ Two separate instances created!
+    }
+}
+
+```
 ```mermaid
 classDiagram
 
@@ -58,8 +83,46 @@ SingletonViolation --> PrinterSpooler : creates 2 instances
 
 ## Enhanced Code
 
-[Printer Spooler - Example](../../code/designPatterns/singleton/SingletonSample.java)
+```java
+package singleton;
 
+
+// Singleton class
+class PrinterSpooler2 {
+    private static PrinterSpooler2 instance;
+
+    // Private constructor to prevent instantiation
+    private PrinterSpooler2() {
+        System.out.println("Spooler initialized");
+    }
+
+    // Thread-safe, lazy initialization
+    public static synchronized PrinterSpooler2 getInstance() {
+        if (instance == null) {
+            instance = new PrinterSpooler2();
+        }
+        return instance;
+    }
+
+    public void addPrintJob(String job) {
+        System.out.println("Added print job: " + job);
+    }
+}
+
+// Usage
+public class SingletonSample {
+    public static void main(String[] args) {
+        PrinterSpooler2 spooler1 = PrinterSpooler2.getInstance();
+        spooler1.addPrintJob("Doc1");
+
+        PrinterSpooler2 spooler2 = PrinterSpooler2.getInstance();
+        spooler2.addPrintJob("Doc2");
+
+        System.out.println("spooler1 == spooler2: " + (spooler1 == spooler2)); // true ✅
+    }
+}
+
+```
 ```mermaid
 classDiagram
 

@@ -42,8 +42,20 @@ The destination remains the same, but the strategy to reach it changes based on 
 
 ## Violation Code
 
-[Payment Strategy - Violation Code](../../code/designPatterns/strategy/StrategyViolation.java)
+```java
+class PaymentService {
+    public void pay(String type) {
+        if (type.equals("credit")) {
+            System.out.println("Paid using Credit Card");
+        } else if (type.equals("paypal")) {
+            System.out.println("Paid using PayPal");
+        } else if (type.equals("upi")) {
+            System.out.println("Paid using UPI");
+        }
+    }
+}
 
+```
 ```mermaid
 classDiagram
 
@@ -61,17 +73,59 @@ StrategyViolation --> ShoppingCart2
 
 ```
 
-### Issues with above code
-1. Violates Open/Closed Principle - Adding new payment methods requires modifying existing code
-2. All payment logic is tightly coupled in one class
-3. Conditional complexity increases with each new payment method
-4. Hard to test individual payment methods in isolation
-5. No polymorphism - uses string-based switching instead
-6. Prone to runtime errors with invalid payment method strings
+### Problem:
+- Every time a new payment method is added, we must modify PaymentService.
+- This violates Open/Closed Principle and makes code less maintainable.
 
 ## Enhanced Code 
 
-[Payment Strategy - Example](../../code/designPatterns/strategy/StrategySample.java)
+```java
+// Strategy interface
+interface PaymentStrategy {
+    void pay();
+}
+
+// Concrete strategies
+class CreditCardPayment implements PaymentStrategy {
+    public void pay() { System.out.println("Paid using Credit Card"); }
+}
+
+class PayPalPayment implements PaymentStrategy {
+    public void pay() { System.out.println("Paid using PayPal"); }
+}
+
+class UPIPayment implements PaymentStrategy {
+    public void pay() { System.out.println("Paid using UPI"); }
+}
+
+// Context class
+class PaymentService {
+    private PaymentStrategy strategy;
+
+    public PaymentService(PaymentStrategy strategy) {
+        this.strategy = strategy;
+    }
+
+    public void makePayment() {
+        strategy.pay();
+    }
+}
+
+// Usage
+class Main {
+    public static void main(String[] args) {
+        PaymentService service = new PaymentService(new PayPalPayment());
+        service.makePayment(); // Output: Paid using PayPal
+    }
+}
+
+```
+
+### Benefits:
+- Behavior (payment method) is easily interchangeable at runtime.
+- New strategies (e.g., CryptoPayment) can be added without modifying existing code.
+- Promotes composition over inheritance.
+
 ```mermaid
 classDiagram
 

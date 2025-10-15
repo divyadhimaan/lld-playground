@@ -29,6 +29,15 @@
 ## Class Structure
 ![single-class-structure.png](../../images/structure/singleton.png)
 
+### Why `synchronized` is used?
+synchronized ensures thread safety. When multiple threads try to access `getInstance()` at the same time:
+- Without synchronized:
+  - Two threads could both see instance == null and create two different instances simultaneously — breaking the Singleton guarantee.
+- With synchronized:
+  - Only one thread at a time can execute the method.
+  - Other threads wait until the current one finishes creating the instance.
+This prevents race conditions and ensures that only one instance is created, even under concurrent access.
+
 ## Violation Code
 
 ```java

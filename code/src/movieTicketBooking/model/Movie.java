@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Movie {
-    private final AtomicInteger id= new AtomicInteger();
+    private static final AtomicInteger id = new AtomicInteger(0);
+    @Getter
     private final String movieId;
     @Getter
     private final String movieName;

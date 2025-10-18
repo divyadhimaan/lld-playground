@@ -3,6 +3,8 @@ package controller;
 
 import service.TicketBookingService;
 
+import java.text.ParseException;
+
 //facade layer
 public class TicketBookingController {
     private final TicketBookingService service;
@@ -16,5 +18,17 @@ public class TicketBookingController {
 
     public String addTheatre(String userId, String theatreName){
         return service.registerTheatre(userId, theatreName);
+    }
+
+    public void addShow(String userId, String theatreId, String movieName, String showDate, String startTime, String endTime) throws ParseException {
+        service.addShowToTheatre(userId, theatreId, movieName, showDate, startTime, endTime);
+    }
+
+    public void displayUpcomingShowsForTheatre(String theatreId){
+        service.displayShowForTheatre(theatreId);
+    }
+
+    public void displayAllUpcomingShows(){
+        service.displayAllUpcomingShows();
     }
 }

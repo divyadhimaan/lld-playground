@@ -2,10 +2,19 @@ package service;
 
 import factory.TheatreFactory;
 import factory.UserFactory;
+import model.Movie;
+import model.Show;
 import model.Theatre;
 import model.User;
 import repository.TheatreInventory;
 import repository.UserInventory;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class TicketBookingService {
     private static TicketBookingService instance;
@@ -60,7 +69,7 @@ public class TicketBookingService {
         return theatre.getTheatreId();
     }
 
-    public void AddShowToTheatre(String userId, String theatreId, String MovieId, String showDate, String startTime, String endTime){
+    public void addShowToTheatre(String userId, String theatreId, String movieName, String showDate, String startTime, String endTime) throws ParseException {
         User user = getUser(userId);
         if(nullCheckUser(user)){
             return;
@@ -71,7 +80,32 @@ public class TicketBookingService {
         if(nullCheckTheatre(theatre)){
             return;
         }
-        
+
+        Movie movie = theatreInventory.getMovieByName(movieName) != null ? theatreInventory.getMovieByName(movieName) : new Movie(movieName);
+
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date showDateParsed = sdf.parse(showDate);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+
+        Show show = new Show(showDateParsed, LocalDateTime.parse(startTime, formatter), LocalDateTime.parse(endTime, formatter));
+
+        theatreInventory.addShowToTheatre(theatre, movie, show);
+        System.out.println("[INFO]: Show added to theatre "+ theatre.getTheatreName());
+
+    }
+
+    public void displayShowForTheatre(String theatreId){
+        Theatre theatre = getTheatre(theatreId);
+        if(nullCheckTheatre(theatre)){
+            return;
+        }
+
+        theatreInventory.displayUpcomingShowsForTheatre(theatre);
+    }
+
+    public void displayAllUpcomingShows(){
+        theatreInventory.displayAllUpcomingShows();
     }
 
     private User getUser(String userId){
@@ -80,6 +114,7 @@ public class TicketBookingService {
     private Theatre getTheatre(String theatreId){
         return theatreInventory.getTheatreById(theatreId);
     }
+
     private boolean nullCheckUser(User user){
         if(user==null){
             System.out.println("[ERROR]: Invalid user.");

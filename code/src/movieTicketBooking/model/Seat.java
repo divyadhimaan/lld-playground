@@ -3,7 +3,7 @@ package model;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Seat {
-    private final AtomicInteger id= new AtomicInteger();
+    private static final AtomicInteger id = new AtomicInteger(0);
     private String seatId;
     private SeatType seatType;
 

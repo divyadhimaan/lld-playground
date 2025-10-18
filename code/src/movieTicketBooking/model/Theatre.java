@@ -2,13 +2,14 @@ package model;
 
 import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Theatre {
-    private final AtomicInteger id= new AtomicInteger();
+    private static final AtomicInteger id = new AtomicInteger(0);
     @Getter
     private final String theatreId;
     @Getter
@@ -38,7 +39,7 @@ public class Theatre {
         if(showsAvailable.containsKey(movie)){
             showsAvailable.get(movie).add(show);
         }
-        showsAvailable.put(movie,show);
+        showsAvailable.put(movie,List.of(show));
     }
 
     public void displayInfo() {
@@ -63,6 +64,35 @@ public class Theatre {
         }
         System.out.println("=======================");
     }
+
+    public void displayUpcomingShows() {
+        System.out.println("===== Upcoming Shows in " + theatreName + " =====");
+
+        LocalDateTime now = LocalDateTime.now();
+        boolean found = false;
+
+        for (Map.Entry<Movie, List<Show>> entry : showsAvailable.entrySet()) {
+            Movie movie = entry.getKey();
+            List<Show> shows = entry.getValue();
+
+            for (Show show : shows) {
+                if (show.getStartTime().isAfter(now)) {
+                    if (!found) found = true;
+                    System.out.println("Movie: " + movie.getMovieName() +
+                            " | Show ID: " + show.getShowId() +
+                            " | Start: " + show.getStartTime() +
+                            " | End: " + show.getEndTime());
+                }
+            }
+        }
+
+        if (!found) {
+            System.out.println("No upcoming shows found.");
+        }
+
+        System.out.println("======================================");
+    }
+
 
 
 }

@@ -6,7 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
 
-    private final AtomicInteger id= new AtomicInteger();
+    private static final AtomicInteger id = new AtomicInteger(0);
     @Getter
     private final String userId;
     @Getter

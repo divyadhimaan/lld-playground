@@ -12,27 +12,15 @@
 8. The system should be scalable to handle a large number of concurrent users and bookings.
 
 
-## Observations
+## Summary
 
-### Models
-1. User (Admin/Regular):
-   - Admin User: CRUD on (Movies/Shows/Theatres/Seating Arrangement)
-   - Regular User: Select Booking
-2. Movie:
-    - List of theatres
-3. Theatre
-   - Number of Screens (For simplicity single screen)
-   - Number of shows (with timing)
-   - Seating Arrangement (seatType -> pricing Map)
-   - pricing (set by admin user)
-4. Seats 
-   - Normal
-   - Premium
-5. Bookings
-   - User
-   - Timing
-   - Theatre
-   - Seats
-   - Movie
-6. Show
-   - Timings
+- Model layer: `User`, `Theatre`, `Movie`, `Show`, `Seat`, `Booking`, `Payment`, `enums`.
+- Repository layer: `UserInventory`, `TheatreInventory`.
+- Service layer: `TicketBookingService` as a singleton facade and `PaymentProcessor`.
+- Controller layer: `TicketBookingController`, `BookingManager`.
+- Factory layer: `UserFactory`, `TheatreFactory`.
+- Strategy pattern for payment: `CreditCardPayment`, `UpiPayment`.
+- CLI simulation: `TicketBookingSimulation` class with admin and customer menus.
+
+[Java Implementation](./../code/src/movieTicketBooking/app/TicketBookingSimulation.java) | [Design Explanation](./../code/src/movieTicketBooking/movieTicketBooking.md)
+

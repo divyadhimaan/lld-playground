@@ -2,10 +2,7 @@ package service;
 
 import factory.TheatreFactory;
 import factory.UserFactory;
-import model.Movie;
-import model.Show;
-import model.Theatre;
-import model.User;
+import model.*;
 import repository.TheatreInventory;
 import repository.UserInventory;
 
@@ -14,7 +11,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Scanner;
 
 public class TicketBookingService {
     private static TicketBookingService instance;
@@ -106,6 +105,58 @@ public class TicketBookingService {
 
     public void displayAllUpcomingShows(){
         theatreInventory.displayAllUpcomingShows();
+    }
+
+    public void booking(){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Initiating Movie Booking....");
+
+        //Pick movie
+        System.out.println("Pick a movie from following: ");
+        theatreInventory.displayAllUpcomingMovies();
+        String selectedMovieName = scanner.nextLine();
+
+        Movie selectedMovie = theatreInventory.getMovieByName(selectedMovieName);
+        if(selectedMovie==null){
+            System.out.println("Invalid Selection");
+            return;
+        }
+        System.out.println("Selected Movie: "+selectedMovie.getMovieName());
+        Selection selection = new Selection(selectedMovie);
+
+
+
+        //Pick theatre
+        System.out.println("Pick a theatre from following: ");
+        theatreInventory.displayTheatresAndShowsForMovie(selection);
+        String selectedTheatreName = scanner.nextLine();
+
+        Theatre selectedTheatre = theatreInventory.getTheatreByName(selectedTheatreName);
+        if (selectedTheatre == null) {
+            System.out.println("Invalid theatre selection.");
+            return;
+        }
+
+        selection.setSelectedTheatre(selectedTheatre);
+
+
+        //Pick Show
+        System.out.println("Pick a show from following (Enter show id): ");
+        selection.displayShowsForSelectedTheatre();
+        String selectedShowId = scanner.nextLine();
+
+        Show selectedShow = theatreInventory.getShowById(selectedTheatre, selectedShowId);
+        if (selectedShow == null) {
+            System.out.println("Invalid Show selection.");
+            return;
+        }
+
+        selection.setSelectedShow(selectedShow);
+
+        selection.displaySelection();
+
+
+
     }
 
     private User getUser(String userId){

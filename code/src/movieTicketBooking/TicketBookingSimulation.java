@@ -1,6 +1,7 @@
 import controller.TicketBookingController;
 
 import java.text.ParseException;
+import java.util.Scanner;
 
 public class TicketBookingSimulation {
     public static void main(String[] args) {
@@ -27,6 +28,8 @@ public class TicketBookingSimulation {
         controller.registerUser("Customer", "Bob", "mypassword");
 
         controller.displayAllUpcomingShows();
+
+        controller.selectShow();
 
 
     }

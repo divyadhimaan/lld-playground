@@ -4,6 +4,7 @@ package controller;
 import service.TicketBookingService;
 
 import java.text.ParseException;
+import java.util.Scanner;
 
 //facade layer
 public class TicketBookingController {
@@ -30,5 +31,9 @@ public class TicketBookingController {
 
     public void displayAllUpcomingShows(){
         service.displayAllUpcomingShows();
+    }
+
+    public void selectShow(){
+        service.booking();
     }
 }

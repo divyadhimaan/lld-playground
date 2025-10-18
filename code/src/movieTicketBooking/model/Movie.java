@@ -16,7 +16,7 @@ public class Movie {
     private final List<Theatre> theatres;
 
     public Movie(String name){
-        this.movieId = name + String.valueOf(id.incrementAndGet());
+        this.movieId =  String.valueOf(id.incrementAndGet());
         this.movieName = name;
         this.theatres = new ArrayList<>();
     }

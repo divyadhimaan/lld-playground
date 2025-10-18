@@ -3,22 +3,18 @@ package model;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-
+@Getter
 public class Theatre {
     private static final AtomicInteger id = new AtomicInteger(0);
-    @Getter
     private final String theatreId;
-    @Getter
     private final String theatreName;
-    @Getter
     private final int numberOfScreens;
-    @Getter
     private final Map<Movie, List<Show>> showsAvailable;
-    @Getter
     private final User registeredBy;
 
     public Theatre(String name, User registeredByUser){
@@ -39,7 +35,7 @@ public class Theatre {
         if(showsAvailable.containsKey(movie)){
             showsAvailable.get(movie).add(show);
         }
-        showsAvailable.put(movie,List.of(show));
+        showsAvailable.computeIfAbsent(movie, k -> new ArrayList<>()).add(show);
     }
 
     public void displayInfo() {

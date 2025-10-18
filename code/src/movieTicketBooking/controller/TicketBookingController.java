@@ -1,9 +1,11 @@
 package controller;
 
 
+import model.Seat;
 import service.TicketBookingService;
 
 import java.text.ParseException;
+import java.util.List;
 import java.util.Scanner;
 
 //facade layer
@@ -33,7 +35,23 @@ public class TicketBookingController {
         service.displayAllUpcomingShows();
     }
 
-    public void selectShow(){
-        service.booking();
+    public void bookShow(String userId){
+        service.booking(userId);
+    }
+
+    public void getBookingsForUser(String userId){
+        service.getBookingsForUser(userId);
+    }
+
+    public void removeMovie(String userId, String theatreId, String movieName) {
+        service.removeMovie(userId, theatreId, movieName);
+    }
+
+    public boolean removeShow(String userId, String theatreId, String movieName, String showId) {
+        return service.removeShow(userId, theatreId, movieName, showId);
+    }
+
+    public void updateSeating(String userId, String theatreId, String movieName, String showId, List<Seat> newSeats) {
+        service.updateSeating(userId, theatreId, movieName, showId, newSeats);
     }
 }

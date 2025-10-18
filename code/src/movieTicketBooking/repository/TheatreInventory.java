@@ -1,10 +1,7 @@
 package repository;
 
 import lombok.Getter;
-import model.Movie;
-import model.Selection;
-import model.Show;
-import model.Theatre;
+import model.*;
 
 import java.time.LocalDateTime;
 import java.util.*;
@@ -66,6 +63,51 @@ public class TheatreInventory {
     public void addShowToTheatre(Theatre theatre, Movie movie, Show show){
         movieMap.put(movie.getMovieName().toLowerCase(), movie);
         theatre.addShow(movie, show);
+    }
+
+    public void removeMovieFromTheatre(Theatre theatre, String movieName) {
+        if (theatre == null || movieName == null) return;
+
+        Movie movie = theatre.getShowsAvailable().keySet().stream()
+                .filter(m -> m.getMovieName().equalsIgnoreCase(movieName))
+                .findFirst().orElse(null);
+
+        if (movie != null) {
+            theatre.getShowsAvailable().remove(movie);
+            System.out.println("[INFO]: Movie '" + movieName + "' removed from theatre '" + theatre.getTheatreName() + "'");
+        } else {
+            System.out.println("[ERROR]: Movie not found in theatre.");
+        }
+    }
+
+
+    public boolean removeShowFromTheatre(Theatre theatre, String movieName, String showId) {
+        if (theatre == null || movieName == null || showId == null) return false;
+
+        Movie movie = theatre.getShowsAvailable().keySet().stream()
+                .filter(m -> m.getMovieName().equalsIgnoreCase(movieName))
+                .findFirst().orElse(null);
+        Boolean removedShow = false;
+        if (movie != null && theatre.getShowsAvailable().containsKey(movie)) {
+            List<Show> shows = theatre.getShowsAvailable().get(movie);
+            shows.removeIf(show -> show.getShowId().equals(showId));
+            removedShow = true;
+            System.out.println("[INFO]: Show " + showId + " removed from movie '" + movieName + "'");
+        } else {
+            System.out.println("[ERROR]: Movie or show not found.");
+        }
+        return removedShow;
+    }
+
+    public void updateSeatingForShow(Theatre theatre, String movieName, String showId, List<Seat> newSeats) {
+        Show show = getShowById(theatre, showId);
+        if (show != null) {
+            show.getSeats().clear();
+            show.getSeats().addAll(newSeats);
+            System.out.println("[INFO]: Seating updated for Show " + showId);
+        } else {
+            System.out.println("[ERROR]: Show not found.");
+        }
     }
 
     public void displayUpcomingShowsForTheatre(Theatre theatre){

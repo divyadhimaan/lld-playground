@@ -1,10 +1,14 @@
 package service;
 
+import controller.BookingManager;
 import factory.TheatreFactory;
 import factory.UserFactory;
 import model.*;
 import repository.TheatreInventory;
 import repository.UserInventory;
+import strategy.CreditCardPayment;
+import strategy.PaymentStrategy;
+import strategy.UpiPayment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -13,6 +17,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 public class TicketBookingService {
@@ -21,6 +26,7 @@ public class TicketBookingService {
     private final UserInventory userInventory;
     private final TheatreFactory theatreFactory;
     private final TheatreInventory theatreInventory;
+    private final BookingManager bookingManager;
 
 
     TicketBookingService(){
@@ -28,6 +34,7 @@ public class TicketBookingService {
         this.userInventory = UserInventory.getInstance();
         this.theatreFactory = new TheatreFactory();
         this.theatreInventory = TheatreInventory.getInstance();
+        this.bookingManager = new BookingManager(theatreInventory);
     }
 
     public static synchronized TicketBookingService getInstance(){
@@ -73,7 +80,9 @@ public class TicketBookingService {
         if(nullCheckUser(user)){
             return;
         }
-        userInventory.verifyUserAsAdmin(user);
+        if(!userInventory.verifyUserAsAdmin(user)){
+            System.out.println("[ERROR]: User doesn't have access to add Show");
+        }
 
         Theatre theatre = getTheatre(theatreId);
         if(nullCheckTheatre(theatre)){
@@ -91,7 +100,21 @@ public class TicketBookingService {
 
         theatreInventory.addShowToTheatre(theatre, movie, show);
         System.out.println("[INFO]: Show added to theatre "+ theatre.getTheatreName());
+        displayAddedShowDetails(theatre, movie, show);
+//        show.displayShowDetails();
+    }
 
+    private void displayAddedShowDetails(Theatre theatre, Movie movie, Show show) {
+        System.out.println("===== Show Added Successfully =====");
+        System.out.println("Theatre: " + theatre.getTheatreName() + " (ID: " + theatre.getTheatreId() + ")");
+        System.out.println("Movie  : " + movie.getMovieName());
+        System.out.println("Show ID: " + show.getShowId() +
+                " | Date: " + show.getShowDate() +
+                " | Start: " + show.getStartTime() +
+                " | End: " + show.getEndTime());
+        System.out.println("Seats Available:");
+        show.displaySeats();
+        System.out.println("===================================");
     }
 
     public void displayShowForTheatre(String theatreId){
@@ -103,60 +126,58 @@ public class TicketBookingService {
         theatreInventory.displayUpcomingShowsForTheatre(theatre);
     }
 
+    public void removeMovie(String userId, String theatreId, String movieName) {
+        User user = getUser(userId);
+        if (nullCheckUser(user) || !userInventory.verifyUserAsAdmin(user)) return;
+
+        Theatre theatre = getTheatre(theatreId);
+        if (nullCheckTheatre(theatre)) return;
+
+        theatreInventory.removeMovieFromTheatre(theatre, movieName);
+    }
+
+    public boolean removeShow(String userId, String theatreId, String movieName, String showId) {
+        User user = getUser(userId);
+        if (nullCheckUser(user) || !userInventory.verifyUserAsAdmin(user)) return false;
+
+        Theatre theatre = getTheatre(theatreId);
+        if (nullCheckTheatre(theatre)) return false;
+
+        return theatreInventory.removeShowFromTheatre(theatre, movieName, showId);
+    }
+
+    public void updateSeating(String userId, String theatreId, String movieName, String showId, List<Seat> newSeats) {
+        User user = getUser(userId);
+        if (nullCheckUser(user) || !userInventory.verifyUserAsAdmin(user)) return;
+
+        Theatre theatre = getTheatre(theatreId);
+        if (nullCheckTheatre(theatre)) return;
+
+        theatreInventory.updateSeatingForShow(theatre, movieName, showId, newSeats);
+    }
+
     public void displayAllUpcomingShows(){
         theatreInventory.displayAllUpcomingShows();
     }
 
-    public void booking(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Initiating Movie Booking....");
-
-        //Pick movie
-        System.out.println("Pick a movie from following: ");
-        theatreInventory.displayAllUpcomingMovies();
-        String selectedMovieName = scanner.nextLine();
-
-        Movie selectedMovie = theatreInventory.getMovieByName(selectedMovieName);
-        if(selectedMovie==null){
-            System.out.println("Invalid Selection");
+    public void booking(String userId){
+        User user = getUser(userId);
+        if(nullCheckUser(user)){
+            System.out.println("[ERROR]: invalid user.");
             return;
         }
-        System.out.println("Selected Movie: "+selectedMovie.getMovieName());
-        Selection selection = new Selection(selectedMovie);
+        bookingManager.bookMovie(user);
+    }
 
 
-
-        //Pick theatre
-        System.out.println("Pick a theatre from following: ");
-        theatreInventory.displayTheatresAndShowsForMovie(selection);
-        String selectedTheatreName = scanner.nextLine();
-
-        Theatre selectedTheatre = theatreInventory.getTheatreByName(selectedTheatreName);
-        if (selectedTheatre == null) {
-            System.out.println("Invalid theatre selection.");
-            return;
+    public void getBookingsForUser(String userId){
+        User user = getUser(userId);
+        if (nullCheckUser(user)) return;
+        if(user.getBookings().isEmpty())
+            System.out.println("No bookings.");
+        for(Booking booking: user.getBookings()){
+            booking.displayBooking();
         }
-
-        selection.setSelectedTheatre(selectedTheatre);
-
-
-        //Pick Show
-        System.out.println("Pick a show from following (Enter show id): ");
-        selection.displayShowsForSelectedTheatre();
-        String selectedShowId = scanner.nextLine();
-
-        Show selectedShow = theatreInventory.getShowById(selectedTheatre, selectedShowId);
-        if (selectedShow == null) {
-            System.out.println("Invalid Show selection.");
-            return;
-        }
-
-        selection.setSelectedShow(selectedShow);
-
-        selection.displaySelection();
-
-
-
     }
 
     private User getUser(String userId){

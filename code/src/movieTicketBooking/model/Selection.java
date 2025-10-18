@@ -2,29 +2,92 @@ package model;
 
 import lombok.Getter;
 import lombok.Setter;
+import repository.TheatreInventory;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
-@Getter
+@Getter @Setter
 public class Selection {
-    private final Movie selectedMovie;
-    @Setter
+    private Movie selectedMovie;
     private Theatre selectedTheatre;
-    @Setter
     private Show selectedShow;
-    @Setter
     private Map<Theatre, List<Show>> theatreShowsMap = new HashMap<>();
+    private List<Seat> selectedSeats;
 
 
     // Constructor
-    public Selection(Movie movie) {
-        this.selectedMovie = movie;
+    public Selection() {
+        this.selectedMovie = null;
         this.selectedTheatre = null;
         this.selectedShow = null;
+        this.selectedSeats = new ArrayList<>();
     }
+
+    public boolean chooseMovie(Scanner scanner, TheatreInventory inventory) {
+        System.out.println("Pick a movie from following:");
+        inventory.displayAllUpcomingMovies();
+        String name = scanner.nextLine();
+        selectedMovie = inventory.getMovieByName(name);
+        if (selectedMovie == null) {
+            System.out.println("Invalid movie selection.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean chooseTheatre(Scanner scanner, TheatreInventory inventory) {
+        System.out.println("Pick a theatre from following:");
+        inventory.displayTheatresAndShowsForMovie(this);
+        String theatreName = scanner.nextLine();
+        selectedTheatre = inventory.getTheatreByName(theatreName);
+        if (selectedTheatre == null) {
+            System.out.println("Invalid theatre selection.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean chooseShow(Scanner scanner, TheatreInventory inventory) {
+        System.out.println("Pick a show from following (Enter show ID):");
+        displayShowsForSelectedTheatre();
+        String showId = scanner.nextLine();
+        selectedShow = inventory.getShowById(selectedTheatre, showId);
+        if (selectedShow == null) {
+            System.out.println("Invalid show selection.");
+            return false;
+        }
+        return true;
+    }
+
+    public boolean chooseSeats(Scanner scanner) {
+        selectedShow.displaySeats();
+        System.out.println("Pick seats (comma separated): ");
+        String input = scanner.nextLine().trim();
+        if (input.isEmpty()) {
+            System.out.println("No seats entered.");
+            return false;
+        }
+
+        String[] seatIds = input.split(",");
+        List<Seat> seatsToHold = new ArrayList<>();
+
+        for (String id : seatIds) {
+            Seat seat = selectedShow.getSeatById(id.trim());
+            if (seat == null || !seat.isAvailable()) {
+                System.out.println("[ERROR]: Seat " + id + " is invalid or unavailable.");
+                return false;
+            }
+            seatsToHold.add(seat);
+        }
+
+        for (Seat seat : seatsToHold) {
+            seat.hold();
+        }
+
+        selectedSeats.addAll(seatsToHold);
+        return true;
+    }
+
 
 
     public void displaySelection() {
@@ -43,6 +106,17 @@ public class Selection {
                             " | End: " + selectedShow.getEndTime()
             );
 
+        System.out.print("Selected Seats: ");
+        if(selectedSeats.isEmpty()){
+            System.out.println("None");
+        }else{
+            for(Seat seat: selectedSeats){
+                System.out.println(
+                        "  Seat ID: " + seat.getSeatId() +
+                        " | Seat Type: " + seat.getSeatType()
+                );
+            }
+        }
 
         System.out.println("=================================");
     }
@@ -97,8 +171,6 @@ public class Selection {
         ));
         System.out.println("======================================================");
     }
-
-
 
 }
 

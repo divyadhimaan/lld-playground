@@ -1,7 +1,10 @@
 package model;
 
 import lombok.Getter;
+import lombok.Setter;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class User {
@@ -14,6 +17,8 @@ public class User {
     @Getter
     private final String userName;
     private final String password;
+    @Getter @Setter
+    private List<Booking> bookings;
 
 
     public User(String userName, UserType userType, String idGen, String password){
@@ -21,6 +26,7 @@ public class User {
         this.userName = userName;
         this.userType = userType;
         this.password = password;
+        this.bookings = new ArrayList<>();
     }
 
     public void displayInfo(){
@@ -29,6 +35,10 @@ public class User {
         System.out.println("User Name : " + getUserName());
         System.out.println("User Type : " + getUserType());
         System.out.println("=====================");
+    }
+
+    public void addBooking(Booking booking){
+        bookings.add(booking);
     }
 
 }

@@ -95,7 +95,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 - Has-A (Composition/Aggregation)
 
 | Syntax | Symbol | Meaning | Usage                        | Line Style                   |                 |
-| ------ | ------ | ------- | ---------------------------- | ---------------------------- | --------------- |
+|--------|--------|---------|------------------------------|------------------------------|-----------------|
 | \`<    | --\`   | Solid   | **Class inheritance**        | Concrete or abstract classes | **Solid line**  |
 | \`<    | ..\`   | Dotted  | **Interface implementation** | Class implements interface   | **Dotted line** |
 

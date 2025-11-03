@@ -241,6 +241,7 @@ classDiagram
         IDLE
         CARD_INSERTED
         AUTHENTICATED
+        INSUFFICIENT_FUNDS
         TRANSACTION_IN_PROGRESS
         SESSION_ENDED
         OUT_OF_SERVICE
@@ -264,3 +265,21 @@ classDiagram
     BankService --> Account : updates
 
 ```
+
+## Components Security Considerations
+- PIN Storage and Verification:
+  - In traditional ATM systems, the PIN is not stored directly. Instead, a **PIN Verification Value (PVV)** is generated using a secure algorithm involving the PIN, a secret key, and the card number. This PVV is stored securely in the bank's hardware security module (HSM).
+  - In modern digital banking systems or simulations, a **hashed PIN (pinHash)** approach is often used. The PIN is combined with a unique salt and hashed using a strong one-way hashing algorithm before storage.
+| Aspect                 | **PVV (PIN Verification Value)**                                   | **pinHash (Hashed PIN)**                                        |
+| ---------------------- | ------------------------------------------------------------------ | --------------------------------------------------------------- |
+| **Used in**            | Physical ATM cards and bank HSMs                                   | Modern digital banking systems, simulations                     |
+| **How it’s generated** | `PVV = encrypt(PIN, secretKey, cardNumber)`                        | `pinHash = hash(salt + PIN)`                                    |
+| **Secret involved**    | Uses a **secret encryption key** known only to the bank            | Uses a **unique salt** stored with each user                    |
+| **Algorithm type**     | **Symmetric encryption** (e.g., Triple DES)                        | **One-way hash** (e.g., SHA-256, bcrypt)                        |
+| **Verification**       | Bank decrypts PVV using HSM and checks if it matches derived value | System hashes entered PIN with stored salt and compares hashes  |
+| **Security level**     | Very high (used in real ATMs with hardware security modules)       | High (secure if salt + strong hash used)                        |
+| **Where used**         | Actual banking systems with chip/PIN verification                  | Simplified software systems or simulations (like this design)   |
+| **Advantages**         | Hardware-grade security, tamper-proof                              | Easier to implement, no encryption keys needed                  |
+| **Disadvantages**      | Requires HSM hardware, complex key management                      | Relies on software integrity, slower if using iterative hashing |
+
+- Using pinHash approach

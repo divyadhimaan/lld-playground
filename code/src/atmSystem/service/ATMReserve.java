@@ -4,6 +4,7 @@ import model.Denomination;
 
 public class ATMReserve {
 //    private Map<Denomination, Integer> noteCounts;
+    //TODO: Implement the note count tracking
 
     Boolean hasSufficientCash(double amount) {
         return true;

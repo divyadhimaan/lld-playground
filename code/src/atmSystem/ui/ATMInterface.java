@@ -1,9 +1,11 @@
 package ui;
 
-public class ATMInterface {
-    private ATM atm;
+import service.ATMService;
 
-    public ATMInterface(ATM instance) {
+public class ATMInterface {
+    private ATMService atm;
+
+    public ATMInterface(ATMService instance) {
         this.atm = instance;
     }
 

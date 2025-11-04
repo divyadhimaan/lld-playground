@@ -5,7 +5,7 @@
 - `User`: Represents a bank customer with attributes such as user ID, name, card number, and PIN.
 - `Card`: Represents a bank card with attributes such as card number, expiration date, and associated user ID.
 - `Account`: Represents a bank account with attributes such as account number, balance, and account type
-- `ATM`: Represents the ATM machine with attributes such as ATM ID, location, and cash dispenser.
+- `ATMService`: Represents the ATM machine with attributes such as ATM ID, location, and cash dispenser.
 - `Transaction`: Represents a transaction with attributes such as transaction ID, type (withdrawal, deposit, inquiry), amount, date, and status.
 - `BankService`: Represents the backend service that interacts with the bank's systems for account validation and transaction processing.
 - `UserInterface`: Represents the user interface of the ATM for user interactions.
@@ -13,7 +13,7 @@
 
 ## Design Considerations
 
-- ATM aggregation: Instead of one bulky ATM class, following aggregations added
+- ATMService aggregation: Instead of one bulky ATM class, following aggregations added
     - Keypad: Takes input from the user (PIN, amount, options)
     - Display: Shows messages and options to the user
     - CardReader: Reads card information and sends it for authentication
@@ -40,10 +40,10 @@
 - `UserInterface` (Entry Point):
     - Responsibility: Handles user interaction and delegates actions to the ATM.
     - Relationships:
-        - Uses → ATM
+        - Uses → ATMService
         - Interacts with → User (indirectly through ATM)
     - Attributes:
-        - ATM instance
+        - ATMService instance
     - Methods:
         - startSession()
         - displayOptions()
@@ -139,7 +139,7 @@ classDiagram
     }
 
     %% ATM and Components
-    class ATM {
+    class ATMService {
         - Keypad keypad
         - Display display
         - CardReader cardReader
@@ -248,18 +248,18 @@ classDiagram
     }
 
     %% Relationships
-    UserInterface --> ATM : uses
+    UserInterface --> ATMService : uses
     User --> Card : has
     User --> Account : has
-    ATM o-- Keypad
-    ATM o-- Display
-    ATM o-- CardReader
-    ATM o-- CashDispenser
-    ATM o-- ReceiptPrinter
-    ATM o-- AuthenticationModule
-    ATM o-- TransactionModule
-    ATM --> BankService : interacts with
-    ATM *-- ATMState
+    ATMService o-- Keypad
+    ATMService o-- Display
+    ATMService o-- CardReader
+    ATMService o-- CashDispenser
+    ATMService o-- ReceiptPrinter
+    ATMService o-- AuthenticationModule
+    ATMService o-- TransactionModule
+    ATMService --> BankService : interacts with
+    ATMService *-- ATMState
     TransactionModule --> Transaction : creates/manages
     AuthenticationModule --> BankService : validates
     BankService --> Account : updates

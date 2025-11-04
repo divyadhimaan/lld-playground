@@ -169,6 +169,13 @@ classDiagram
         + dispenseCash(amount)
         + checkCashAvailability(amount)
     }
+    
+    class ATMReserve {
+        + hasSufficientCash(amount)
+        + deductCash(amount)
+        + refillCash(amount)
+        + getCurrentBalance()
+    }
 
     class ReceiptPrinter {
         + printReceipt(transactionDetails)
@@ -260,6 +267,7 @@ classDiagram
     ATMService o-- TransactionModule
     ATMService --> BankService : interacts with
     ATMService *-- ATMState
+    ATMService o-- ATMReserve 
     TransactionModule --> Transaction : creates/manages
     AuthenticationModule --> BankService : validates
     BankService --> Account : updates

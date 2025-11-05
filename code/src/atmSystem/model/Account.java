@@ -1,6 +1,7 @@
 package model;
 
 import lombok.Getter;
+import model.enums.AccountType;
 
 public class Account {
     private final String accountNumber;

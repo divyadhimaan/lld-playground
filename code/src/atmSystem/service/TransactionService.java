@@ -1,6 +1,6 @@
 package service;
 
-import model.TransactionType;
+import model.enums.TransactionType;
 
 public class TransactionService {
 

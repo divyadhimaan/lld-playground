@@ -1,6 +1,6 @@
-package service;
+package atm;
 
-import state.ATMState;
+import service.*;
 
 public class ATMService {
     KeypadService keypadService;

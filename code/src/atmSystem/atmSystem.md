@@ -291,3 +291,10 @@ classDiagram
 | **Disadvantages**      | Requires HSM hardware, complex key management                      | Relies on software integrity, slower if using iterative hashing |
 
 - Using pinHash approach
+
+## Handling Cash Dispensing for different denomination requests
+- Break down the requested amount into available note denominations.
+- Prefer higher denominations first (e.g., ₹2000 → ₹500 → ₹100).
+- Ideal Pattern: Chain of Responsibility (CoR)
+  - Each handler in the chain will try to dispense its denomination and pass the remaining amount to the next handler.Each handler (denomination dispenser) is responsible for one note type (e.g., ₹2000 dispenser, ₹500 dispenser).
+  - If a handler can’t fully satisfy the withdrawal amount, it passes the remaining amount down the chain.

@@ -1,6 +1,6 @@
-package state;
+package atm;
 
-import model.TransactionType;
+import model.enums.TransactionType;
 
 public interface ATMState {
     public void insertCard();

@@ -1,6 +1,6 @@
 package ui;
 
-import service.ATMService;
+import atm.ATMService;
 
 public class ATMInterface {
     private ATMService atm;

@@ -1,16 +1,23 @@
 package service;
 
+import atm.ATMReserve;
+import model.enums.Denomination;
 import service.dispense.DispenseHandler;
 import service.dispense.RupeeDispenser;
 
+import java.util.Map;
+
 public class CashDispenserService {
     private final DispenseHandler chain;
+    private final ATMReserve reserve;
 
-    public CashDispenserService(Boolean allowChangeMode) {
-        DispenseHandler d2000 = new RupeeDispenser(2000);
-        DispenseHandler d500 = new RupeeDispenser(500);
-        DispenseHandler d200 = new RupeeDispenser(200);
-        DispenseHandler d100 = new RupeeDispenser(100);
+    public CashDispenserService(ATMReserve reserve) {
+        this.reserve = reserve;
+
+        DispenseHandler d2000 = new RupeeDispenser(Denomination.TWO_THOUSAND, reserve);
+        DispenseHandler d500 = new RupeeDispenser(Denomination.FIVE_HUNDRED, reserve);
+        DispenseHandler d200 = new RupeeDispenser(Denomination.TWO_HUNDRED, reserve);
+        DispenseHandler d100 = new RupeeDispenser(Denomination.ONE_HUNDRED, reserve);
 
         d2000.setNextHandler(d500);
         d500.setNextHandler(d200);
@@ -21,11 +28,27 @@ public class CashDispenserService {
     }
     public void dispenseCash(int amount) {
         System.out.println("\n--- Dispensing ₹" + amount + " ---");
+
+        // Try to plan first
+        Map<Denomination, Integer> plan = reserve.planDispense(amount, Denomination.TWO_THOUSAND);
+        if (plan == null) {
+            System.out.println("❌ Cannot dispense ₹" + amount + ". Insufficient denominations.");
+            return;
+        }
+        if (!checkCashAvailability(amount)) {
+            System.out.println("❌ ATM has insufficient funds for ₹" + amount);
+            return;
+        }
+        // Commit the plan
+        reserve.commitDispense(plan);
+
+        // Physically dispense (simulate)
         chain.dispense(amount);
+
+
         System.out.println("--- Dispensing complete ---");
     }
     public boolean checkCashAvailability(int amount) {
-        //check with bank service and atm cash reserve
-        return true;
+        return amount <= reserve.getTotalCash();
     }
 }

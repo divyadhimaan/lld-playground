@@ -8,7 +8,7 @@ public class ATMReserve {
     private final List<Denomination> denominationList;
     private final Map<Denomination, Integer> noteCounts;
 
-    ATMReserve(Map<Denomination, Integer> initial){
+    public ATMReserve(Map<Denomination, Integer> initial){
         this.noteCounts = new EnumMap<>(Denomination.class);
         this.noteCounts.putAll(initial);
 
@@ -39,7 +39,7 @@ public class ATMReserve {
             if (available <= 0) continue;
 
             int needed = remaining / value;
-            int used = Math.min(needed, available);
+            int used = Math.min (needed, available);
             if (used > 0) {
                 plan.put(denom, used);
                 remaining -= used * value;

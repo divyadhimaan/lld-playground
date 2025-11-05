@@ -2,12 +2,9 @@ package service;
 
 import service.dispense.DispenseHandler;
 import service.dispense.RupeeDispenser;
-import service.dispense.strategy.DispenseStrategy;
-import service.dispense.strategy.GreedyDispenseStrategy;
-import service.dispense.strategy.MixedDispenseStrategy;
 
 public class CashDispenserService {
-    private final DispenseStrategy strategy;
+    private final DispenseHandler chain;
 
     public CashDispenserService(Boolean allowChangeMode) {
         DispenseHandler d2000 = new RupeeDispenser(2000);
@@ -19,16 +16,12 @@ public class CashDispenserService {
         d500.setNextHandler(d200);
         d200.setNextHandler(d100);
 
-        if(allowChangeMode){
-            this.strategy = new MixedDispenseStrategy(d2000);
-        }else{
-            this.strategy = new GreedyDispenseStrategy(d2000);
-        }
+        this.chain = d2000;
 
     }
     public void dispenseCash(int amount) {
         System.out.println("\n--- Dispensing ₹" + amount + " ---");
-        strategy.dispenseAmount(amount);
+        chain.dispense(amount);
         System.out.println("--- Dispensing complete ---");
     }
     public boolean checkCashAvailability(int amount) {

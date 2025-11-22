@@ -99,6 +99,10 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 | \`<    | --\`   | Solid   | **Class inheritance**        | Concrete or abstract classes | **Solid line**  |
 | \`<    | ..\`   | Dotted  | **Interface implementation** | Class implements interface   | **Dotted line** |
 
+## Relationships
+
+![img.png](images/relationships.png)
+
 ## Terminology
 
 - `DAO` (Data Access Object): A design pattern that provides an abstract interface to a database or other persistence mechanism.

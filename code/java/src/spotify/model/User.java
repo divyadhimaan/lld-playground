@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 public class User {
-    private AtomicLong idGenerator = new AtomicLong(0);
+    private static AtomicLong idGenerator = new AtomicLong(0);
 
     private final Long userId;
     private final String username;
@@ -29,8 +29,8 @@ public class User {
 
     // Only for normal users
     public void addPlaylist(Long playlistId) {
-        if (role != Role.USER)
-            throw new IllegalStateException("Only USERS can have playlists");
+        if (role != Role.LISTENER)
+            throw new IllegalStateException("Only LISTENERS can have playlists");
         playlists.add(playlistId);
     }
 

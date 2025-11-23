@@ -16,7 +16,7 @@ public class AuthService {
     }
 
     public Long signupUser(String username, String password){
-        return signup(username, password, Role.USER);
+        return signup(username, password, Role.LISTENER);
     }
 
     public Long signupArtist(String username, String password){

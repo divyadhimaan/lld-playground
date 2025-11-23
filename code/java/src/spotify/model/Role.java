@@ -1,6 +1,6 @@
 package spotify.model;
 
 public enum Role {
-    USER,
+    LISTENER,
     ARTIST
 }

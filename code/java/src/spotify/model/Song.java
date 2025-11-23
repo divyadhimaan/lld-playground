@@ -8,7 +8,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Getter
 public class Song {
-    private final AtomicLong idGenerator = new AtomicLong(0);
+    private static final AtomicLong idGenerator = new AtomicLong(0);
     private final Long songId;
     private final String title;
     private final Long duration; //seconds

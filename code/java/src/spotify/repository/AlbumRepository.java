@@ -5,6 +5,7 @@ package spotify.repository;
 import spotify.model.Album;
 import spotify.model.Song;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,13 +27,15 @@ public class AlbumRepository {
         return songById.getOrDefault(songId, null);
     }
 
-    public Song saveSong(Song song) {
+    public void saveSong(Song song) {
         songById.put(song.getSongId(), song);
-        return song;
     }
 
-    public Album saveAlbum(Album album) {
+    public void saveAlbum(Album album) {
         albumById.put(album.getAlbumId(), album);
-        return album;
+    }
+
+    public Collection<Album> getAllAlbums(){
+        return albumById.values();
     }
 }

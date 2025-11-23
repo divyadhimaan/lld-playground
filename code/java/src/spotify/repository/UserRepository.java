@@ -1,6 +1,6 @@
 package spotify.repository;
 
-import src.main.java.model.User;
+import spotify.model.User;
 
 import java.util.HashMap;
 import java.util.Map;

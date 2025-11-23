@@ -17,7 +17,7 @@ public class Spotify {
         Long albumId = spotify.createAlbum(token_artist1, "New Era");
         spotify.addSongToAlbum(token_artist1, albumId, "Flower", "Pop", 10800L, String.valueOf(artist1));
 
-        spotify.getArtist(artist1);
+//        spotify.getArtist(artist1);
 
 
 

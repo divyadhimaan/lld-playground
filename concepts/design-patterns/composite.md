@@ -6,7 +6,7 @@
 
 ## When to Use Composite Pattern
 
-- You want to represent a tree-like structure (like a folder-file system or UI components). 
+- You want to represent a tree-like structure (like a folder-file system or SpotifyUi components). 
 - Clients should treat both individual objects and groups of objects the same way. 
 - You need to simplify code that deals with hierarchies of objects.
 
@@ -122,9 +122,9 @@ classDiagram
 
 ---
 
-### 2. UI Component Trees
+### 2. SpotifyUi Component Trees
 - **Components:** `Button`, `Label`, `TextField`, `Panel`, `Window`
-- **Context:** Build nested UI layouts where each container can hold other components or containers.
+- **Context:** Build nested SpotifyUi layouts where each container can hold other components or containers.
 
 ---
 

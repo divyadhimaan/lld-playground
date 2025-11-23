@@ -137,7 +137,7 @@ classDiagram
 
 ### 6. Online Document Editor
 - **States:** `EditMode`, `ReadOnlyMode`, `CommentMode`
-- **Context:** UI and editing capabilities change based on current mode.
+- **Context:** SpotifyUi and editing capabilities change based on current mode.
 
 ---
 

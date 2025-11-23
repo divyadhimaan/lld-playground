@@ -176,7 +176,7 @@ classDiagram
 
 ### 8. Weather Monitoring System
 - **Observers:** `CurrentDisplay`, `ForecastPanel`, `AlertSystem`
-- **Context:** On weather data update, notify all UI displays and alert modules.
+- **Context:** On weather data update, notify all SpotifyUi displays and alert modules.
 
 ---
 

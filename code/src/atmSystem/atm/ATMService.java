@@ -1,7 +1,5 @@
 package atm;
 
-import service.*;
-
 public class ATMService {
     KeypadService keypadService;
     DisplayService displayService;

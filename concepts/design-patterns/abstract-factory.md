@@ -215,19 +215,19 @@ classDiagram
 
 ## Common LLD Problems Using Abstract Factory Pattern:
 
-### 1. Cross-Platform UI Toolkit
+### 1. Cross-Platform SpotifyUi Toolkit
 - **Abstract Factory:** `WidgetFactory`
 - **Products:** `Button`, `Checkbox`, `TextField`
 - **Variants:** `MacWidgetFactory`, `WindowsWidgetFactory`, `LinuxWidgetFactory`
-- **Context:** UI components differ by OS but belong to the same "family".
+- **Context:** SpotifyUi components differ by OS but belong to the same "family".
 
 ---
 
-### 2. Theme-Based UI System (Dark/Light Mode)
+### 2. Theme-Based SpotifyUi System (Dark/Light Mode)
 - **Abstract Factory:** `UIThemeFactory`
 - **Products:** `ThemedButton`, `ThemedNavbar`, `ThemedCard`
 - **Variants:** `DarkThemeFactory`, `LightThemeFactory`
-- **Context:** Dynamically render full UI component sets based on selected theme.
+- **Context:** Dynamically render full SpotifyUi component sets based on selected theme.
 
 ---
 

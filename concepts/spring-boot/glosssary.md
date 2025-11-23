@@ -21,7 +21,7 @@ Key Components of Spring MVC
     - Holds application data.
     - Passed to the view for rendering.
 - View:
-    - The UI representation, usually JSP, Thymeleaf, or other template engines.
+    - The SpotifyUi representation, usually JSP, Thymeleaf, or other template engines.
 - ViewResolver:
     - Helps locate and render the correct view.
 

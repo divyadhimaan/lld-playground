@@ -115,7 +115,7 @@ Burger2 *-- Burger2Builder : uses
 
 ---
 
-### 3. UI Form Builder
+### 3. SpotifyUi Form Builder
 - **Example:** `FormBuilder`, `ComponentBuilder`
 - **Context:** Build GUI elements like forms, dropdowns, and dynamic inputs step-by-step.
 

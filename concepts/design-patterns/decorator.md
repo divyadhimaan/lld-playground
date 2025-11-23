@@ -169,7 +169,7 @@ DecoratorSample --> Coffee
 
 ---
 
-### 2. UI Component Styling
+### 2. SpotifyUi Component Styling
 - **Decorators:** `BorderDecorator`, `ShadowDecorator`, `PaddingDecorator`, `ColorDecorator`
 - **Context:** Dynamically enhance visual components in GUI frameworks (like JavaFX/Swing).
 

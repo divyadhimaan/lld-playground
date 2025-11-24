@@ -26,7 +26,6 @@
     - user preference (client input)
     - listening history (analytics)
 
-
 ## Interview Styled
 
 > `Interviewer`: Let’s design Spotify. What entities would you start with?

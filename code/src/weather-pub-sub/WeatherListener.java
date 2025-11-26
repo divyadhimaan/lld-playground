@@ -1,3 +1,0 @@
-interface WeatherListener {
-    void Update();
-}

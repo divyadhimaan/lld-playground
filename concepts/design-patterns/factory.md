@@ -6,11 +6,9 @@
 
 ## When to use Factory Method Pattern
 
-- When you don't know beforehand the exact types of objects your code should work with
-- When you want to provide a library of products and reveal only their interfaces
-- When you need to centralize object creation logic
-- When object creation involves complex logic that shouldn't be repeated
-- When you want to decouple object creation from object usage
+- The exact type of object to be created isn't known until runtime.
+- Object creation logic is **complex**, **repetitive**, or **needs encapsulation**.
+-You want to follow the Open/Closed Principle, open for extension, closed for modification.
 
 ## Real world analogy
 

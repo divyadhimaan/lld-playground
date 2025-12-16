@@ -1,6 +1,6 @@
 # Factory: Creational Design Pattern
 
->provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
+> provides an interface for creating objects in a superclass, but allows subclasses to alter the type of objects that will be created.
 > 
 >  It encapsulates object creation logic in a separate method or class, allowing the system to create objects based on given parameters or conditions.
 
@@ -8,14 +8,14 @@
 
 - The exact type of object to be created isn't known until runtime.
 - Object creation logic is **complex**, **repetitive**, or **needs encapsulation**.
--You want to follow the Open/Closed Principle, open for extension, closed for modification.
+- You want to follow the Open/Closed Principle, open for extension, closed for modification.
 
 ## Real world analogy
 
-- Think of a pizza restaurant kitchen. 
-- When you order a pizza, you don't go into the kitchen and make it yourself. 
-- You simply tell the chef what type of pizza you want (Margherita, Pepperoni, Veggie), and the kitchen factory produces the specific pizza for you. 
-- The kitchen knows all the recipes and ingredients needed - you just specify the type, and the factory handles the complex creation process.
+- Think of a notification desk in a company that must send messages to users.
+- Initially, the desk only sends emails, so it prepares and sends them directly.
+- As new channels appear (SMS, Push, Slack, WhatsApp), the desk becomes overloaded creating each type manually.
+- Instead of the desk handling creation, a Notification Factory produces the correct notification object for each channel.
 
 ## Problem Solved
 

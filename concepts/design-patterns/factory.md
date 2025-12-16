@@ -34,49 +34,28 @@ The Factory Method pattern suggests that you replace direct object construction 
 
 ## Violation code
 
-[Pizza factory - Violation Code](../../code/designPatterns/factory/FactoryViolation.java)
-
-```mermaid
-classDiagram
-
-%% Product classes (no shared interface)
-    class MargheritaPizza2 {
-        +prepare()
-        +bake()
-        +serve()
+```java
+class NotificationService {
+    public void sendNotification(String type, String message) {
+        if (type.equals("EMAIL")) {
+            EmailNotification email = new EmailNotification();
+            email.send(message);
+        } else if (type.equals("SMS")) {
+            SMSNotification sms = new SMSNotification();
+            sms.send(message);
+        } else if (type.equals("Push")) {
+            PushNotification sms = new PushNotification();
+            sms.send(message);
+        } else if (type.equals("Slack")) {
+            SlackNotification sms = new SlackNotification();
+            sms.send(message);
+        } else if (type.equals("WhatsApp")) {
+            WhatsAppNotification sms = new WhatsAppNotification();
+            sms.send(message);
+        }
     }
-
-    class PepperoniPizza2 {
-        +prepare()
-        +bake()
-        +serve()
-    }
-
-    class VeggiePizza2 {
-        +prepare()
-        +bake()
-        +serve()
-    }
-
-%% Client classes with duplicated creation logic
-    class PizzaRestaurant {
-        +orderPizza(pizzaType)
-    }
-
-    class PizzaDeliveryService {
-        +processPizzaOrder(pizzaType)
-    }
-
-    PizzaRestaurant --> MargheritaPizza2
-    PizzaRestaurant --> PepperoniPizza2
-    PizzaRestaurant --> VeggiePizza2
-
-    PizzaDeliveryService --> MargheritaPizza2
-    PizzaDeliveryService --> PepperoniPizza2
-    PizzaDeliveryService --> VeggiePizza2
-
+}
 ```
-
 ### Issues with above code
 1. Tight coupling - Client code depends directly on concrete pizza classes
 2. Violates Open/Closed Principle - adding new pizza types requires modifying existing code
@@ -89,51 +68,77 @@ classDiagram
 
 ## Enhanced Code
 
-[Pizza factory - Sample](../../code/designPatterns/factory/FactorySample.java)
-
-```mermaid
-classDiagram
-
-class Pizza {
-    <<interface>>
-    +prepare(): void
-    +bake(): void
-    +serve(): void
+```java
+public interface Notification {
+    void send(String message);
 }
 
-class MargheritaPizza {
-    +prepare(): void
-    +bake(): void
-    +serve(): void
-}
-Pizza <|.. MargheritaPizza
 
-class PepperoniPizza {
-    +prepare(): void
-    +bake(): void
-    +serve(): void
-}
-Pizza <|.. PepperoniPizza
-
-class VeggiePizza {
-    +prepare(): void
-    +bake(): void
-    +serve(): void
-}
-Pizza <|.. VeggiePizza
-
-class PizzaFactory {
-    +createPizza(pizzaType: String): Pizza
+public class EmailNotification implements Notification {
+    @Override
+    public void send(String message) {
+        System.out.println("Sending EMAIL: " + message);
+    }
 }
 
-class PizzaFactoryExample {
-    +main(String[]): void
+public class SMSNotification implements Notification {
+    @Override
+    public void send(String message) {
+        System.out.println("Sending SMS: " + message);
+    }
 }
 
-PizzaFactoryExample --> PizzaFactory
-PizzaFactory --> Pizza
+public class PushNotification implements Notification {
+    @Override
+    public void send(String message) {
+        System.out.println("Sending PUSH: " + message);
+    }
+}
+
+public class SlackNotification implements Notification {
+    @Override
+    public void send(String message) {
+        System.out.println("Sending SLACK: " + message);
+    }
+}
+
+public class WhatsAppNotification implements Notification {
+    @Override
+    public void send(String message) {
+        System.out.println("Sending WHATSAPP: " + message);
+    }
+}
+
+public class NotificationFactory {
+
+    public static Notification createNotification(String type) {
+        switch (type) {
+            case "EMAIL":
+                return new EmailNotification();
+            case "SMS":
+                return new SMSNotification();
+            case "PUSH":
+                return new PushNotification();
+            case "SLACK":
+                return new SlackNotification();
+            case "WHATSAPP":
+                return new WhatsAppNotification();
+            default:
+                throw new IllegalArgumentException("Unknown notification type: " + type);
+        }
+    }
+}
+
+public class NotificationService {
+
+    public void sendNotification(String type, String message) {
+        Notification notification = NotificationFactory.createNotification(type);
+        notification.send(message);
+    }
+}
 
 ```
+
 ## Common LLD Problems Using Factory Pattern:
 
 ### 1. Notification Sender System

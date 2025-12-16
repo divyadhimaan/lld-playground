@@ -153,6 +153,8 @@ SingletonSample --> PrinterSpooler2 : uses getInstance()
 ## Pros and Cons
 ![img.png](../../images/singleton-pros-cons.png)
 
+> It's important to note that the Singleton pattern should be used judiciously, as it introduces global state and can make testing and maintenance more challenging. Consider alternative approaches like dependency injection when possible to promote loose coupling and testability.
+
 ## Common LLD Problems Using Singleton Pattern:
 
 ### 1. Configuration Manager

@@ -150,6 +150,9 @@ SingletonSample --> PrinterSpooler2 : uses getInstance()
 
 ```
 
+## Pros and Cons
+![img.png](../../images/singleton-pros-cons.png)
+
 ## Common LLD Problems Using Singleton Pattern:
 
 ### 1. Configuration Manager

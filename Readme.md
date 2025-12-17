@@ -104,7 +104,7 @@ SOLID is an acronym for five fundamental principles of object-oriented programmi
 
 ## Relationships
 
-![img.png](images/relationships.png)
+![UML Relations](images/uml-relations.png)
 
 ## Terminology
 

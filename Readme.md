@@ -14,6 +14,7 @@ This is the repos
 - [Basic OOP](./concepts/oops/java.md#basic-oop)
   - [Classes in Java](./concepts/oops/java.md#classes-in-java)
   - [Scope](./concepts/oops/java.md#scope)
+  - [UML](./concepts/intro/uml.md)
   - [Main OOP Concepts in Java](./concepts/oops/java.md#main-oop-concepts-in-java)
     - [Encapsulation](./concepts/oops/java.md#encapsulation)
     - [Abstraction](./concepts/oops/java.md#abstraction)

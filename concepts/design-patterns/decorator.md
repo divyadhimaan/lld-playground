@@ -35,68 +35,75 @@
 
 ## Violation Code
 
-[Coffee Machine - violation Code](../../code/designPatterns/decorator/DecoratorViolation.java)
-
-```mermaid
-classDiagram
-
-class SimpleCoffee2 {
-    +getDescription(): String
-    +getCost(): double
+```java
+abstract class Notifier {
+    abstract void send(String message);
 }
 
-class CoffeeWithMilk {
-    +getDescription(): String
-    +getCost(): double
+class SMSNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending SMS: " + message);
+    }
 }
 
-class CoffeeWithSugar {
-    +getDescription(): String
-    +getCost(): double
+class FacebookNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending Facebook message: " + message);
+    }
 }
 
-class CoffeeWithWhip {
-    +getDescription(): String
-    +getCost(): double
+class SlackNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending Slack message: " + message);
+    }
 }
 
-class CoffeeWithMilkAndSugar {
-    +getDescription(): String
-    +getCost(): double
+
+class SMSFacebookNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending SMS: " + message);
+        System.out.println("Sending Facebook message: " + message);
+    }
 }
 
-class CoffeeWithMilkAndWhip {
-    +getDescription(): String
-    +getCost(): double
+class SMSSlackNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending SMS: " + message);
+        System.out.println("Sending Slack message: " + message);
+    }
 }
 
-class CoffeeWithSugarAndWhip {
-    +getDescription(): String
-    +getCost(): double
+class FacebookSlackNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending Facebook message: " + message);
+        System.out.println("Sending Slack message: " + message);
+    }
 }
 
-class CoffeeWithMilkSugarAndWhip {
-    +getDescription(): String
-    +getCost(): double
+class SMSFacebookSlackNotifier extends Notifier {
+    @Override
+    void send(String message) {
+        System.out.println("Sending SMS: " + message);
+        System.out.println("Sending Facebook message: " + message);
+        System.out.println("Sending Slack message: " + message);
+    }
 }
 
-class CoffeeWithFlags {
-    -hasMilk: boolean
-    -hasSugar: boolean
-    -hasWhip: boolean
-    +getDescription(): String
-    +getCost(): double
+public class Client {
+    public static void main(String[] args) {
+        Notifier notifier = new SMSFacebookSlackNotifier();
+        notifier.send("Server is down!");
+    }
 }
-
-SimpleCoffee2 <|-- CoffeeWithMilk
-SimpleCoffee2 <|-- CoffeeWithSugar
-SimpleCoffee2 <|-- CoffeeWithWhip
-SimpleCoffee2 <|-- CoffeeWithMilkAndSugar
-SimpleCoffee2 <|-- CoffeeWithMilkAndWhip
-SimpleCoffee2 <|-- CoffeeWithSugarAndWhip
-SimpleCoffee2 <|-- CoffeeWithMilkSugarAndWhip
 
 ```
+
 
 ### Issues with Above Code
 1. Class explosion - N add-ons = 2^N possible combinations
@@ -110,57 +117,103 @@ SimpleCoffee2 <|-- CoffeeWithMilkSugarAndWhip
 
 ## Enhanced Code
 
-[Coffee Machine - Example](../../code/designPatterns/decorator/DecoratorSample.java)
+```java
 
-```mermaid
-classDiagram
-
-class Coffee {
-    <<interface>>
-    +getDescription(): String
-    +getCost(): double
+//Base component
+interface Notifier {
+    void send(String message);
 }
 
-class SimpleCoffee {
-    +getDescription(): String
-    +getCost(): double
-}
-Coffee <|.. SimpleCoffee
-
-class CoffeeDecorator {
-    <<abstract>>
-    -coffee: Coffee
-    +CoffeeDecorator(coffee: Coffee)
-    +getDescription(): String
-    +getCost(): double
-}
-Coffee <|-- CoffeeDecorator
-
-class MilkDecorator {
-    +getDescription(): String
-    +getCost(): double
-}
-CoffeeDecorator <|-- MilkDecorator
-
-class SugarDecorator {
-    +getDescription(): String
-    +getCost(): double
-}
-CoffeeDecorator <|-- SugarDecorator
-
-class WhipDecorator {
-    +getDescription(): String
-    +getCost(): double
-}
-CoffeeDecorator <|-- WhipDecorator
-
-class DecoratorSample {
-    +main(args: String[]): void
+// Concrete Component (Base Notifier)
+class BaseNotifier implements Notifier {
+    @Override
+    public void send(String message) {
+        // Base behavior (can be empty or logging)
+        System.out.println("Notification triggered");
+    }
 }
 
-DecoratorSample --> Coffee
 
+// Abstract Decorator
+abstract class NotifierDecorator implements Notifier {
+    protected Notifier notifier;
+
+    public NotifierDecorator(Notifier notifier) {
+        this.notifier = notifier;
+    }
+
+    @Override
+    public void send(String message) {
+        notifier.send(message);
+    }
+}
+
+// Concrete Decorators
+class SMSNotifier extends NotifierDecorator {
+
+    public SMSNotifier(Notifier notifier) {
+        super(notifier);
+    }
+
+    @Override
+    public void send(String message) {
+        super.send(message);
+        System.out.println("Sending SMS: " + message);
+    }
+}
+class FacebookNotifier extends NotifierDecorator {
+
+    public FacebookNotifier(Notifier notifier) {
+        super(notifier);
+    }
+
+    @Override
+    public void send(String message) {
+        super.send(message);
+        System.out.println("Sending Facebook message: " + message);
+    }
+}
+class SlackNotifier extends NotifierDecorator {
+
+    public SlackNotifier(Notifier notifier) {
+        super(notifier);
+    }
+
+    @Override
+    public void send(String message) {
+        super.send(message);
+        System.out.println("Sending Slack message: " + message);
+    }
+}
+
+
+// Client usage
+
+public class Client {
+    public static void main(String[] args) {
+        Notifier notifier =
+                new SlackNotifier(
+                        new SMSNotifier(
+                                new BaseNotifier()
+                        )
+                );
+
+        notifier.send("Server is down!");
+        Notifier notifier2 =
+                new SlackNotifier(
+                        new FacebookNotifier(
+                                new SMSNotifier(
+                                        new BaseNotifier()
+                                )
+                        )
+                );
+
+        notifier2.send("High CPU usage detected!");
+
+    }
+}
 ```
+
 ## Common LLD Problems Using Decorator Pattern:
 
 ### 1. Text Editor / Rich Text Formatting

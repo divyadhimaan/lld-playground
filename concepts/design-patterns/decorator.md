@@ -213,6 +213,8 @@ public class Client {
     }
 }
 ```
+> Decorator pattern eliminates combinatorial subclass explosion by dynamically composing behaviors using composition instead of inheritance.
+
 
 ## Common LLD Problems Using Decorator Pattern:
 

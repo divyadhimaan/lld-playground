@@ -1,6 +1,6 @@
 # Decorator: Structural Design Pattern
 
-> lets you attach new behaviors to objects by placing these objects inside special wrapper objects that contain the behaviors.
+> allows you to add responsibilities to objects dynamically, without altering their structure or modifying their original code.
 > 
 > It provides a flexible alternative to subclassing for extending functionality by wrapping objects in decorator classes.
 

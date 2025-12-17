@@ -36,10 +36,12 @@
 ## Violation Code
 
 ```java
+// Base Class
 abstract class Notifier {
     abstract void send(String message);
 }
 
+// Single-Channel Notifiers
 class SMSNotifier extends Notifier {
     @Override
     void send(String message) {
@@ -61,7 +63,7 @@ class SlackNotifier extends Notifier {
     }
 }
 
-
+// Multi-Channel Notifiers (Combinations)
 class SMSFacebookNotifier extends Notifier {
     @Override
     void send(String message) {

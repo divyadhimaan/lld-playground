@@ -7,7 +7,6 @@ This repository serves as a comprehensive guide to Low-Level Design (LLD), aimed
 - Design Examples: Step-by-step breakdowns of real-world design problems, with detailed explanations of how to design and architect scalable, maintainable software systems.
 
 - Whether you're preparing for interviews, aiming to improve your design skills, or looking to see best practices in action, this repository provides a solid foundation for mastering Low-Level Design.
-This is the repos
 
 
 ## Concepts
